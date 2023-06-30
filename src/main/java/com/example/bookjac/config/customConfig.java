@@ -18,8 +18,8 @@ public class customConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeHttpRequests().anyRequest().permitAll();
+        http.csrf(d -> d.disable());
+        http.authorizeHttpRequests(r -> r.anyRequest().permitAll());
 
         return http.build();
     }
