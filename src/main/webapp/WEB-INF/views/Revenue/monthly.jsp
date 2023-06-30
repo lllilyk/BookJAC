@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: kangjisu
   Date: 2023/06/30
-  Time: 11:43 AM
+  Time: 2:34 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,22 +10,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>일일 정산</title>
+    <title>월말 정산 내역</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
 </head>
 <body>
-<h1>일일 정산 내역</h1>
 <div class="container">
+    <h1>월말 정산 내역</h1>
+    <%-- 일일 정산 버튼 --%>
+    <a href="/Revenue/daily">일일 정산</a>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">매출 일자</th>
-            <th scope="col">현금 매출액</th>
-            <th scope="col">카드 매출액</th>
-            <th scope="col">시재금</th>
-            <th scope="col">수입내역</th>
+            <th scope="col">월</th>
+            <th scope="col">매대 금액</th>
+            <th scope="col">발주 금액</th>
             <th scope="col">순수익</th>
         </tr>
         </thead>
@@ -36,20 +35,14 @@
             <th scope="row">1000</th>
             <th scope="row">1000</th>
             <th scope="row">1000</th>
-            <th scope="row">1000</th>
-            <th scope="row">1000</th>
-<%--            <td colspan="2">Larry the Bird</td>--%>
-<%--            <td>@twitter</td>--%>
         </tr>
         </tbody>
         <tfoot>
         <tr>
             <td colspan="2">합계</td>
-            <td>현금 총액</td>
-            <td>카드 총액</td>
-            <td>시재금 빈칸</td>
-            <td>수입내역 총액</td>
-            <td>순수익 총액</td>
+            <td>(현금 매출액 - 시재금) + 카드 매출액</td>
+            <td>(발주 총액)</td>
+            <td>매대 총액 - 발주 금액 </td>
         </tr>
         </tfoot>
     </table>
