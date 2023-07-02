@@ -43,7 +43,10 @@
         <c:forEach items="${list }" var="settlement">
             <tr>
                 <th scope="row">${settlement.id }</th>
-                <th scope="row">${settlement.inserted }</th>
+                <th scope="row">
+                        ${settlement.inserted.toLocalDate() }
+                    <span style="color: gray">(${settlement.inserted.toLocalTime() })</span>
+                </th>
                 <th scope="row">돈통 총액</th>
                 <th scope="row">실제 매출액</th>
                 <th scope="row">돈통 기본돈</th>

@@ -18,7 +18,7 @@ public interface RevenueMapper {
     Integer insertRevenue(Settlement settlement);
 
     @Select("""
-            SELECT * FROM Settlement
+            SELECT * FROM Settlement ORDER BY inserted DESC
             """)
     List<Settlement> selectSettlement();
 }
