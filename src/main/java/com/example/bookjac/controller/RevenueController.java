@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("Revenue")
@@ -21,17 +22,15 @@ public class RevenueController {
     @GetMapping("daily")
     public void daily(Model model) {
         //일일 정산 리스트 포워드
-        List<Settlement> settlement = revenueService.selectSettlement();
+        Map<String, Object> info = revenueService.selectSettlement();
 
-        model.addAttribute("settlement", settlement);
-        model.addAttribute("test", "test");
+        model.addAllAttributes(info);
     }
 
     @PostMapping("daily")
     public String dailyInput(Settlement settlement) {
-        System.out.println(settlement);
+        //일일 정산 입력 과정
         boolean ok = revenueService.insertRevenue(settlement);
-        System.out.println(ok);
 
         return "redirect:/Revenue/daily";
     }

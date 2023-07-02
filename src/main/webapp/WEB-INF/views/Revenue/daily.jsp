@@ -16,9 +16,6 @@
 </head>
 <body>
 <div class="container">
-    <c:forEach begin="1" end="3">
-        ${test}
-    </c:forEach>
     <h1>일일 정산 내역</h1>
 
     <!-- 정산 입력 폼 모달 버튼 -->
@@ -43,7 +40,7 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <c:forEach items="${settlement }" var="settlement">
+        <c:forEach items="${list }" var="settlement">
             <tr>
                 <th scope="row">${settlement.id }</th>
                 <th scope="row">${settlement.inserted }</th>
@@ -54,6 +51,8 @@
                 <th scope="row">수입내역 - 판 책 원가</th>
             </tr>
         </c:forEach>
+
+        <!-- 없앨 코드 -->
         <tr>
             <th scope="row">id값</th>
             <th scope="row">2023-02-03</th>
