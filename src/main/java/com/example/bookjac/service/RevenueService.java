@@ -17,7 +17,7 @@ public class RevenueService {
     RevenueMapper revenueMapper;
 
     public boolean insertRevenue(Settlement settlement) {
-       Integer count = revenueMapper.insertRevenue(settlement);
+       Integer count = revenueMapper.insertSettlement(settlement);
 
        return count == 1;
     }
@@ -31,5 +31,24 @@ public class RevenueService {
         info.put("list", list);
 
         return info;
+    }
+
+    public Map<String, Object> deleteRevenue(Integer settlementId) {
+        Integer count = 0;
+        Map<String, Object> res = new HashMap<>();
+
+        count = revenueMapper.deleteSettlement(settlementId);
+
+        if(count == 1) {
+            res.put("message", "삭제되었습니다.");
+        } else {
+            res.put("message", "삭제되지 않았습니다.");
+        }
+        return res;
+    }
+
+    public Settlement selectSettlementById(Integer settlementId) {
+        Settlement settlement = revenueMapper.selectSettlementById(settlementId);
+        return  settlement;
     }
 }

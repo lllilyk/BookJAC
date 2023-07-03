@@ -1,9 +1,7 @@
 package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Settlement;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -15,10 +13,20 @@ public interface RevenueMapper {
             VALUES
                 (#{cash}, #{card}, #{vaultCash})
             """)
-    Integer insertRevenue(Settlement settlement);
+    Integer insertSettlement(Settlement settlement);
 
     @Select("""
             SELECT * FROM Settlement ORDER BY inserted DESC
             """)
     List<Settlement> selectSettlement();
+
+    @Delete("""
+            DELETE FROM Settlement WHERE id = #{settlementId}
+            """)
+    Integer deleteSettlement(Integer settlementId);
+
+    @Select("""
+            SELECT * FROM Settlement WHERE id = #{settlementId}
+            """)
+    Settlement selectSettlementById(Integer settlementId);
 }

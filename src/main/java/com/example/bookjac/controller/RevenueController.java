@@ -3,13 +3,11 @@ package com.example.bookjac.controller;
 import com.example.bookjac.domain.Settlement;
 import com.example.bookjac.service.RevenueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,19 +19,40 @@ public class RevenueController {
 
     @GetMapping("daily")
     public void daily(Model model) {
-        //일일 정산 리스트 포워드
+        //일일 정산 리스트 조회
         Map<String, Object> info = revenueService.selectSettlement();
 
         model.addAllAttributes(info);
     }
 
-    @PostMapping("daily")
-    public String dailyInput(Settlement settlement) {
+    @PostMapping("addDaily")
+    public String addDaily(Settlement settlement) {
         //일일 정산 입력 과정
         boolean ok = revenueService.insertRevenue(settlement);
 
         return "redirect:/Revenue/daily";
     }
+
+    @DeleteMapping("deleteDaily")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> deleteDaily(
+            @RequestParam("settlementId") Integer settlementId) {
+        //일일 정산 삭제 과정
+        Map<String, Object> res = revenueService.deleteRevenue(settlementId);
+        System.out.println(res.get("message"));
+
+        return ResponseEntity.ok().body(res);
+    }
+
+    @GetMapping("getDailyInfo")
+    @ResponseBody
+    public Settlement getDailyInfo(@RequestParam("settlementId") Integer settlementId) {
+        // 일일 정산 수정 시 기존 정보 조회
+        Settlement settlement = revenueService.selectSettlementById(settlementId);
+
+        return settlement;
+    }
+
 
     @GetMapping("monthly")
     public void monthly() {
