@@ -37,22 +37,22 @@
     <%--  조회 조건  --%>
     <form action="/Revenue/daily" class="row justify-content-start">
         <h5>조회 조건</h5>
-        <div style="width: 150px;">
-            <input type="date" name="startDate">
+        <div style="width: 200px;">
+            <input class="form-control" type="date" name="startDate" value="${param.startDate}">
         </div>
-        <div style="width: 150px;">
-            <input type="date" name="endDate">
+        <div style="width: 200px;">
+            <input class="form-control" type="date" name="endDate" value="${param.endDate}">
         </div>
         <div style="width: 170px;">
             <select name="selectWay" class="form-select col-4" aria-label="Default select example">
-                <option value="0" selected>조회 조건 선택</option>
-                <option value="1">현금 매출 순</option>
-                <option value="2">카드 매출 순</option>
-                <option value="3">순수익 순</option>
+                <option value="0" ${param.selectWay == 0 ? 'selected' : ''}>조회 조건 선택</option>
+                <option value="1" ${param.selectWay == 1 ? 'selected' : ''}>현금 매출 순</option>
+                <option value="2" ${param.selectWay == 2 ? 'selected' : ''}>카드 매출 순</option>
+                <option value="3" ${param.selectWay == 3 ? 'selected' : ''}>순수익 순</option>
             </select>
         </div>
         <button style="width: 55px; margin-right: 5px;" type="submit" class="btn btn-outline-primary">조회</button>
-        <a style="width: 90px;" href="/Revenue/daily" class="btn btn-outline-primary">돌아가기</a>
+        <a style="width: 100px;" href="/Revenue/daily" class="btn btn-outline-primary">조건 초기화</a>
     </form>
     <%-- 일일 정산 리스트 --%>
     <table class="table table-bordered">

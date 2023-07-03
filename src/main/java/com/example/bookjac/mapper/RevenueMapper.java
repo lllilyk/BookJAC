@@ -18,10 +18,18 @@ public interface RevenueMapper {
     @Select("""
             <script>
             SELECT * FROM Settlement
-            <if test="startDate != null">
+            <if test="startDate != null and endDate != null">
             WHERE inserted &gt;= #{startDate} AND inserted &lt;= #{endDate}
             </if> 
+            <if test="selectWay == null or selectWay == 0">
             ORDER BY inserted DESC
+            </if>
+            <if test="selectWay == 1">
+            ORDER BY cash DESC
+            </if>            
+            <if test="selectWay == 2">
+            ORDER BY card DESC
+            </if>
             </script>
             """)
     List<Settlement> selectSettlement(String startDate, String endDate, Integer selectWay);
