@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>일일 정산 내역</title>
+    <title>정산 내역</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
@@ -24,7 +24,7 @@
     <hr>
     <div class="row">
         <div class="col-md-6">
-            <h1>일일 정산 내역</h1>
+            <h1>정산 내역</h1>
         </div>
         <div class="col-md-6 text-end">
             <button id="addBtn" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
@@ -60,7 +60,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">매출 일자<small style="color: gray">(입력 시간)</small></th>
-            <th scope="col">현금 총액</th>
+            <th scope="col">cash drawer</th>
             <th scope="col">카드 매출액</th>
             <th scope="col">시재금</th>
             <th scope="col">수입내역</th>
@@ -73,8 +73,8 @@
             <tr id="dailyRow${settlement.id}">
                 <th scope="row">${settlement.id }</th>
                 <th scope="row">
-                    <a href="/Revenue/dailyDetail?settlementId=${settlement.id}">
-                        <fmt:formatDate value="${settlement.inserted}" type="date"/>
+                    <a href="/Revenue/dailyDetail?settlementId=${settlement.id}" id="dateLink${settlement.id }">
+                        <fmt:formatDate value="${settlement.inserted}" type="date" pattern="yyyy년 MM월 dd일"/>
                     </a>
                     <small style="color: gray">(<fmt:formatDate value="${settlement.inserted}" type="time"/>)</small>
                 </th>
@@ -159,7 +159,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modifyRevenueModalLabel"><span id="modifyDayBox">(수정 날짜)</span> 정산 수정</h1>
+                <h1 class="modal-title fs-5" id="modifyRevenueModalLabel"><span id="modifyDayBox"></span> 정산 수정</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -190,7 +190,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteRevenueModalLabel">(삭제 날짜) 정산 삭제</h1>
+                <h1 class="modal-title fs-5" id="deleteRevenueModalLabel"><span id="deleteDayBox"></span> 정산 삭제</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

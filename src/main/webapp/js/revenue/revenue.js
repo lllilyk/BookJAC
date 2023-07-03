@@ -17,6 +17,9 @@ $(".modifyBtn").click(function () {
     //수정버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
     console.log(settlementId);
+    const dateInfo = $("#dateLink"+settlementId).text();
+    console.log(dateInfo);
+    $("#modifyDayBox").text(dateInfo);
 
     //기존의 정보를 조회
     $.ajax("/Revenue/getDailyInfo?settlementId=" + settlementId, {
@@ -54,6 +57,9 @@ $(".deleteBtn").click(function () {
     //삭제버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
     $("#settlementIdInput").val(settlementId);
+    const dateInfo = $("#dateLink"+settlementId).text();
+    console.log(dateInfo);
+    $("#deleteDayBox").text(dateInfo);
 
     $("#deleteModalBtn").click(function () {
         //모달 삭제 버튼을 누르면

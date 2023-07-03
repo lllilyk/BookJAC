@@ -20,7 +20,7 @@
 <div class="container">
     <br>
     <hr>
-    <h1><fmt:formatDate value="${settlement.inserted}"/> 상세 내역</h1>
+    <h1><fmt:formatDate value="${settlement.inserted}" pattern="yyyy년 MM월 dd일"/> 상세 내역</h1>
     <table class="table table-bordered">
         <thead>
         <tr>
