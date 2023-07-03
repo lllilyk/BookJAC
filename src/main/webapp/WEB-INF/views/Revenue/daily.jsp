@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -18,15 +18,19 @@
 <body>
 <my:alert></my:alert>
 <div class="container">
-    <h1>일일 정산 내역</h1>
-
-    <!-- 정산 입력 폼 모달 버튼 -->
-    <button id="addBtn" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
-        정산 입력
-    </button>
-
-    <%-- 월말 정산 버튼 --%>
-    <a href="/Revenue/monthly" class="btn btn-outline-secondary">월말 정산</a>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>일일 정산 내역</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <button id="addBtn" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
+                정산 입력
+            </button>
+            <a href="/Revenue/monthly" class="btn btn-outline-success">월말 정산</a>
+        </div>
+    </div>
 
     <%-- 일일 정산 리스트 --%>
     <table class="table table-bordered">
@@ -39,7 +43,7 @@
             <th scope="col">시재금</th>
             <th scope="col">수입내역</th>
             <th scope="col">순수익</th>
-            <th scope="col">수정 및 삭제</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
