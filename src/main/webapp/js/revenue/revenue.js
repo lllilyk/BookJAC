@@ -3,6 +3,7 @@ var week = ['일', '월', '화', '수', '목', '금', '토'];
 
 //정산입력 버튼 누르면 현재 날짜 뜨도록 하기
 $("#addBtn").click(function () {
+    var year = currentDate.getFullYear();
     var month = currentDate.getMonth() + 1; //월
     var day = currentDate.getDate(); //일
     var weekNum = currentDate.getDay();

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class RevenueService {
@@ -17,18 +16,19 @@ public class RevenueService {
     RevenueMapper revenueMapper;
 
     public boolean insertRevenue(Settlement settlement) {
+
         //일일 정산 입력
        Integer count = revenueMapper.insertSettlement(settlement);
 
        return count == 1;
     }
 
-    public Map<String, Object> selectSettlement() {
+    public Map<String, Object> selectSettlement(String startDate, String endDate, Integer selectWay) {
         //일일 정산 전체 조회
         Map<String, Object> info = new HashMap<>();
 
         // 정산 리스트 전체 조회
-        List<Settlement> list = revenueMapper.selectSettlement();
+        List<Settlement> list = revenueMapper.selectSettlement(startDate, endDate, selectWay);
 
         info.put("list", list);
 

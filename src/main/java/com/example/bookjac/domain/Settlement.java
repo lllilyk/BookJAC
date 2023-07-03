@@ -1,7 +1,7 @@
 package com.example.bookjac.domain;
 
 import lombok.Data;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class Settlement {
@@ -10,5 +10,5 @@ public class Settlement {
     private Integer cash;
     private Integer card;
     private Integer vaultCash;
-    private LocalDateTime inserted;
+    private Date inserted;
 }

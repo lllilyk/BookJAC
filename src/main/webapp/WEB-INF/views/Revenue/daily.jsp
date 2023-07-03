@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -31,13 +33,33 @@
             <a href="/Revenue/monthly" class="btn btn-outline-success">월말 정산</a>
         </div>
     </div>
-
+    <br>
+    <%--  조회 조건  --%>
+    <form action="/Revenue/daily" class="row justify-content-start">
+        <h5>조회 조건</h5>
+        <div style="width: 150px;">
+            <input type="date" name="startDate">
+        </div>
+        <div style="width: 150px;">
+            <input type="date" name="endDate">
+        </div>
+        <div style="width: 170px;">
+            <select name="selectWay" class="form-select col-4" aria-label="Default select example">
+                <option value="0" selected>조회 조건 선택</option>
+                <option value="1">현금 매출 순</option>
+                <option value="2">카드 매출 순</option>
+                <option value="3">순수익 순</option>
+            </select>
+        </div>
+        <button style="width: 55px; margin-right: 5px;" type="submit" class="btn btn-outline-primary">조회</button>
+        <a style="width: 90px;" href="/Revenue/daily" class="btn btn-outline-primary">돌아가기</a>
+    </form>
     <%-- 일일 정산 리스트 --%>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">매출 일자<span style="color: gray">(입력 시간)</span></th>
+            <th scope="col">매출 일자<small style="color: gray">(입력 시간)</small></th>
             <th scope="col">현금 총액</th>
             <th scope="col">카드 매출액</th>
             <th scope="col">시재금</th>
@@ -51,14 +73,16 @@
             <tr id="dailyRow${settlement.id}">
                 <th scope="row">${settlement.id }</th>
                 <th scope="row">
-                        ${settlement.inserted.toLocalDate() }
-                    <span style="color: gray">(${settlement.inserted.toLocalTime() })</span>
+                    <a href="/Revenue/dailyDetail?settlementId=${settlement.id}">
+                        <fmt:formatDate value="${settlement.inserted}" type="date"/>
+                    </a>
+                    <small style="color: gray">(<fmt:formatDate value="${settlement.inserted}" type="time"/>)</small>
                 </th>
-                <th scope="row">${settlement.cash}</th>
-                <th scope="row">${settlement.card}</th>
-                <th scope="row">${settlement.vaultCash}</th>
-                <th scope="row">${settlement.cash - settlement.vaultCash + settlement.card}</th>
-                <th scope="row">수입내역 - 판 책 원가</th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.cash}"/></th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.card}"/></th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.vaultCash}"/></th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.cash - settlement.vaultCash + settlement.card}"/></th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value=""/>수입내역 - 판 책 원가</th>
                 <th scope="row">
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <button type="button" settlement-id="${settlement.id}" class="btn btn-outline-secondary modifyBtn" data-bs-toggle="modal" data-bs-target="#modifyRevenueModal">
@@ -110,15 +134,15 @@
                 <form action="/Revenue/addDaily" id="addRevenueForm" method="post">
                     <div class="mb-3">
                         <label for="addCash" class="col-form-label">cash drawer : </label>
-                        <input type="text" name="cash" class="form-control" id="addCash">
+                        <input type="text" name="cash" class="form-control" id="addCash" value="0">
                     </div>
                     <div class="mb-3">
                         <label for="addCard" class="col-form-label">카드 매출액 : </label>
-                        <input type="text" name="card" class="form-control" id="addCard">
+                        <input type="text" name="card" class="form-control" id="addCard" value="0">
                     </div>
                     <div class="mb-3">
                         <label for="addVaultCash" class="col-form-label">시재금 : </label>
-                        <input type="text" name="vaultCash" class="form-control" id="addVaultCash">
+                        <input type="text" name="vaultCash" class="form-control" id="addVaultCash" value="0">
                     </div>
                 </form>
             </div>

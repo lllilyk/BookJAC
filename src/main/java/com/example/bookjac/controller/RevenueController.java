@@ -18,10 +18,14 @@ public class RevenueController {
     RevenueService revenueService;
 
     @GetMapping("daily")
-    public void daily(Model model) {
+    public void daily(
+            @RequestParam(value = "startDate", required = false) String startDate,
+            @RequestParam(value = "endDate", required = false) String endDate,
+            @RequestParam(value = "selectWay", required = false) Integer selectWay,
+            Model model) {
         //일일 정산 리스트 조회
-        Map<String, Object> info = revenueService.selectSettlement();
-
+        Map<String, Object> info = revenueService.selectSettlement(startDate, endDate, selectWay);
+        System.out.println(startDate + ", " + endDate + ", " + selectWay);
         model.addAllAttributes(info);
     }
 
@@ -29,7 +33,6 @@ public class RevenueController {
     public String addDaily(Settlement settlement) {
         //일일 정산 입력 과정
         boolean ok = revenueService.insertRevenue(settlement);
-
         return "redirect:/Revenue/daily";
     }
 
@@ -66,5 +69,15 @@ public class RevenueController {
     @GetMapping("monthly")
     public void monthly() {
         // 일일 정산 입력창 forward
+    }
+
+    @GetMapping("dailyDetail")
+    public void dailyDetail(
+            @RequestParam("settlementId") Integer settlementId,
+            Model model) {
+        //일일 정산 상세 내역 forward
+        Settlement settlement = revenueService.selectSettlementById(settlementId);
+
+        model.addAttribute("settlement", settlement);
     }
 }

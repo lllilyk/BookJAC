@@ -16,9 +16,15 @@ public interface RevenueMapper {
     Integer insertSettlement(Settlement settlement);
 
     @Select("""
-            SELECT * FROM Settlement ORDER BY inserted DESC
+            <script>
+            SELECT * FROM Settlement
+            <if test="startDate != null">
+            WHERE inserted &gt;= #{startDate} AND inserted &lt;= #{endDate}
+            </if> 
+            ORDER BY inserted DESC
+            </script>
             """)
-    List<Settlement> selectSettlement();
+    List<Settlement> selectSettlement(String startDate, String endDate, Integer selectWay);
 
     @Delete("""
             DELETE FROM Settlement WHERE id = #{settlementId}
