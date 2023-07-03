@@ -16,6 +16,7 @@ $(".modifyBtn").click(function () {
     //수정버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
     console.log(settlementId);
+
     //기존의 정보를 조회
     $.ajax("/Revenue/getDailyInfo?settlementId=" + settlementId, {
         method: "get",
@@ -23,17 +24,31 @@ $(".modifyBtn").click(function () {
             $("#modifyCash").val(settlement.cash);
             $("#modifyCard").val(settlement.card);
             $("#modifyVaultCash").val(settlement.vaultCash);
+            $("#modifyId").val(settlementId);
         }
     })
 
-    $("#modifyModalBtn").click(function () {
-        //수정된 정보 업데이트
-        const id = settlementId;
-        const cash = $("#modifyCash").val();
-        const card = $("#modifyCard").val();
-        const vaultCash = $("#modifyVaultCash").val();
-        const data = {cash, card, vaultCash};
-        console.log(data);
+})
+
+$("#modifyModalBtn").click(function () {
+    //수정된 정보 업데이트
+    const id = $("#modifyId").val();;
+    const cash = $("#modifyCash").val();
+    const card = $("#modifyCard").val();
+    const vaultCash = $("#modifyVaultCash").val();
+    const data = {id, cash, card, vaultCash};
+    console.log(data);
+
+    $.ajax("/Revenue/modifyDaily", {
+        method: "put",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function () {
+            console.log("modify success")
+            $("#cashInfo" + id).text(cash)
+            $("#cardInfo" + id).text(card)
+            $("#vaultCashInfo" + id).text(vaultCash)
+        }
     })
 })
 

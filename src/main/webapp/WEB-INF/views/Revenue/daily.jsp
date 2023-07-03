@@ -50,9 +50,9 @@
                         ${settlement.inserted.toLocalDate() }
                     <span style="color: gray">(${settlement.inserted.toLocalTime() })</span>
                 </th>
-                <th scope="row">${settlement.cash}</th>
-                <th scope="row">${settlement.card}</th>
-                <th scope="row">${settlement.vaultCash}</th>
+                <th scope="row" id="cashInfo${settlement.id}">${settlement.cash}</th>
+                <th scope="row" id="cardInfo${settlement.id}">${settlement.card}</th>
+                <th scope="row" id="vaultCashInfo${settlement.id}">${settlement.vaultCash}</th>
                 <th scope="row">${settlement.cash - settlement.vaultCash + settlement.card}</th>
                 <th scope="row">수입내역 - 판 책 원가</th>
                 <th scope="row">
@@ -135,6 +135,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <input type="text" class="form-control d-none" id="modifyId">
                 <div class="mb-3">
                     <label for="modifyCash" class="col-form-label">현금 매출액 : </label>
                     <input type="text" name="cash" class="form-control" id="modifyCash">
@@ -150,7 +151,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary" id="modifyModalBtn">정산 수정</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="modifyModalBtn">정산 수정</button>
             </div>
         </div>
     </div>

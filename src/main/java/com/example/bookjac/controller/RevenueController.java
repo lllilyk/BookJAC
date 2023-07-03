@@ -53,6 +53,15 @@ public class RevenueController {
         return settlement;
     }
 
+    @PutMapping("modifyDaily")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> modifyDaily(
+            @RequestBody Settlement settlement) {
+        Map<String, Object> res = revenueService.modifyDaily(settlement);
+
+        System.out.println(res.get("message"));
+        return ResponseEntity.ok().body(res);
+    }
 
     @GetMapping("monthly")
     public void monthly() {

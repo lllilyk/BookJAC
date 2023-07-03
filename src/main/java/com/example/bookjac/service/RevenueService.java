@@ -17,12 +17,14 @@ public class RevenueService {
     RevenueMapper revenueMapper;
 
     public boolean insertRevenue(Settlement settlement) {
+        //일일 정산 입력
        Integer count = revenueMapper.insertSettlement(settlement);
 
        return count == 1;
     }
 
     public Map<String, Object> selectSettlement() {
+        //일일 정산 전체 조회
         Map<String, Object> info = new HashMap<>();
 
         // 정산 리스트 전체 조회
@@ -34,6 +36,7 @@ public class RevenueService {
     }
 
     public Map<String, Object> deleteRevenue(Integer settlementId) {
+        //선택한 일일 정산 삭제
         Integer count = 0;
         Map<String, Object> res = new HashMap<>();
 
@@ -48,7 +51,22 @@ public class RevenueService {
     }
 
     public Settlement selectSettlementById(Integer settlementId) {
+        // 선택한 일일 정산 조회
         Settlement settlement = revenueMapper.selectSettlementById(settlementId);
         return  settlement;
+    }
+
+    public Map<String, Object> modifyDaily(Settlement settlement) {
+        //선택한 일일 정산 수정
+        Map<String, Object> res = new HashMap<>();
+
+        Integer count = revenueMapper.modifyDaily(settlement);
+
+        if(count == 1) {
+            res.put("message", "수정되었습니다.");
+        } else {
+            res.put("message", "수정되지 않았습니다.");
+        }
+        return res;
     }
 }

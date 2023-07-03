@@ -29,4 +29,11 @@ public interface RevenueMapper {
             SELECT * FROM Settlement WHERE id = #{settlementId}
             """)
     Settlement selectSettlementById(Integer settlementId);
+
+    @Update("""
+            UPDATE Settlement
+            SET cash = #{cash}, card = #{card}, vaultCash = #{vaultCash}
+            WHERE id = #{id}
+            """)
+    Integer modifyDaily(Settlement settlement);
 }
