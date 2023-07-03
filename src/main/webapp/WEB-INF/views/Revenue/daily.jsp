@@ -44,15 +44,15 @@
         </thead>
         <tbody class="table-group-divider">
         <c:forEach items="${list }" var="settlement">
-            <tr>
+            <tr id="dailyRow${settlement.id}">
                 <th scope="row">${settlement.id }</th>
                 <th scope="row">
                         ${settlement.inserted.toLocalDate() }
                     <span style="color: gray">(${settlement.inserted.toLocalTime() })</span>
                 </th>
-                <th scope="row" id="cashInfo${settlement.id}">${settlement.cash}</th>
-                <th scope="row" id="cardInfo${settlement.id}">${settlement.card}</th>
-                <th scope="row" id="vaultCashInfo${settlement.id}">${settlement.vaultCash}</th>
+                <th scope="row">${settlement.cash}</th>
+                <th scope="row">${settlement.card}</th>
+                <th scope="row">${settlement.vaultCash}</th>
                 <th scope="row">${settlement.cash - settlement.vaultCash + settlement.card}</th>
                 <th scope="row">수입내역 - 판 책 원가</th>
                 <th scope="row">

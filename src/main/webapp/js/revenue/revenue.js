@@ -31,23 +31,19 @@ $(".modifyBtn").click(function () {
 })
 
 $("#modifyModalBtn").click(function () {
-    //수정된 정보 업데이트
+    //입력된 정보로 수정
     const id = $("#modifyId").val();;
     const cash = $("#modifyCash").val();
     const card = $("#modifyCard").val();
     const vaultCash = $("#modifyVaultCash").val();
     const data = {id, cash, card, vaultCash};
-    console.log(data);
 
     $.ajax("/Revenue/modifyDaily", {
         method: "put",
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function () {
-            console.log("modify success")
-            $("#cashInfo" + id).text(cash)
-            $("#cardInfo" + id).text(card)
-            $("#vaultCashInfo" + id).text(vaultCash)
+            window.location.href = "/Revenue/daily";
         }
     })
 })
@@ -56,7 +52,6 @@ $("#modifyModalBtn").click(function () {
 $(".deleteBtn").click(function () {
     //삭제버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
-    console.log(settlementId);
     $("#settlementIdInput").val(settlementId);
 
     $("#deleteModalBtn").click(function () {
@@ -64,7 +59,6 @@ $(".deleteBtn").click(function () {
         $.ajax("/Revenue/deleteDaily?settlementId=" + settlementId, {
             method: "delete",
             success: function () {
-                console.log("delete")
                 window.location.href = "/Revenue/daily";
             }
         })
