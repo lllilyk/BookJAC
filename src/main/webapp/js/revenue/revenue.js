@@ -1,6 +1,17 @@
 var currentDate = new Date();
 var week = ['일', '월', '화', '수', '목', '금', '토'];
 
+//정산입력 버튼 누르면 현재 날짜 뜨도록 하기
+$("#addBtn").click(function () {
+    var month = currentDate.getMonth() + 1; //월
+    var day = currentDate.getDate(); //일
+    var weekNum = currentDate.getDay();
+    var today = month + "월 " + day + "일 " + week[weekNum] + "요일";
+
+    $("#todayBox").text(today);
+})
+
+// 일일 정산 수정 과정
 $(".modifyBtn").click(function () {
     //수정버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
@@ -26,6 +37,7 @@ $(".modifyBtn").click(function () {
     })
 })
 
+//일일 정산 삭제 과정
 $(".deleteBtn").click(function () {
     //삭제버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
@@ -44,12 +56,4 @@ $(".deleteBtn").click(function () {
     })
 })
 
-//정산입력 버튼 누르면 현재 날짜 뜨도록 하기
-$("#addBtn").click(function () {
-    var month = currentDate.getMonth() + 1; //월
-    var day = currentDate.getDate(); //일
-    var weekNum = currentDate.getDay();
-    var today = month + "월 " + day + "일 " + week[weekNum] + "요일";
 
-    $("#todayBox").text(today);
-})

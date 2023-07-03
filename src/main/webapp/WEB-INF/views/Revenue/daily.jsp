@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -15,16 +16,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+<my:alert></my:alert>
 <div class="container">
     <h1>일일 정산 내역</h1>
 
     <!-- 정산 입력 폼 모달 버튼 -->
-    <button id="addBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
+    <button id="addBtn" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
         정산 입력
     </button>
 
     <%-- 월말 정산 버튼 --%>
-    <a href="/Revenue/monthly">월말 정산</a>
+    <a href="/Revenue/monthly" class="btn btn-outline-secondary">월말 정산</a>
 
     <%-- 일일 정산 리스트 --%>
     <table class="table table-bordered">
