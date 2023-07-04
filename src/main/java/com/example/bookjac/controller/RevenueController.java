@@ -61,7 +61,7 @@ public class RevenueController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> modifyDaily(
             @RequestBody Settlement settlement) {
-        // 정산 수정 프로세
+        // 정산 수정 프로세스 
         Map<String, Object> res = revenueService.modifyDaily(settlement);
 
         System.out.println(res.get("message"));

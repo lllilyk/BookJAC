@@ -17,7 +17,7 @@ $(".modifyBtn").click(function () {
     //수정버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
     console.log(settlementId);
-    const dateInfo = $("#dateLink"+settlementId).text();
+    const dateInfo = $("#dateLink" + settlementId).text();
     console.log(dateInfo);
     $("#modifyDayBox").text(dateInfo);
 
@@ -36,7 +36,8 @@ $(".modifyBtn").click(function () {
 
 $("#modifyModalBtn").click(function () {
     //입력된 정보로 수정
-    const id = $("#modifyId").val();;
+    const id = $("#modifyId").val();
+    ;
     const cash = $("#modifyCash").val();
     const card = $("#modifyCard").val();
     const vaultCash = $("#modifyVaultCash").val();
@@ -57,7 +58,7 @@ $(".deleteBtn").click(function () {
     //삭제버튼을 누르면
     const settlementId = $(this).attr("settlement-id");
     $("#settlementIdInput").val(settlementId);
-    const dateInfo = $("#dateLink"+settlementId).text();
+    const dateInfo = $("#dateLink" + settlementId).text();
     console.log(dateInfo);
     $("#deleteDayBox").text(dateInfo);
 
@@ -82,16 +83,20 @@ monthInput.addEventListener('change', function () {
     //월별 조회를 선택할 경우 시작일과 종료일의 값은 없어지고 disabled된다
     startDateInput.disabled = true;
     endDateInput.disabled = true;
-    startDateInput.value='';
-    endDateInput.value='';
+    startDateInput.value = '';
+    endDateInput.value = '';
     alert('월별 조회를 선택한 경우 기간별 조회를 할 수 없습니다.');
 });
 
 startDateInput.addEventListener('change', function () {
     //시작일을 선택할 경우 월별 조회의 값은 없어지고 disable된다.
     monthInput.disabled = true;
-    monthInput.value='';
+    monthInput.value = '';
     alert('기간별 조회를 선택하시면 월별 조회를 선택할 수 없습니다.');
 });
 
-
+//엑셀 다운로드 코드
+document.getElementById("excelBtn").addEventListener('click', function () {
+    var wb = XLSX.utils.table_to_book(document.getElementById("TableToExport"));
+    XLSX.writeFile(wb, "정산 내역.xlsx");
+});

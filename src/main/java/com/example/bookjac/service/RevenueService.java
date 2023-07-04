@@ -26,11 +26,12 @@ public class RevenueService {
     public Map<String, Object> selectSettlement(String startDate, String endDate, Integer selectWay, String yearMonth) {
         //정산 조회
         Map<String, Object> info = new HashMap<>();
-
+        System.out.println(startDate + ", " + endDate + ", " + selectWay + ", " + yearMonth);
         //파라미터로 받은 yearMonth를 year과 month로 분리
         String year = "";
         String month = "";
-        if (yearMonth != null) {
+        //yearMonth의 값이 있을 경우에만 진행
+        if(yearMonth != null && !yearMonth.equals("")) {
             String[] parts = yearMonth.split("-");
             year = parts[0];
             month = parts[1];
@@ -38,8 +39,6 @@ public class RevenueService {
 
         // 정산 리스트 전체 조회
         List<Settlement> list = revenueMapper.selectSettlement(startDate, endDate, selectWay, year, month);
-
-
 
         info.put("list", list);
         return info;

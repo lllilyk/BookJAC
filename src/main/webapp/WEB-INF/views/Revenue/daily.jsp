@@ -31,6 +31,7 @@
                 차트 보기
             </button>
             <a href="/Revenue/monthly" class="btn btn-outline-secondary">월말 정산</a>
+            <button id="excelBtn" class="btn btn-outline-secondary">엑셀 다운</button>
             <button id="addBtn" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
                 정산 입력
             </button>
@@ -84,7 +85,7 @@
     </div>
 
     <%-- 일일 정산 리스트 --%>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="TableToExport">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -249,6 +250,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 <script src="/js/revenue/revenue.js"></script>
 <script src="/js/revenue/chart.js"></script>
 </body>
