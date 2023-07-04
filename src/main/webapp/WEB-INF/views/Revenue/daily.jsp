@@ -61,7 +61,10 @@
 
     <%--차트--%>
     <div class="container d-none w-50" id="barChartBox">
-        <h1>일 별 차트</h1>
+        <h1>
+            일 별 차트
+            <span id="chartSelectWay" select-way="${param.selectWay}"></span>
+        </h1>
         <div>
             <canvas id="barChartCanvas"></canvas>
         </div>

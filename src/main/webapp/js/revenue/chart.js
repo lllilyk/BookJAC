@@ -2,6 +2,17 @@
 // 바 차트 보기 버튼 클릭 시
 $("#barChartBtn").click(function () {
     $("#barChartBox").toggleClass("d-none");
+    $("#chartSelectWay").text(function () {
+        let selectWay = $(this).attr("select-way");
+        console.log(selectWay);
+        if(selectWay == 1) {
+            return '(현금 매출)'
+        } else if (selectWay == 2) {
+            return '(카드 매출)'
+        } else if (selectWay == 3 || selectWay == null || selectWay == 0) {
+            return '(수입 내역)'
+        }
+    });
 })
 
 //도넛 차트 보기 버튼 클릭 시

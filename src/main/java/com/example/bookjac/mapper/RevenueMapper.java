@@ -18,7 +18,7 @@ public interface RevenueMapper {
     @Select("""
             <script>
             SELECT * FROM Settlement
-            <if test="startDate != null and endDate != null">
+            <if test="(startDate != null and startDate != '') and (endDate != null and endDate != '')">
             WHERE inserted &gt;= #{startDate} AND inserted &lt;= #{endDate}
             </if> 
             <if test="selectWay == null or selectWay == 0">

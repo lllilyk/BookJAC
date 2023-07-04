@@ -25,7 +25,7 @@ public class RevenueController {
             Model model) {
         //정산 전체 리스트 조회
         Map<String, Object> info = revenueService.selectSettlement(startDate, endDate, selectWay);
-
+        System.out.println(startDate + ", " + endDate + ", " + selectWay);
         model.addAllAttributes(info);
     }
 
