@@ -90,11 +90,11 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">매출 일자<small style="color: gray">(입력 시간)</small></th>
-            <th scope="col">cash drawer</th>
-            <th scope="col">카드 매출액</th>
+            <th scope="col" class="${param.selectWay == 1 ? 'text-danger' : ''}">cash drawer</th>
+            <th scope="col" class="${param.selectWay == 2 ? 'text-danger' : ''}">카드 매출액</th>
             <th scope="col">시재금</th>
-            <th scope="col">수입내역</th>
-            <th scope="col">순수익</th>
+            <th scope="col" class="${param.selectWay == 3 ? 'text-danger' : ''}">수입내역</th>
+            <th scope="col" >순수익</th>
             <th scope="col"></th>
         </tr>
         </thead>
