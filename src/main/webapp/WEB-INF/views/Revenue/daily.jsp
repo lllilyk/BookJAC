@@ -27,6 +27,9 @@
             <h1>정산 내역</h1>
         </div>
         <div class="col-md-6 text-end">
+            <button id="barChartBtn" type="button" class="btn btn-outline-primary">
+                차트 보기
+            </button>
             <button id="addBtn" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
                 정산 입력
             </button>
@@ -34,6 +37,7 @@
         </div>
     </div>
     <br>
+
     <%--  조회 조건  --%>
     <form action="/Revenue/daily" class="row justify-content-start">
         <h5>조회 조건</h5>
@@ -48,12 +52,22 @@
                 <option value="0" ${param.selectWay == 0 ? 'selected' : ''}>조회 조건 선택</option>
                 <option value="1" ${param.selectWay == 1 ? 'selected' : ''}>현금 매출 순</option>
                 <option value="2" ${param.selectWay == 2 ? 'selected' : ''}>카드 매출 순</option>
-                <option value="3" ${param.selectWay == 3 ? 'selected' : ''}>순수익 순</option>
+                <option value="3" ${param.selectWay == 3 ? 'selected' : ''}>수입내역 순</option>
             </select>
         </div>
         <button style="width: 55px; margin-right: 5px;" type="submit" class="btn btn-outline-primary">조회</button>
         <a style="width: 100px;" href="/Revenue/daily" class="btn btn-outline-secondary">조건 초기화</a>
     </form>
+
+    <%--차트--%>
+    <div class="container d-none w-50" id="barChartBox">
+        <h1>일 별 차트</h1>
+        <div>
+            <canvas id="barChartCanvas"></canvas>
+        </div>
+        <br>
+    </div>
+
     <%-- 일일 정산 리스트 --%>
     <table class="table table-bordered">
         <thead>
@@ -73,7 +87,7 @@
             <tr id="dailyRow${settlement.id}">
                 <th scope="row">${settlement.id }</th>
                 <th scope="row">
-                    <a href="/Revenue/dailyDetail?settlementId=${settlement.id}" id="dateLink${settlement.id }">
+                    <a href="/Revenue/dailyDetail?settlementId=${settlement.id}" id="dateLink${settlement.id }" class="dateInfo">
                         <fmt:formatDate value="${settlement.inserted}" type="date" pattern="yyyy년 MM월 dd일"/>
                     </a>
                     <small style="color: gray">(<fmt:formatDate value="${settlement.inserted}" type="time"/>)</small>
@@ -205,8 +219,22 @@
     </div>
 </div>
 
+<script>
+    // 차트 x축 개수 = 배열 길이, 차트의 기본 정보
+    let date = new Array();
+    let revenueValue = new Array();
+    <c:forEach items="${list}" var="settlement" varStatus="num">
+    date[${num.index}] = '<fmt:formatDate value="${settlement.inserted}" type="date" pattern="MM/dd"/>';
+    revenueValue[${num.index}] = ${settlement.cash - settlement.vaultCash + settlement.card};
+    </c:forEach>
+    //해당 날짜의 수입내역을 행렬로 넣음
+    let xInfo = [date, revenueValue];
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 <script src="/js/revenue/revenue.js"></script>
+<script src="/js/revenue/chart.js"></script>
 </body>
 </html>

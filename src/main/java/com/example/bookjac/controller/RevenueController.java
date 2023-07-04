@@ -23,9 +23,9 @@ public class RevenueController {
             @RequestParam(value = "endDate", required = false) String endDate,
             @RequestParam(value = "selectWay", required = false) Integer selectWay,
             Model model) {
-        //일일 정산 리스트 조회
+        //정산 전체 리스트 조회
         Map<String, Object> info = revenueService.selectSettlement(startDate, endDate, selectWay);
-        System.out.println(startDate + ", " + endDate + ", " + selectWay);
+
         model.addAllAttributes(info);
     }
 
@@ -60,6 +60,7 @@ public class RevenueController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> modifyDaily(
             @RequestBody Settlement settlement) {
+        // 정산 수정 프로세스
         Map<String, Object> res = revenueService.modifyDaily(settlement);
 
         System.out.println(res.get("message"));

@@ -31,7 +31,6 @@ public class RevenueService {
         List<Settlement> list = revenueMapper.selectSettlement(startDate, endDate, selectWay);
 
         info.put("list", list);
-
         return info;
     }
 
