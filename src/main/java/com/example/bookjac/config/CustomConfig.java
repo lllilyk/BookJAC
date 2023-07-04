@@ -9,7 +9,7 @@ import org.springframework.security.web.*;
 
 @Configuration
 @EnableMethodSecurity
-public class customConfig {
+public class CustomConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
