@@ -9,7 +9,7 @@ import java.util.List;
 public interface CartMapper {
 
     /* 발주 품목 추가 */
-    public int addCart(Cart cart);
+    public int addCart(Cart cart) throws Exception;
 
     /* 발주 품목 삭제 */
     public int deleteCart(int cartId);
@@ -20,4 +20,6 @@ public interface CartMapper {
     /* 발주 품목 List*/
     public List<Cart> getCart(String memberId);
 
+    /* 발주 확인 */
+    public Cart checkCart(Cart cart);
 }

@@ -27,4 +27,10 @@
         WHERE memberId = #{memberId}
     </select>
 
+    <!-- 발주 확인-->
+    <select id="checkCart" resultType="com.example.bookjac.domain.Cart">
+        SELECT * FROM OrderCart
+        WHERE memberId = #{memberId} and bookId = #{bookId}
+    </select>
+
 </mapper>

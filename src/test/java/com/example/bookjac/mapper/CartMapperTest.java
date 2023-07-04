@@ -1,4 +1,4 @@
-package com.example.bookjac;
+package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Cart;
 import com.example.bookjac.mapper.CartMapper;
@@ -18,7 +18,7 @@ class CartMapperTest {
 
     /* 발주 품목 추가 */
     @Test
-    public void addCart() {
+    public void addCart() throws Exception {
         String memberId = "admin";
         int bookId = 1;
         int count = 2;
@@ -69,6 +69,22 @@ class CartMapperTest {
         for(Cart cart : list) {
             System.out.println(cart);
         }
+
+    }
+
+    /* 카트 확인 */
+    @Test
+    public void checkCart() {
+
+        String memberId = "admin";
+        int bookId = 3;
+
+        Cart cart = new Cart();
+        cart.setMemberId(memberId);
+        cart.setBookId(bookId);
+
+        Cart resutlCart = mapper.checkCart(cart);
+        System.out.println(resutlCart);
 
     }
 }
