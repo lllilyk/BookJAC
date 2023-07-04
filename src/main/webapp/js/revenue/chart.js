@@ -10,7 +10,7 @@ $("#barChartBtn").click(function () {
         } else if (selectWay == 2) {
             return '(카드 매출)'
         } else if (selectWay == 3 || selectWay == null || selectWay == 0) {
-            return '(수입 내역)'
+            return ''
         }
     });
 })
@@ -29,12 +29,12 @@ new Chart(barChart, {
             type: 'bar',
             data: xInfo[1],
             order: 2,
-            label: '막대 이름'
+            label: '총 수입트'
         }, {
             type: 'line',
             data: xInfo[1],
             order: 1,
-            label: '선 이름음'
+            label: '순수익'
         }],
         labels: xInfo[0]
     },

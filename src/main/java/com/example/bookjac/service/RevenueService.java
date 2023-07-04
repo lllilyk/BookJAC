@@ -18,17 +18,26 @@ public class RevenueService {
     public boolean insertRevenue(Settlement settlement) {
 
         //일일 정산 입력
-       Integer count = revenueMapper.insertSettlement(settlement);
+        Integer count = revenueMapper.insertSettlement(settlement);
 
-       return count == 1;
+        return count == 1;
     }
 
-    public Map<String, Object> selectSettlement(String startDate, String endDate, Integer selectWay) {
+    public Map<String, Object> selectSettlement(String startDate, String endDate, Integer selectWay, String yearMonth) {
         //일일 정산 전체 조회
         Map<String, Object> info = new HashMap<>();
 
+        //파라미터로 받은 yearMonth를 year과 month로 분리
+        String year = "";
+        String month = "";
+        if (yearMonth != null) {
+            String[] parts = yearMonth.split("-");
+            year = parts[0];
+            month = parts[1];
+        }
+
         // 정산 리스트 전체 조회
-        List<Settlement> list = revenueMapper.selectSettlement(startDate, endDate, selectWay);
+        List<Settlement> list = revenueMapper.selectSettlement(startDate, endDate, selectWay, year, month);
 
         info.put("list", list);
         return info;
@@ -41,7 +50,7 @@ public class RevenueService {
 
         count = revenueMapper.deleteSettlement(settlementId);
 
-        if(count == 1) {
+        if (count == 1) {
             res.put("message", "삭제되었습니다.");
         } else {
             res.put("message", "삭제되지 않았습니다.");
@@ -52,7 +61,7 @@ public class RevenueService {
     public Settlement selectSettlementById(Integer settlementId) {
         // 선택한 일일 정산 조회
         Settlement settlement = revenueMapper.selectSettlementById(settlementId);
-        return  settlement;
+        return settlement;
     }
 
     public Map<String, Object> modifyDaily(Settlement settlement) {
@@ -61,7 +70,7 @@ public class RevenueService {
 
         Integer count = revenueMapper.modifyDaily(settlement);
 
-        if(count == 1) {
+        if (count == 1) {
             res.put("message", "수정되었습니다.");
         } else {
             res.put("message", "수정되지 않았습니다.");

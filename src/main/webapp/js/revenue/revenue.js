@@ -72,4 +72,3 @@ $(".deleteBtn").click(function () {
     })
 })
 
-

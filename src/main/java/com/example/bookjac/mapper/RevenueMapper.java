@@ -21,6 +21,9 @@ public interface RevenueMapper {
             <if test="(startDate != null and startDate != '') and (endDate != null and endDate != '')">
             WHERE inserted &gt;= #{startDate} AND inserted &lt;= #{endDate}
             </if> 
+            <if test="(year != null and year != '') and (month != null and month != '')">
+            WHERE MONTH(inserted) = #{month} AND YEAR(inserted) = #{year}
+            </if>
             <if test="selectWay == null or selectWay == 0">
             ORDER BY inserted DESC
             </if>
@@ -32,7 +35,7 @@ public interface RevenueMapper {
             </if>
             </script>
             """)
-    List<Settlement> selectSettlement(String startDate, String endDate, Integer selectWay);
+    List<Settlement> selectSettlement(String startDate, String endDate, Integer selectWay,String year, String month);
 
     @Delete("""
             DELETE FROM Settlement WHERE id = #{settlementId}
