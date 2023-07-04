@@ -30,10 +30,10 @@
             <button id="barChartBtn" type="button" class="btn btn-outline-secondary">
                 차트 보기
             </button>
-            <button id="addBtn" type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
+            <a href="/Revenue/monthly" class="btn btn-outline-secondary">월말 정산</a>
+            <button id="addBtn" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
                 정산 입력
             </button>
-            <a href="/Revenue/monthly" class="btn btn-outline-secondary">월말 정산</a>
         </div>
     </div>
     <hr>
