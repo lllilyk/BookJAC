@@ -24,7 +24,7 @@ public class RevenueService {
     }
 
     public Map<String, Object> selectSettlement(String startDate, String endDate, Integer selectWay, String yearMonth) {
-        //일일 정산 전체 조회
+        //정산 조회
         Map<String, Object> info = new HashMap<>();
 
         //파라미터로 받은 yearMonth를 year과 month로 분리
@@ -38,6 +38,8 @@ public class RevenueService {
 
         // 정산 리스트 전체 조회
         List<Settlement> list = revenueMapper.selectSettlement(startDate, endDate, selectWay, year, month);
+
+
 
         info.put("list", list);
         return info;

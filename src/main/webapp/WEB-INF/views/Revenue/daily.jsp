@@ -43,11 +43,11 @@
         <form action="/Revenue/daily" class="row" id="searchForm">
             <h5><strong>조회 조건</strong></h5>
             <div class="col">
-                <label for="startDateInput">시작 날짜</label>
+                <label for="startDateInput">시작일</label>
                 <input class="form-control" type="date" id="startDateInput" name="startDate" value="${param.startDate}">
             </div>
             <div class="col">
-                <label for="endDateInput">마지막 날짜</label>
+                <label for="endDateInput">종료일</label>
                 <input class="form-control" type="date" id="endDateInput" name="endDate" value="${param.endDate}">
             </div>
             <div class="col">

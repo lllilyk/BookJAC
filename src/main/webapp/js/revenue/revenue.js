@@ -72,3 +72,26 @@ $(".deleteBtn").click(function () {
     })
 })
 
+//조건 조회 기간별, 월별 기능 추가
+//기간을 선택하면 월별 선택 불가능, 월별을 선택하면 기간 선택 불가능
+var monthInput = document.getElementById('monthInput');
+var startDateInput = document.getElementById('startDateInput');
+var endDateInput = document.getElementById('endDateInput');
+
+monthInput.addEventListener('change', function () {
+    //월별 조회를 선택할 경우 시작일과 종료일의 값은 없어지고 disabled된다
+    startDateInput.disabled = true;
+    endDateInput.disabled = true;
+    startDateInput.value='';
+    endDateInput.value='';
+    alert('월별 조회를 선택한 경우 기간별 조회를 할 수 없습니다.');
+});
+
+startDateInput.addEventListener('change', function () {
+    //시작일을 선택할 경우 월별 조회의 값은 없어지고 disable된다.
+    monthInput.disabled = true;
+    monthInput.value='';
+    alert('기간별 조회를 선택하시면 월별 조회를 선택할 수 없습니다.');
+});
+
+
