@@ -52,7 +52,7 @@
             </select>
         </div>
         <button style="width: 55px; margin-right: 5px;" type="submit" class="btn btn-outline-primary">조회</button>
-        <a style="width: 100px;" href="/Revenue/daily" class="btn btn-outline-primary">조건 초기화</a>
+        <a style="width: 100px;" href="/Revenue/daily" class="btn btn-outline-secondary">조건 초기화</a>
     </form>
     <%-- 일일 정산 리스트 --%>
     <table class="table table-bordered">
