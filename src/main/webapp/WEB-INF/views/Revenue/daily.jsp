@@ -253,5 +253,6 @@
 <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 <script src="/js/revenue/revenue.js"></script>
 <script src="/js/revenue/chart.js"></script>
+<script src="/js/revenue/excel.js"></script>
 </body>
 </html>

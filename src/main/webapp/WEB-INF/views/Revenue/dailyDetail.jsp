@@ -26,33 +26,23 @@
             <h1><fmt:formatDate value="${settlement.inserted}" pattern="yyyy년 MM월 dd일"/> 상세 내역</h1>
         </div>
         <div class="col-md-6 text-end">
-            <button id="barChartBtn" type="button" class="btn btn-outline-primary">
-                바 차트 보기
-            </button>
             <button id="doughnutChartBtn" type="button" class="btn btn-outline-primary">
                 도넛 차트 보기
             </button>
+            <button id="excelBtn" class="btn btn-outline-secondary">엑셀 다운</button>
             <a href="/Revenue/daily" class="btn btn-outline-secondary">
                 돌아가기
             </a>
         </div>
     </div>
-    <%--바 차트--%>
-    <div class="container d-none  w-50" id="barChartBox">
-        <h1>막대 차트</h1>
-        <div>
-            <canvas id="barChartCanvas"></canvas>
-        </div>
-    </div>
 
     <%--도넛 차트 --%>
-    <div class="container d-none  w-50" id="doughnutChartBox">
-        <h1>도넛 차트</h1>
-        <div>
-            <canvas id="doughnutChartCanvas"></canvas>
+    <div class="container d-none w-50" id="doughnutChartBox">
+        <div style="width: 400px;">
+            <canvas id="doughnutChartCanvas" ></canvas>
         </div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="TableToExport">
         <thead>
         <tr>
             <th scope="col">판매 책 제목</th>
@@ -84,6 +74,9 @@ ${settlement.id}, ${settlement.cash}, ${settlement.card}, ${settlement.vaultCash
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 <script src="/js/revenue/chart.js"></script>
+<script src="/js/revenue/excel.js"></script>
+
 </body>
 </html>
