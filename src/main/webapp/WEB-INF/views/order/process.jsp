@@ -22,18 +22,6 @@
         .row{
             margin: 10px 0px 20px 0px;
         }
-        .titles{
-            width:430px;
-        }
-        .size1{
-            width:170px;
-        }
-        .size2{
-            width:100px;
-        }
-        .size3{
-            width:50px;
-        }
     </style>
 </head>
 <body>
@@ -52,30 +40,40 @@
             </div>
                 <%--search바--%>
 
-                <table class="table table-bordered">
+                <table class="table table-bordered" style="text-align: center">
                     <thead>
                     <tr>
-                        <th class="size3">#</th>
-                        <th class="titles">제목</th>
-                        <th class="size1">글쓴이</th>
-                        <th class="size1">출판사</th>
-                        <th class="size2">카테고리</th>
-                        <th class="size2">가격</th>
-                        <th class="size2">재고수량</th>
-                        <th class="size2">발주수량</th>
+                        <th style="width:50px;">#</th>
+                        <th style="width:350px;">제목</th>
+                        <th style="width:170px;">글쓴이</th>
+                        <th style="width:170px;">출판사</th>
+                        <th style="width:100px;">단가</th>
+                        <th style="width:100px;">재고수량</th>
+                        <th style="width:160px;">발주수량</th>
+                        <th style="width:70px;">발주</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         <c:forEach items="${bookList}" var="book">
                             <tr>
-                                <td>${book.id }</td>
+                                <td id="bookIdText">${book.id }</td>
                                 <td>${book.title }</td>
                                 <td>${book.writer }</td>
                                 <td>${book.publisher }</td>
-                                <td>${book.categoryId }</td>
                                 <td>${book.inPrice }</td>
                                 <td>${book.totalCount }</td>
-                                <td></td>
+                                <td>
+                                    <div class="btn">
+                                        <div class="btn_quantity">
+                                            <div class="input-group">
+                                                <button id="minus_btn" type="button" class="btn btn-light">-</button>
+                                                <input id="quantity_input" type="text" class="form-control" value="1" style="width:35px;">
+                                                <button id="plus_btn" type="button" class="btn btn-light">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><button id="btn_cart" type="button" class="btn btn-outline-danger"> 등록 </button></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -118,5 +116,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
         integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/order/cart.js"></script>
 </body>
 </html>
