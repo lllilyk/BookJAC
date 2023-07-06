@@ -8,11 +8,30 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
-    @Select("""
+   /* @Select("""
             SELECT *
             FROM Book
             ORDER BY totalCount
             """
     )
-    List<Order> selectAll();
+    List<Order> selectAll();*/
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM Book
+            """)
+    Integer countAll();
+
+    @Select("""
+            SELECT id,
+                   title,
+                   writer,
+                   publisher,
+                   inPrice,
+                   totalCount
+            FROM Book
+            ORDER BY totalCount
+            LIMIT #{startIndex}, #{booksInPage}
+            """)
+    List<Order> selectAllPage(Integer startIndex, Integer booksInPage);
 }

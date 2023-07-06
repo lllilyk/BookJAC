@@ -19,7 +19,7 @@
     <%--iamport--%>
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <style>
-        .row{
+        .row {
             margin: 10px 0px 20px 0px;
         }
     </style>
@@ -33,57 +33,100 @@
                     <h1>발주 페이지</h1>
                 </div>
                 <div class="col-md-6 text-end">
-                    <button type="button" class="btn btn-outline-primary"> 주문내역확인 </button>
-                    <button type="button" class="btn btn-outline-success"> 발주품목 </button>
+                    <button type="button" class="btn btn-outline-primary"> 주문내역확인</button>
+                    <button type="button" class="btn btn-outline-success"> 발주품목</button>
                     <%--<button type="button" class="btn btn-outline-danger"> 발주 </button>--%>
                 </div>
             </div>
-                <%--search바--%>
+            <%--search바--%>
 
-                <table class="table table-bordered" style="text-align: center">
-                    <thead>
+            <table class="table table-bordered" style="text-align: center">
+                <thead>
+                <tr>
+                    <th style="width:50px;">#</th>
+                    <th style="width:350px;">제목</th>
+                    <th style="width:170px;">글쓴이</th>
+                    <th style="width:170px;">출판사</th>
+                    <th style="width:100px;">단가</th>
+                    <th style="width:100px;">재고수량</th>
+                    <th style="width:165px;">발주수량</th>
+                    <th style="width:70px;">발주</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <c:forEach items="${bookList}" var="book" varStatus="bookStatus">
                     <tr>
-                        <th style="width:50px;">#</th>
-                        <th style="width:350px;">제목</th>
-                        <th style="width:170px;">글쓴이</th>
-                        <th style="width:170px;">출판사</th>
-                        <th style="width:100px;">단가</th>
-                        <th style="width:100px;">재고수량</th>
-                        <th style="width:165px;">발주수량</th>
-                        <th style="width:70px;">발주</th>
-                    </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <c:forEach items="${bookList}" var="book" varStatus="bookStatus">
-                            <tr>
-                                <td id="bookIdText_${bookStatus.index}">${book.id }</td>
-                                <td>${book.title }</td>
-                                <td>${book.writer }</td>
-                                <td>${book.publisher }</td>
-                                <td>${book.inPrice }</td>
-                                <td>${book.totalCount }</td>
-                                <td>
-                                    <div class="btn">
-                                        <div class="btn_quantity">
-                                            <div class="input-group">
-                                                <button id="minus_btn_${bookStatus.index}" type="button" class="btn btn-light minus_btn">-</button>
-                                                <input id="quantity_input_${bookStatus.index}" type="text" class="form-control quantity_input" value="1" style="width:55px; text-align: center">
-                                                <button id="plus_btn_${bookStatus.index}" type="button" class="btn btn-light plus_btn">+</button>
-                                            </div>
-                                        </div>
+                        <td id="bookIdText_${bookStatus.index}">${book.id }</td>
+                        <td>${book.title }</td>
+                        <td>${book.writer }</td>
+                        <td>${book.publisher }</td>
+                        <td>${book.inPrice }</td>
+                        <td>${book.totalCount }</td>
+                        <td>
+                            <div class="btn">
+                                <div class="btn_quantity">
+                                    <div class="input-group">
+                                        <button id="minus_btn_${bookStatus.index}" type="button"
+                                                class="btn btn-light minus_btn">-
+                                        </button>
+                                        <input id="quantity_input_${bookStatus.index}" type="text"
+                                               class="form-control quantity_input" value="1"
+                                               style="width:55px; text-align: center">
+                                        <button id="plus_btn_${bookStatus.index}" type="button"
+                                                class="btn btn-light plus_btn">+
+                                        </button>
                                     </div>
-                                </td>
-                                <td><button id="btn_cart_${bookStatus.index}" type="button" class="btn btn-outline-danger btn_cart"> 등록 </button></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <%--<button class="btn btn-danger" onclick="requestPay()">결제하기</button>--%>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button id="btn_cart_${bookStatus.index}" type="button"
+                                    class="btn btn-outline-danger btn_cart"> 등록
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
+        <%--<button class="btn btn-danger" onclick="requestPay()">결제하기</button>--%>
     </div>
 </div>
+</div>
 
+<%-- pagination --%>
+<div class="container-lg">
+    <div class="row">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <%-- 이전 버튼 --%>
+                <c:if test="${pageInfo.currentPageNum ne 1 }">
+                    <c:url value="/order/process" var="pageLink">
+                        <c:param name="page" value="${pageInfo.currentPageNum -1 }"/>
+                    </c:url>
+                    <li class="page-item"><a class="page-link" href="pageLink">이전</a></li>
+                </c:if>
+
+                <%-- 페이지 영역 --%>
+                <c:forEach begin="${pageInfo.leftPageNum}" end="${pageInfo.rightPageNum}" var="pageNum">
+                    <c:url value="/order/process" var="pageLink">
+                        <c:param name="page" value="${pageNum}"/>
+                    </c:url>
+                    <li class="page-item"><a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : ''}" href="${pageLink}"> ${pageNum} </a></li>
+                </c:forEach>
+
+                <%-- 다음 버튼--%>
+                <c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum}">
+                    <c:url value="/order/process" var="pageLink">
+                        <c:param name="page" value="${pageInfo.currentPageNum + 1}"/>
+                    </c:url>
+                    <li class="page-item"><a class="page-link" href="pageLink">다음</a></li>
+                </c:if>
+
+            </ul>
+        </nav>
+    </div>
+</div>
 <%--<script>
     var IMP = window.IMP;
     IMP.init("imp00000000");
