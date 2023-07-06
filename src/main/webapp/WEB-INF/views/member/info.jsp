@@ -36,7 +36,7 @@
           <input type="text" value="${member.phoneNumber}" readonly />
         </div>
 
-        <a href="">수정</a>
+        <a class="btn btn-secondary" href="/member/modify?id=${member.id}">수정</a>
         <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">탈퇴</button>
         <!-- 탈퇴 확인 Modal -->
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,7 +55,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-danger">확인</button>
+                <button type="submit" form="removeForm" class="btn btn-danger">확인</button>
               </div>
             </div>
           </div>

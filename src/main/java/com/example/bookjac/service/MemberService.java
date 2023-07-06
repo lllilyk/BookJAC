@@ -5,6 +5,7 @@ import com.example.bookjac.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -21,14 +22,23 @@ public class MemberService {
     }
 
     public List<Member> listMember() {
+
         return mapper.selectAll();
     }
 
     public Member get(String id) {
+
         return mapper.selectById(id);
     }
 
-    public void remove(String id) {
-        mapper.deleteById(id);
+    public boolean remove(Member member) {
+        Member oldMember = mapper.selectById(member.getId());
+        int cnt = 0;
+        if(oldMember.getPassword().equals(member.getPassword())) {
+            // 암호가 같으면?
+            cnt = mapper.deleteById(member.getId());
+
+        }
+        return cnt == 1;
     }
 }
