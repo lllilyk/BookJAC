@@ -49,7 +49,7 @@
                         <th style="width:170px;">출판사</th>
                         <th style="width:100px;">단가</th>
                         <th style="width:100px;">재고수량</th>
-                        <th style="width:160px;">발주수량</th>
+                        <th style="width:165px;">발주수량</th>
                         <th style="width:70px;">발주</th>
                     </tr>
                     </thead>
@@ -67,7 +67,7 @@
                                         <div class="btn_quantity">
                                             <div class="input-group">
                                                 <button id="minus_btn_${bookStatus.index}" type="button" class="btn btn-light minus_btn">-</button>
-                                                <input id="quantity_input_${bookStatus.index}" type="text" class="form-control quantity_input" value="1" style="width:35px;">
+                                                <input id="quantity_input_${bookStatus.index}" type="text" class="form-control quantity_input" value="1" style="width:55px; text-align: center">
                                                 <button id="plus_btn_${bookStatus.index}" type="button" class="btn btn-light plus_btn">+</button>
                                             </div>
                                         </div>

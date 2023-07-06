@@ -3,7 +3,7 @@ const maxQuantity = 100; // 최대 허용 수량 설정
 
 /* +버튼으로 수량 조작 */
 $(".plus_btn").on("click", function(){
-    let index = $(this).attr("id").split("_")[2]; /* index : '-'로 id를 나누었을때 3번째 요소 */
+    let index = $(this).attr("id").split("_")[2];
     let quantityField = $("#quantity_input_" + index);
     let quantity = parseInt(quantityField.val());
 
