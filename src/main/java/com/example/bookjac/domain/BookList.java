@@ -9,6 +9,6 @@ public class BookList {
     private String writer;
     private String publisher;
     private Integer categoryId;
-    private String inPrice;
-    private String outPrice;
+    private Integer inPrice;
+    private Integer outPrice;
 }

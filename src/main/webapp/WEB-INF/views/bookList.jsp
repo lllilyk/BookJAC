@@ -39,7 +39,7 @@
 <body>
 
 <div class="container-lg mt-3">
-    <h1>전체 도서 목록</h1>
+    <h1><a href="/bookList" style="color: black; text-decoration-line: none">전체 도서 목록</a></h1>
 </div>
 
 <%-- search --%>
@@ -47,34 +47,38 @@
     <div class="row g-2 mb-3">
         <div class="col-md">
             <label for="inputTitle" class="form-label">도서명</label>
-            <input type="text" class="form-control" id="inputTitle">
+            <input type="text" class="form-control" name="title" id="inputTitle" value="${param.title}">
         </div>
         <div class="col-md">
             <label for="inputPublisher" class="form-label">출판사</label>
-            <input type="text" class="form-control" id="inputPublisher">
+            <input type="text" class="form-control" name="publisher" id="inputPublisher" value="${param.publisher}">
         </div>
     </div>
     <div class="mb-3 d-flex">
         <div class="p-1">
             <label for="inputInPrice" class="form-label">입고가</label>
-            <select class="form-select" aria-label="Default select example" id="inputInPrice" style="width: 310px">
-                <option selected>범위를 선택 해 주세요.</option>
-                <option value="1">0 - 10,000</option>
-                <option value="2">10,000 - 50,000</option>
-                <option value="3">50,000 - 100,000</option>
+            <select class="form-select" aria-label="Default select example" name="cost" id="inputInPrice"
+                    style="width: 310px">
+                <option selected value="">범위를 선택 해 주세요.</option>
+                <option value="1" ${param.cost eq 1 ? 'selected' : ''}>0 - 10,000</option>
+                <option value="2" ${param.cost eq 2 ? 'selected' : ''}>10,000 - 50,000</option>
+                <option value="3" ${param.cost eq 3 ? 'selected' : ''}>50,000 - 100,000</option>
+                <option value="4" ${param.cost eq 4 ? 'selected' : ''}>100,000 이상</option>
             </select>
         </div>
         <div class="p-1">
-            <label for="inputOutPrice" class="form-label">출고가</label>
-            <select class="form-select" aria-label="Default select example" id="inputOutPrice" style="width: 310px">
-                <option selected>범위를 선택 해 주세요.</option>
-                <option value="1">0 - 10,000</option>
-                <option value="2">10,000 - 50,000</option>
-                <option value="3">50,000 - 100,000</option>
+            <label for="inputOutPrice" class="form-label">판매가</label>
+            <select class="form-select" aria-label="Default select example" name="sellingPrice" id="inputOutPrice"
+                    style="width: 310px">
+                <option selected value="">범위를 선택 해 주세요.</option>
+                <option value="1" ${param.sellingPrice eq 1 ? 'selected' : ''}>0 - 10,000</option>
+                <option value="2" ${param.sellingPrice eq 2 ? 'selected' : ''}>10,000 - 50,000</option>
+                <option value="3" ${param.sellingPrice eq 3 ? 'selected' : ''}>50,000 - 100,000</option>
+                <option value="4" ${param.sellingPrice eq 4 ? 'selected' : ''}>100,000 이상</option>
             </select>
         </div>
         <div class="ms-auto mt-auto p-2">
-            <button type="" class="btn btn-secondary">리셋</button>
+            <input type="button" class="btn btn-secondary" onclick='location.href="/bookList"' value="리셋"></input>
             <button type="submit" class="btn btn-primary">찾기</button>
         </div>
     </div>
@@ -115,26 +119,52 @@
 <div class="container-lg">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
+
+            <%-- 이전 페이지 --%>
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
+                <c:if test="${pageInfo.currentPageNum gt 1 }">
+                    <c:url value="/bookList" var="pageLink">
+                        <c:param name="page" value="${pageInfo.currentPageNum - 1}"></c:param>
+                        <c:param name="title" value="${param.title }"></c:param>
+                        <c:param name="publisher" value="${param.publisher }"></c:param>
+                        <c:param name="cost" value="${param.cost }"></c:param>
+                        <c:param name="sellingPrice" value="${param.sellingPrice }"></c:param>
+                    </c:url>
+                    <a class="page-link" href="${pageLink}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </c:if>
             </li>
 
-            <c:forEach begin="${pageInfo.page + 1 }" end="${pageInfo.lastPageNum }" var="pageNum">
+            <%-- 페이지 목록--%>
+            <c:forEach begin="${pageInfo.page + 1 }" end="${pageInfo.searchLastPageNum}" var="pageNum">
                 <li class="page-item">
                     <c:url value="/bookList" var="pageLink">
                         <c:param name="page" value="${pageNum }"></c:param>
+                        <c:param name="title" value="${param.title }"></c:param>
+                        <c:param name="publisher" value="${param.publisher }"></c:param>
+                        <c:param name="cost" value="${param.cost }"></c:param>
+                        <c:param name="sellingPrice" value="${param.sellingPrice }"></c:param>
                     </c:url>
                     <a class="page-link ${pageNum eq (pageInfo.currentPageNum) ? 'active' : ''}"
                        href="${pageLink }">${pageNum}</a>
                 </li>
             </c:forEach>
 
+            <%-- 다음 페이지 --%>
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
+                <c:if test="${pageInfo.currentPageNum lt pageInfo.searchLastPageNum }">
+                    <c:url value="/bookList" var="pageLink">
+                        <c:param name="page" value="${pageInfo.currentPageNum + 1}"></c:param>
+                        <c:param name="title" value="${param.title }"></c:param>
+                        <c:param name="publisher" value="${param.publisher }"></c:param>
+                        <c:param name="cost" value="${param.cost }"></c:param>
+                        <c:param name="sellingPrice" value="${param.sellingPrice }"></c:param>
+                    </c:url>
+                    <a class="page-link" href="${pageLink}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </c:if>
             </li>
         </ul>
     </nav>
@@ -149,5 +179,6 @@
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
 </body>
 </html>
