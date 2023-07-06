@@ -33,7 +33,7 @@
                     <h1>발주 페이지</h1>
                 </div>
                 <div class="col-md-6 text-end">
-                    <button type="button" class="btn btn-outline-primary"> 등록 </button>
+                    <button type="button" class="btn btn-outline-primary"> 주문내역확인 </button>
                     <button type="button" class="btn btn-outline-success"> 발주품목 </button>
                     <%--<button type="button" class="btn btn-outline-danger"> 발주 </button>--%>
                 </div>
@@ -54,9 +54,9 @@
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <c:forEach items="${bookList}" var="book">
+                        <c:forEach items="${bookList}" var="book" varStatus="bookStatus">
                             <tr>
-                                <td id="bookIdText">${book.id }</td>
+                                <td id="bookIdText_${bookStatus.index}">${book.id }</td>
                                 <td>${book.title }</td>
                                 <td>${book.writer }</td>
                                 <td>${book.publisher }</td>
@@ -66,14 +66,14 @@
                                     <div class="btn">
                                         <div class="btn_quantity">
                                             <div class="input-group">
-                                                <button id="minus_btn" type="button" class="btn btn-light">-</button>
-                                                <input id="quantity_input" type="text" class="form-control" value="1" style="width:35px;">
-                                                <button id="plus_btn" type="button" class="btn btn-light">+</button>
+                                                <button id="minus_btn_${bookStatus.index}" type="button" class="btn btn-light minus_btn">-</button>
+                                                <input id="quantity_input_${bookStatus.index}" type="text" class="form-control quantity_input" value="1" style="width:35px;">
+                                                <button id="plus_btn_${bookStatus.index}" type="button" class="btn btn-light plus_btn">+</button>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td><button id="btn_cart" type="button" class="btn btn-outline-danger"> 등록 </button></td>
+                                <td><button id="btn_cart_${bookStatus.index}" type="button" class="btn btn-outline-danger btn_cart"> 등록 </button></td>
                             </tr>
                         </c:forEach>
                     </tbody>
