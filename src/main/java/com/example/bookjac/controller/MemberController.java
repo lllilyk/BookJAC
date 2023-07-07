@@ -69,11 +69,13 @@ public class MemberController {
 
     @GetMapping("modify")
     public void modifyForm(String id, Model model) {
+
         model.addAttribute(service.get(id));
     }
 
     @PostMapping("modify")
-    public void modifyProcess() {
+    public void modifyProcess(Member member, RedirectAttributes rttr) {
+        boolean ok = service.modify(member);
 
     }
 }

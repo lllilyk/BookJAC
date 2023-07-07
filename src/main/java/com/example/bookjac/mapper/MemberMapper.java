@@ -1,10 +1,7 @@
 package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Member;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,4 +34,15 @@ public interface MemberMapper {
             WHERE id = #{id} 
             """)
     Integer deleteById(String id);
+
+    @Update("""
+            UPDATE Member
+            SET password = #{password},
+                memberNumber = #{memberNumber},
+                email = #{email},
+                phoneNumber = #{phoneNumber}
+            WHERE 
+                id = #{id}
+            """)
+    Integer update(Member member);
 }

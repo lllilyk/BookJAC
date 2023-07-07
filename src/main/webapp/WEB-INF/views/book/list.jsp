@@ -13,6 +13,7 @@
     <title>Title</title>
 </head>
 <body>
+<div>${message}</div>
 <div class="container-lg">
     <h1>도서 목록</h1>
         <tr>

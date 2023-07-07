@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <form method="post">
+    <form action="/member/modify" method="post">
         <div class="">
             ID
             <input type="text" name="id" value="${member.id}" readonly />
@@ -19,7 +19,7 @@
         </div>
         <div class="">
             이름
-            <input type="text" name="name" value="${member.name}" />
+            <input type="text" name="name" value="${member.name}" readonly/>
         </div>
         <div class="">
             사원번호
