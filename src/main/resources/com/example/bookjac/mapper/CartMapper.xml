@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookjac.mapper.CartMapper">
+
+    <!-- 발주 품목 추가 -->
+    <insert id="addCart">
+        INSERT INTO OrderCart(memberId, bookId, bookCount)
+        VALUES(#{memberId}, #{bookId}, #{bookCount})
+    </insert>
+
+    <!-- 발주 품목 삭제 -->
+    <delete id="deleteCart">
+        DELETE FROM OrderCart WHERE cartId = #{cartId}
+    </delete>
+
+    <!-- 발주 수량 변경 -->
+    <update id="modifyCount">
+        UPDATE OrderCart SET bookCount = #{bookCount} WHERE cartId = #{cartId}
+    </update>
+
+    <!-- 발주 품목 List-->
+    <select id="getCart" resultType="com.example.bookjac.domain.Cart">
+        SELECT c.cartId, c.memberId, c.bookId, c.bookCount, b.title, b.writer, b.publisher, b.inPrice
+        FROM OrderCart c LEFT OUTER JOIN Book b ON c.bookId = b.id
+        WHERE memberId = #{memberId}
+    </select>
+
+    <!-- 발주 확인-->
+    <select id="checkCart" resultType="com.example.bookjac.domain.Cart">
+        SELECT * FROM OrderCart
+        WHERE memberId = #{memberId} and bookId = #{bookId}
+    </select>
+
+</mapper>
