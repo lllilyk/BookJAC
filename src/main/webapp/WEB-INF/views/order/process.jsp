@@ -104,7 +104,9 @@
                     <c:url value="/order/process" var="pageLink">
                         <c:param name="page" value="${pageInfo.currentPageNum -1 }"/>
                     </c:url>
-                    <li class="page-item"><a class="page-link" href="${pageLink}">이전</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="${pageLink}">이전</a>
+                    </li>
                 </c:if>
 
                 <%-- 페이지 영역 --%>
@@ -112,7 +114,9 @@
                     <c:url value="/order/process" var="pageLink">
                         <c:param name="page" value="${pageNum}"/>
                     </c:url>
-                    <li class="page-item"><a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : ''}" href="${pageLink}"> ${pageNum} </a></li>
+                    <li class="page-item">
+                        <a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : ''}" href="${pageLink}"> ${pageNum} </a>
+                    </li>
                 </c:forEach>
 
                 <%-- 다음 버튼--%>
@@ -120,9 +124,10 @@
                     <c:url value="/order/process" var="pageLink">
                         <c:param name="page" value="${pageInfo.currentPageNum + 1}"/>
                     </c:url>
-                    <li class="page-item"><a class="page-link" href="${pageLink}">다음</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="${pageLink}">다음</a>
+                    </li>
                 </c:if>
-
             </ul>
         </nav>
     </div>

@@ -8,14 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
-   /* @Select("""
-            SELECT *
-            FROM Book
-            ORDER BY totalCount
-            """
-    )
-    List<Order> selectAll();*/
-
     @Select("""
             SELECT COUNT(*)
             FROM Book
