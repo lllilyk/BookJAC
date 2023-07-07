@@ -11,4 +11,8 @@ public class Settlement {
     private Integer card;
     private Integer vaultCash;
     private Date inserted;
+    private Long sumCash;
+    private Long sumCard;
+    private Long sumIncome;
+    private Long sumNetIncome;
 }

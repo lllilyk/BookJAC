@@ -24,6 +24,9 @@ public interface RevenueMapper {
             <if test="(year != null and year != '') and (month != null and month != '')">
             WHERE MONTH(inserted) = #{month} AND YEAR(inserted) = #{year}
             </if>
+            <if test="(month == null or month == '') and (startDate == null or startDate == '')">
+            WHERE YEAR(inserted) = YEAR(CURDATE()) AND MONTH(inserted) = MONTH(CURDATE())
+            </if>
             <if test="selectWay == null or selectWay == 0">
             ORDER BY inserted DESC
             </if>
@@ -36,6 +39,23 @@ public interface RevenueMapper {
             </script>
             """)
     List<Settlement> selectSettlement(String startDate, String endDate, Integer selectWay,String year, String month);
+
+    @Select("""
+            <script>
+            SELECT SUM(cash) sumCash, SUM(card) sumCard, SUM(sunCash + sumCard) sumIncome
+            FROM Settlement
+            <if test="(startDate != null and startDate != '') and (endDate != null and endDate != '')">
+            WHERE inserted &gt;= #{startDate} AND inserted &lt;= #{endDate}
+            </if> 
+            <if test="(year != null and year != '') and (month != null and month != '')">
+            WHERE MONTH(inserted) = #{month} AND YEAR(inserted) = #{year}
+            </if>
+            <if test="(month == null or month == '') and (startDate == null or startDate == '')">
+            WHERE YEAR(inserted) = YEAR(CURDATE()) AND MONTH(inserted) = MONTH(CURDATE())
+            </if>
+            </script>
+            """)
+    Settlement selectSum(String startDate, String endDate, String year, String month);
 
     @Delete("""
             DELETE FROM Settlement WHERE id = #{settlementId}
@@ -53,4 +73,5 @@ public interface RevenueMapper {
             WHERE id = #{id}
             """)
     Integer modifyDaily(Settlement settlement);
+
 }

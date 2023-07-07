@@ -89,12 +89,12 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">매출 일자<small style="color: gray">(입력 시간)</small></th>
+            <th scope="col" class="${param.selectWay == null ? 'text-danger' : ''}">매출 일자<small style="color: gray">(입력 시간)</small></th>
+            <th scope="col">시재금</th>
             <th scope="col" class="${param.selectWay == 1 ? 'text-danger' : ''}">cash drawer</th>
             <th scope="col" class="${param.selectWay == 2 ? 'text-danger' : ''}">카드 매출액</th>
-            <th scope="col">시재금</th>
             <th scope="col" class="${param.selectWay == 3 ? 'text-danger' : ''}">수입내역</th>
-            <th scope="col" >순수익</th>
+            <th scope="col">순수익</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -108,9 +108,9 @@
                     </a>
                     <small style="color: gray">(<fmt:formatDate value="${settlement.inserted}" type="time"/>)</small>
                 </th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.vaultCash}"/></th>
                 <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.cash}"/></th>
                 <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.card}"/></th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.vaultCash}"/></th>
                 <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.cash - settlement.vaultCash + settlement.card}"/></th>
                 <th scope="row"><fmt:formatNumber groupingUsed="true" value=""/>수입내역 - 판 책 원가</th>
                 <th scope="row">
@@ -140,10 +140,10 @@
         <tfoot>
         <tr>
             <td colspan="2">합계</td>
-            <td>(현금 총액)</td>
-            <td>(카드 총액)</td>
             <td>(시재금 빈칸)</td>
-            <td>(수입내역 총액)</td>
+            <td><fmt:formatNumber groupingUsed="true" value="${sum.sumCash}"/>(현금 총액)</td>
+            <td><fmt:formatNumber groupingUsed="true" value="${sum.sumCard}"/>(카드 총액)</td>
+            <td><fmt:formatNumber groupingUsed="true" value="${sum.sumIncome}"/>(수입내역 총액)</td>
             <td>(순수익 총액)</td>
         </tr>
         </tfoot>
@@ -196,15 +196,15 @@
                 <input type="text" class="form-control d-none" id="modifyId">
                 <div class="mb-3">
                     <label for="modifyCash" class="col-form-label">현금 매출액 : </label>
-                    <input type="text" name="cash" class="form-control" id="modifyCash">
+                    <input type="text" class="form-control" id="modifyCash">
                 </div>
                 <div class="mb-3">
                     <label for="modifyCard" class="col-form-label">카드 매출액 : </label>
-                    <input type="text" name="card" class="form-control" id="modifyCard">
+                    <input type="text" class="form-control" id="modifyCard">
                 </div>
                 <div class="mb-3">
                     <label for="modifyVaultCash" class="col-form-label">시재금 : </label>
-                    <input type="text" name="vaultCash" class="form-control" id="modifyVaultCash">
+                    <input type="text" class="form-control" id="modifyVaultCash">
                 </div>
             </div>
             <div class="modal-footer">
@@ -225,7 +225,7 @@
             </div>
             <div class="modal-body">
                 정산 내역을 삭제하시겠습니까?
-                <input type="text" name="id" class="form-control" id="settlementIdInput">
+                <input type="text" class="form-control" id="settlementIdInput">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>

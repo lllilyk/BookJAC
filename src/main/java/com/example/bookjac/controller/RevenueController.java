@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 public class RevenueController {
 
     @Autowired
-    RevenueService revenueService;
+    private RevenueService revenueService;
 
     @GetMapping("daily")
     public void daily(
@@ -24,9 +25,11 @@ public class RevenueController {
             @RequestParam(value = "selectWay", required = false) Integer selectWay,
             @RequestParam(value = "month", required = false) String yearMonth,
             Model model) {
+
         //정산 전체 리스트 조회
         Map<String, Object> info = revenueService.selectSettlement(startDate, endDate, selectWay, yearMonth);
         System.out.println(startDate + ", " + endDate + ", " + selectWay + ", " + yearMonth);
+
         model.addAllAttributes(info);
     }
 
@@ -34,6 +37,7 @@ public class RevenueController {
     public String addDaily(Settlement settlement) {
         //일일 정산 입력 과정
         boolean ok = revenueService.insertRevenue(settlement);
+
         return "redirect:/Revenue/daily";
     }
 
@@ -51,8 +55,16 @@ public class RevenueController {
     @GetMapping("getDailyInfo")
     @ResponseBody
     public Settlement getDailyInfo(@RequestParam("settlementId") Integer settlementId) {
+        //시간 측정
+        long beforTime = System.currentTimeMillis();
+
         // 일일 정산 수정 시 기존 정보 조회
         Settlement settlement = revenueService.selectSettlementById(settlementId);
+
+        //시간 측정
+        long afterTime = System.currentTimeMillis();
+        long result = (afterTime - beforTime);
+        System.out.println("수정 실행 시간 : " + result);
 
         return settlement;
     }
