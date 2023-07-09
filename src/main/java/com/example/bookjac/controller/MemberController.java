@@ -35,7 +35,7 @@ public class MemberController {
         try {
             service.signup(member);
             rttr.addFlashAttribute("message", "회원 가입이 완료되었습니다.");
-            return "redirect:/list";
+            return "redirect:/";
         } catch (Exception e) {
             e.printStackTrace();
             rttr.addFlashAttribute("member", member);
