@@ -92,8 +92,12 @@ public class RevenueService {
         // 하루 판매 조회
         List<Sales> sales = revenueMapper.selectSalesBySettlementId(settlementId);
 
+        //총 판매 조회
+        Sales sum = revenueMapper.selectSumDetailBySettlementId(settlementId);
+
         //map에 저장
         info.put("sales", sales);
+        info.put("sum", sum);
 
         return info;
     }

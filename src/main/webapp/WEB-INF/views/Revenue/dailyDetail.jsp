@@ -70,11 +70,11 @@
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="2">합계</td>
-            <td>총 판매 수량</td>
-            <td>원가 총액</td>
-            <td>판매가 총액</td>
-            <td>순이익 총액</td>
+            <th colspan="2">합계</th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumSoldCount}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumInPrice}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumOutPrice}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumOutPrice - sum.sumInPrice}"/></th>
         </tr>
         </tfoot>
     </table>
