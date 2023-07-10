@@ -21,6 +21,7 @@
 <div class="container">
     <br>
     <hr>
+    <%--  버튼  --%>
     <div class="row">
         <div class="col-md-6">
             <h1><fmt:formatDate value="${settlement.inserted}" pattern="yyyy년 MM월 dd일"/> 상세 내역</h1>
@@ -39,9 +40,11 @@
     <%--도넛 차트 --%>
     <div class="container d-none w-50" id="doughnutChartBox">
         <div style="width: 400px;">
-            <canvas id="doughnutChartCanvas" ></canvas>
+            <canvas id="doughnutChartCanvas"></canvas>
         </div>
     </div>
+
+    <%--  판매 리스트 표  --%>
     <table class="table table-bordered" id="TableToExport">
         <thead>
         <tr>
@@ -54,7 +57,16 @@
         </tr>
         </thead>
         <tbody>
-
+        <c:forEach items="${sales}" var="sales">
+            <tr>
+                <td>${sales.title}</td>
+                <td><fmt:formatNumber groupingUsed="true" value="${sales.totalCount}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${sales.soldCount}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${sales.inPrice}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${sales.outPrice}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${sales.outPrice - sales.inPrice}"/></td>
+            </tr>
+        </c:forEach>
         </tbody>
         <tfoot>
         <tr>
@@ -67,7 +79,7 @@
         </tfoot>
     </table>
 </div>
-${settlement.id}, ${settlement.cash}, ${settlement.card}, ${settlement.vaultCash},${settlement.inserted}
+<%--정산 아이디 : ${settlement.id}, 현금 : ${settlement.cash}, 카드 : ${settlement.card}, 시재금 : ${settlement.vaultCash}, 작성일 : ${settlement.inserted}--%>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

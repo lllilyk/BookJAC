@@ -1,5 +1,6 @@
 package com.example.bookjac.mapper;
 
+import com.example.bookjac.domain.Sales;
 import com.example.bookjac.domain.Settlement;
 import org.apache.ibatis.annotations.*;
 
@@ -42,16 +43,13 @@ public interface RevenueMapper {
 
     @Select("""
             <script>
-            SELECT SUM(cash) sumCash, SUM(card) sumCard, SUM(sunCash + sumCard) sumIncome
+            SELECT SUM(cash) sumCash, SUM(card) sumCard, SUM(cash + card) sumIncome
             FROM Settlement
             <if test="(startDate != null and startDate != '') and (endDate != null and endDate != '')">
             WHERE inserted &gt;= #{startDate} AND inserted &lt;= #{endDate}
             </if> 
             <if test="(year != null and year != '') and (month != null and month != '')">
             WHERE MONTH(inserted) = #{month} AND YEAR(inserted) = #{year}
-            </if>
-            <if test="(month == null or month == '') and (startDate == null or startDate == '')">
-            WHERE YEAR(inserted) = YEAR(CURDATE()) AND MONTH(inserted) = MONTH(CURDATE())
             </if>
             </script>
             """)
@@ -74,4 +72,8 @@ public interface RevenueMapper {
             """)
     Integer modifyDaily(Settlement settlement);
 
+    @Select("""
+            SELECT * FROM Sales JOIN Book ON Sales.bookId = Book.id WHERE settlementId = #{settlementId}
+            """)
+    List<Sales> selectSalesBySettlementId(Integer settlementId);
 }

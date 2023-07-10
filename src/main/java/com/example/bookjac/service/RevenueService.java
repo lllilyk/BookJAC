@@ -1,5 +1,6 @@
 package com.example.bookjac.service;
 
+import com.example.bookjac.domain.Sales;
 import com.example.bookjac.domain.Settlement;
 import com.example.bookjac.mapper.RevenueMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +84,17 @@ public class RevenueService {
             res.put("message", "수정되지 않았습니다.");
         }
         return res;
+    }
+
+    public Map<String, Object> selectDailyDetailBySettlementId(Integer settlementId) {
+        Map<String, Object> info = new HashMap<>();
+
+        // 하루 판매 조회
+        List<Sales> sales = revenueMapper.selectSalesBySettlementId(settlementId);
+
+        //map에 저장
+        info.put("sales", sales);
+
+        return info;
     }
 }

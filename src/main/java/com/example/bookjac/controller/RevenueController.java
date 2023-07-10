@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -89,9 +90,15 @@ public class RevenueController {
     public void dailyDetail(
             @RequestParam("settlementId") Integer settlementId,
             Model model) {
-        //일일 정산 상세 내역 forward
-        Settlement settlement = revenueService.selectSettlementById(settlementId);
+        //Map<String, Object> info = new HashMap<>();
 
-        model.addAttribute("settlement", settlement);
+        //일일 정산 상세 내역 forward(삭제 고민)
+        //Settlement settlement = revenueService.selectSettlementById(settlementId);
+        //info.put("settlement", settlement);
+
+        //일일 정산 상세 내역 조회
+        Map<String, Object> info = revenueService.selectDailyDetailBySettlementId(settlementId);
+
+        model.addAllAttributes(info);
     }
 }
