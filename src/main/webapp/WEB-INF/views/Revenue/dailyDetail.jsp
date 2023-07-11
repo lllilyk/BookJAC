@@ -27,9 +27,11 @@
             <h1><fmt:formatDate value="${settlement.inserted}" pattern="yyyy년 MM월 dd일"/> 상세 내역</h1>
         </div>
         <div class="col-md-6 text-end">
-            <button id="doughnutChartBtn" type="button" class="btn btn-outline-secondary">
-                도넛 차트 보기
-            </button>
+            <c:if test="${!empty cart}">
+                <button id="doughnutChartBtn" type="button" class="btn btn-outline-secondary">
+                    도넛 차트 보기
+                </button>
+            </c:if>
             <button id="excelBtn" class="btn btn-outline-secondary">엑셀 다운</button>
             <a href="/Revenue/daily" class="btn btn-outline-secondary">
                 돌아가기
@@ -160,12 +162,16 @@
 </div>
 <%--정산 아이디 : ${settlement.id}, 현금 : ${settlement.cash}, 카드 : ${settlement.card}, 시재금 : ${settlement.vaultCash}, 작성일 : ${settlement.inserted}--%>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+<script>
+    let label = $("#title").text();
+    let orderSum = ${sumCart.sumInPrice};
+    let inPriceSum = ${sum.sumNetIncome};
+</script>
 <script src="/js/revenue/chart.js"></script>
 <script src="/js/revenue/excel.js"></script>
 
