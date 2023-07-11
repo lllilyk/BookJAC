@@ -1,9 +1,11 @@
 package com.example.bookjac.mapper;
 
+import com.example.bookjac.domain.Cart;
 import com.example.bookjac.domain.Sales;
 import com.example.bookjac.domain.Settlement;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -87,4 +89,24 @@ public interface RevenueMapper {
             """)
     Sales selectSumDetailBySettlementId(Integer settlementId);
 
+    @Select("""
+            SELECT
+                b.title title,
+                b.inPrice inPrice,
+                b.outPrice outPrice,
+                oc.bookCount bookCount,
+                b.inPrice * oc.bookCount sumInPrice
+            FROM OrderCart oc JOIN Book b ON oc.bookId = b.id 
+            WHERE inserted = #{date}
+            """)
+    List<Cart> selectOrderCartByDate(String date);
+
+    @Select("""
+            SELECT
+                SUM(oc.bookCount) sumBookCount,
+                SUM(b.inPrice * oc.bookCount) sumInPrice
+            FROM OrderCart oc JOIN Book b ON oc.bookId = b.id
+            WHERE inserted = #{date}
+            """)
+    Cart selectCartSum(String date);
 }

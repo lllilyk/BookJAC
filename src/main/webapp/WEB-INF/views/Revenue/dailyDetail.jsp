@@ -78,7 +78,7 @@
     <%--  판매 리스트 표  --%>
     <table class="table table-bordered excelTable " id="TableToExport">
         <thead>
-        <tr>
+        <tr class="table-primary">
             <th colspan="8"><h5><strong>판매 책 정보</strong></h5></th>
         </tr>
         <tr>
@@ -105,6 +105,8 @@
                 <td>${sales.pay == 1 ? '현금' : '카드'}</td>
             </tr>
         </c:forEach>
+        </tbody>
+        <tfoot>
         <tr>
             <th colspan="2">합계</th>
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumSoldCount}"/></th>
@@ -112,15 +114,48 @@
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumOutPrice}"/></th>
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumOutPrice - sum.sumInPrice}"/></th>
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumNetIncome}"/></th>
+            <th></th>
         </tr>
-        </tbody>
-        <thead>
-        <%--  발주 정보  --%>
-        <tr>
-            <th colspan="8"><h5><strong>발주 정보</strong></h5></th>
-        </tr>
-        </thead>
+        </tfoot>
     </table>
+
+    <%--  발주 정보  --%>
+    <c:if test="${!empty cart}">
+        <table class="table table-bordered excelTable">
+            <thead class="orderInfo">
+            <tr class="table-danger">
+                <th colspan="8"><h5><strong>발주 정보</strong></h5></th>
+            </tr>
+            <tr>
+                <th>#</th>
+                <th>책 제목</th>
+                <th>개 당 입고 금액</th>
+                <th>개 당 판매 금액</th>
+                <th>발주 수량</th>
+                <th>총 입고 금액</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${cart}" var="cart" varStatus="num">
+                <tr>
+                    <td>${num.index + 1}</td>
+                    <td>${cart.title}</td>
+                    <td><fmt:formatNumber groupingUsed="true" value="${cart.inPrice}"/></td>
+                    <td><fmt:formatNumber groupingUsed="true" value="${cart.outPrice}"/></td>
+                    <td>${cart.bookCount}</td>
+                    <td><fmt:formatNumber groupingUsed="true" value="${cart.sumInPrice}"/></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="4">합계</th>
+                <th>${sumCart.sumBookCount}</th>
+                <th><fmt:formatNumber groupingUsed="true" value="${sumCart.sumInPrice}"/></th>
+            </tr>
+            </tfoot>
+        </table>
+    </c:if>
 
 </div>
 <%--정산 아이디 : ${settlement.id}, 현금 : ${settlement.cash}, 카드 : ${settlement.card}, 시재금 : ${settlement.vaultCash}, 작성일 : ${settlement.inserted}--%>
