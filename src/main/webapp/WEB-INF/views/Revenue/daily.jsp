@@ -139,8 +139,7 @@
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="2">합계</td>
-            <td>(시재금 빈칸)</td>
+            <td colspan="3">합계</td>
             <td><fmt:formatNumber groupingUsed="true" value="${sum.sumCash}"/>(현금 총액)</td>
             <td><fmt:formatNumber groupingUsed="true" value="${sum.sumCard}"/>(카드 총액)</td>
             <td><fmt:formatNumber groupingUsed="true" value="${sum.sumIncome}"/>(수입내역 총액)</td>
