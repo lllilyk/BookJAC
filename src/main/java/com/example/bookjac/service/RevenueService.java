@@ -119,4 +119,21 @@ public class RevenueService {
     }
 
 
+    public Map<String, Object> selectDailyDetailBySearch(Integer settlementId, Integer selectWay, Integer payWay, String bookTitle) {
+        //검색 조건에 따른 조회
+        //selectWay : 0=기본값, 1=판매수량, 2=순이익, 3=재고적은순, 4=재고많은순, 5=책제목순
+        //payWay : 0=기본값, 1=현금만, 2=카드만
+        //bookTitle : 책제목
+        Map<String, Object> result = new HashMap<>();
+
+        // 하루 판매 내역 조회(책)
+        List<Sales> sales = revenueMapper.selectSalesBySearch(settlementId, selectWay);
+
+
+
+        //map에 데이터 저장
+        result.put("sales", sales);
+        System.out.println("ser : " +  settlementId + ", " + selectWay + ", " + payWay + ", " + bookTitle);
+        return result;
+    }
 }

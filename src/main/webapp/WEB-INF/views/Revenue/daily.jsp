@@ -41,7 +41,7 @@
 
     <%--  조회 조건  --%>
     <div class="row">
-        <form action="/Revenue/daily" class="row" id="searchForm">
+        <form action="/Revenue/daily" class="row">
             <h5><strong>조회 조건</strong></h5>
             <div class="col">
                 <label for="startDateInput">시작일</label>
@@ -65,7 +65,7 @@
                 </select>
             </div>
             <div class="col text-end align-self-end">
-                <button form="searchForm" type="submit" class="btn btn-outline-secondary" id="selectWayBtn">조회</button>
+                <button type="submit" class="btn btn-outline-secondary" id="selectWayBtn">조회</button>
                 <a href="/Revenue/daily" class="btn btn-outline-secondary">조건 초기화</a>
             </div>
         </form>

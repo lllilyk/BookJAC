@@ -109,4 +109,16 @@ public interface RevenueMapper {
             WHERE inserted = #{date}
             """)
     Cart selectCartSum(String date);
+
+    @Select("""
+            <script>
+            SELECT * 
+            FROM Sales JOIN Book ON Sales.bookId = Book.id 
+            WHERE settlementId = #{settlementId}
+            <if test="selectWay == 1">
+                ORDER BY soldCount DESC
+            </if>
+            </script>
+            """)
+    List<Sales> selectSalesBySearch(Integer settlementId, Integer selectWay);
 }

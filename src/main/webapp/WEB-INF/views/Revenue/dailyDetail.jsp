@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title id="title"><fmt:formatDate value="${settlement.inserted}" pattern="yyyy년 MM월 dd일"/> 정산 상세 내역</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
 </head>
 <body>
 <div class="container">
@@ -44,27 +43,37 @@
     <hr>
     <%--  조회 조건  --%>
     <div class="row">
-        <form action="/Revenue/dailyDetail" class="row" id="searchForm">
+        <form class="row" id="searchForm" method="get">
             <h5><strong>조회 조건</strong></h5>
             <div class="col">
                 <label>조회 순서</label>
-                <select name="selectWay" class="form-select" aria-label="Default select example">
+                <select id="selectWay" class="form-select" aria-label="Default select example">
                     <option value="0" ${param.selectWay == 0 ? 'selected' : ''}>조회 조건 선택</option>
                     <option value="1" ${param.selectWay == 1 ? 'selected' : ''}>판매 수량 순</option>
                     <option value="2" ${param.selectWay == 2 ? 'selected' : ''}>순이익 순</option>
                     <option value="3" ${param.selectWay == 3 ? 'selected' : ''}>재고 적은 순</option>
                     <option value="4" ${param.selectWay == 4 ? 'selected' : ''}>재고 많은 순</option>
-                    <option value="5" ${param.selectWay == 5 ? 'selected' : ''}>현금만</option>
-                    <option value="6" ${param.selectWay == 6 ? 'selected' : ''}>카드만</option>
-                    <option value="7" ${param.selectWay == 7 ? 'selected' : ''}>책 제목 순</option>
+                    <option value="5" ${param.selectWay == 5 ? 'selected' : ''}>책 제목 순</option>
+                </select>
+            </div>
+            <div class="col">
+                <label>결제 방식</label>
+                <select id="payWay" class="form-select" aria-label="Default select example">
+                    <option value="0" ${param.payWay == 0 ? 'selected' : ''}>결제 방식 선택</option>
+                    <option value="1" ${param.payWay == 1 ? 'selected' : ''}>현금만</option>
+                    <option value="2" ${param.payWay == 2 ? 'selected' : ''}>카드만</option>
                 </select>
             </div>
             <div class="col">
                 <label>책 검색</label>
-                <input class="form-control" type="text">
+                <input class="form-control" type="text" value="${param.title}" id="bookTitle">
             </div>
+            <div class="col">
+                <input class="form-control d-none" type="text" id="settlementId" value="${param.settlementId}">
+            </div>
+
             <div class="col text-end align-self-end">
-                <button form="searchForm" type="submit" class="btn btn-outline-secondary" id="selectWayBtn">조회</button>
+                <button type="button" class="btn btn-outline-secondary" id="selectBtn">조회</button>
                 <a href="/Revenue/dailyDetail?settlementId=${settlement.id}" class="btn btn-outline-secondary">조건 초기화</a>
             </div>
         </form>
@@ -75,6 +84,7 @@
         <div style="width: 400px;">
             <canvas id="doughnutChartCanvas"></canvas>
         </div>
+        <br>
     </div>
 
     <%--  판매 리스트 표  --%>
@@ -94,7 +104,7 @@
             <th scope="col">결제 방법</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="soldBookTableBody">
         <c:forEach items="${sales}" var="sales" varStatus="num">
             <tr>
                 <td>${num.index + 1}</td>
@@ -108,7 +118,7 @@
             </tr>
         </c:forEach>
         </tbody>
-        <tfoot>
+        <tfoot id="soldBookTableFoot">
         <tr>
             <th colspan="2">합계</th>
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumSoldCount}"/></th>
@@ -174,6 +184,8 @@
 </script>
 <script src="/js/revenue/chart.js"></script>
 <script src="/js/revenue/excel.js"></script>
+<script src="/js/revenue/dailyRevenue.js"></script>
+
 
 </body>
 </html>
