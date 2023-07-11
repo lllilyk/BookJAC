@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>정산 내역</title>
+    <title id="title">정산 내역</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
@@ -30,7 +30,7 @@
             <button id="barChartBtn" type="button" class="btn btn-outline-secondary">
                 차트 보기
             </button>
-            <a href="/Revenue/monthly" class="btn btn-outline-secondary">월말 정산</a>
+            <a href="/Revenue/monthly" class="btn btn-outline-secondary">월별 정산</a>
             <button id="excelBtn" class="btn btn-outline-secondary">엑셀 다운</button>
             <button id="addBtn" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addRevenueModal">
                 정산 입력
@@ -99,21 +99,21 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <c:forEach items="${list }" var="settlement">
+        <c:forEach items="${list }" var="settlement" varStatus="num">
             <tr id="dailyRow${settlement.id}">
-                <th scope="row">${settlement.id }</th>
-                <th scope="row">
+                <td>${num.index + 1 }</td>
+                <td>
                     <a href="/Revenue/dailyDetail?settlementId=${settlement.id}" id="dateLink${settlement.id }" class="dateInfo">
                         <fmt:formatDate value="${settlement.inserted}" type="date" pattern="yyyy년 MM월 dd일"/>
                     </a>
                     <small style="color: gray">(<fmt:formatDate value="${settlement.inserted}" type="time"/>)</small>
-                </th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.vaultCash}"/></th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.cash}"/></th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.card}"/></th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${settlement.cash - settlement.vaultCash + settlement.card}"/></th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value=""/>수입내역 - 판 책 원가</th>
-                <th scope="row">
+                </td>
+                <td><fmt:formatNumber groupingUsed="true" value="${settlement.vaultCash}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${settlement.cash}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${settlement.card}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${settlement.cash - settlement.vaultCash + settlement.card}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value=""/>수입내역 - 판 책 원가</td>
+                <td>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <button type="button" settlement-id="${settlement.id}" class="btn btn-outline-secondary modifyBtn" data-bs-toggle="modal" data-bs-target="#modifyRevenueModal">
                             수정
@@ -122,28 +122,17 @@
                             삭제
                         </button>
                     </div>
-                </th>
+                </td>
             </tr>
         </c:forEach>
-
-        <!-- 없앨 코드 -->
-        <tr>
-            <th scope="row">id값</th>
-            <th scope="row">2023-02-03</th>
-            <th scope="row">돈통 총액</th>
-            <th scope="row">실제 매출액</th>
-            <th scope="row">돈통 기본돈</th>
-            <th scope="row">(현금 총액 - 시재금) + 카드 매출액</th>
-            <th scope="row">수입내역 - 판 책 원가</th>
-        </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="3">합계</td>
-            <td><fmt:formatNumber groupingUsed="true" value="${sum.sumCash}"/>(현금 총액)</td>
-            <td><fmt:formatNumber groupingUsed="true" value="${sum.sumCard}"/>(카드 총액)</td>
-            <td><fmt:formatNumber groupingUsed="true" value="${sum.sumIncome}"/>(수입내역 총액)</td>
-            <td>(순수익 총액)</td>
+            <th colspan="3">합계</th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumCash}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumCard}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumIncome}"/></th>
+            <th>(순수익 총액)</th>
         </tr>
         </tfoot>
     </table>

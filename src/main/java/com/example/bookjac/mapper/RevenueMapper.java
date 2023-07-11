@@ -78,9 +78,13 @@ public interface RevenueMapper {
     List<Sales> selectSalesBySettlementId(Integer settlementId);
 
     @Select("""
-            SELECT SUM(soldCount) sumSoldCount, SUM(inPrice) sumInPrice, SUM(outPrice) sumOutPrice 
+            SELECT SUM(soldCount) sumSoldCount, 
+                   SUM(soldCount * inPrice) sumInPrice, 
+                   SUM(soldCount * outPrice) sumOutPrice,
+                   SUM((soldCount * outPrice) - (soldCount * inPrice)) sumNetIncome
             FROM Sales JOIN Book ON Sales.bookId = Book.id 
             WHERE  settlementId = #{settlementId};
             """)
     Sales selectSumDetailBySettlementId(Integer settlementId);
+
 }

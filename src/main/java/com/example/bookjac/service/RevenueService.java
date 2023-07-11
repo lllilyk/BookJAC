@@ -89,16 +89,22 @@ public class RevenueService {
     public Map<String, Object> selectDailyDetailBySettlementId(Integer settlementId) {
         Map<String, Object> info = new HashMap<>();
 
-        // 하루 판매 조회
+        // 하루 판매 내역 조회(책)
         List<Sales> sales = revenueMapper.selectSalesBySettlementId(settlementId);
 
-        //총 판매 조회
+        //총액 조회
         Sales sum = revenueMapper.selectSumDetailBySettlementId(settlementId);
+
+        //하루 정산 내역 조회
+        Settlement settlement = revenueMapper.selectSettlementById(settlementId);
 
         //map에 저장
         info.put("sales", sales);
         info.put("sum", sum);
+        info.put("settlement", settlement);
 
         return info;
     }
+
+
 }

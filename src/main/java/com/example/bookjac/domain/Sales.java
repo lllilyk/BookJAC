@@ -19,4 +19,5 @@ public class Sales {
     private Integer sumSoldCount;
     private Integer sumInPrice;
     private Integer sumOutPrice;
+    private Integer sumNetIncome;
 }

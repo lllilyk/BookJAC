@@ -82,8 +82,11 @@ public class RevenueController {
     }
 
     @GetMapping("monthly")
-    public void monthly() {
+    public void monthly(Model model) {
         // 일일 정산 입력창 forward
+
+        //월별 정보 조회
+        //Map<String, Object> info =  revenueService.selectSettlementForMonth();
     }
 
     @GetMapping("dailyDetail")
@@ -91,10 +94,6 @@ public class RevenueController {
             @RequestParam("settlementId") Integer settlementId,
             Model model) {
         //Map<String, Object> info = new HashMap<>();
-
-        //일일 정산 상세 내역 forward(삭제 고민)
-        //Settlement settlement = revenueService.selectSettlementById(settlementId);
-        //info.put("settlement", settlement);
 
         //일일 정산 상세 내역 조회
         Map<String, Object> info = revenueService.selectDailyDetailBySettlementId(settlementId);
