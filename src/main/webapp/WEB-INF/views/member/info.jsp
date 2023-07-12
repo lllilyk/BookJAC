@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <html>
@@ -16,31 +17,33 @@
         <div class="col-12 col-md-8 col-lg-6">
           <h1>회원 정보</h1>
           <div class="mb-3">
-            <label for="">ID</label>
-            <input type="text" value="${member.id}" readonly />
+            <label class="form-label" for="">ID</label>
+            <input class="form-control" type="text" value="${member.id}" readonly />
           </div>
           <div class="mb-3">
-            <label for="">PASSWORD</label>
-            <input type="text" value="${member.password}" readonly />
+            <label class="form-label" for="">PASSWORD</label>
+            <input class="form-control" type="text" value="${member.password}" readonly />
           </div>
           <div class="mb-3">
-            <label for="">이름</label>
-            <input type="text" value="${member.name}" readonly />
+            <label class="form-label" for="">이름</label>
+            <input class="form-control" type="text" value="${member.name}" readonly />
           </div>
           <div class="mb-3">
-            <label for="">사원번호</label>
-            <input type="text" value="${member.memberNumber}" readonly />
+            <label class="form-label" for="">사원번호</label>
+            <input class="form-control" type="text" value="${member.memberNumber}" readonly />
           </div>
           <div class="mb-3">
-            <label for="">email</label>
-            <input type="text" value="${member.email}" readonly/>
+            <label class="form-label" for="">email</label>
+            <input class="form-control" type="text" value="${member.email}" readonly/>
           </div>
           <div class="mb-3">
-            <label for="">전화번호</label>
-            <input type="text" value="${member.phoneNumber}" readonly />
+            <label class="form-label" for="">전화번호</label>
+            <input class="form-control" type="text" value="${member.phoneNumber}" readonly />
           </div>
 
-          <a class="btn btn-secondary" href="/member/modify?id=${member.id}">수정</a>
+          <sec:authorize access="authentication.name eq #member.id">
+           <a class="btn btn-secondary" href="/member/modify?id=${member.id}">수정</a>
+          </sec:authorize>
           <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">탈퇴</button>
           <!-- 탈퇴 확인 Modal -->
           <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

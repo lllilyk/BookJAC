@@ -3,13 +3,12 @@ package com.example.bookjac.security;
 import com.example.bookjac.domain.Member;
 import com.example.bookjac.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
@@ -25,10 +24,19 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username + "회원이 존재하지 않습니다.");
         }
 
+        /* 39번째 코드를 풀어 쓴다면
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+            for (String auth : member.getAuthority()) {
+                authorityList.add(new SimpleGrantedAuthority(auth));
+        }
+        */
+
         UserDetails user = User.builder()
                 .username(member.getId())
                 .password(member.getPassword())
-                .authorities(List.of())
+                /* 39번째 코드를 풀어 쓴다면
+                .authorities(authorityList)*/
+                .authorities(member.getAuthority().stream().map(SimpleGrantedAuthority::new).toList())
                 .build();
 
         return user;

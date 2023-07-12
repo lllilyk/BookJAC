@@ -40,7 +40,7 @@ public class MemberController {
         try {
             service.signup(member);
             rttr.addFlashAttribute("message", "회원 가입이 완료되었습니다.");
-            return "redirect:/";
+            return "redirect:/member/login";
         } catch (Exception e) {
             e.printStackTrace();
             rttr.addFlashAttribute("member", member);
@@ -65,7 +65,7 @@ public class MemberController {
     }
 
     @PostMapping("remove")
-    @PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
+    @PreAuthorize("isAuthenticated() and (authentication.name eq #member.id) or hasAuthority('manager')")
     public String remove(Member member, RedirectAttributes rttr,
                          HttpServletRequest request) throws Exception {
 
