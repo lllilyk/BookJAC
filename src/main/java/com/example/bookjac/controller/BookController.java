@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -19,9 +21,12 @@ public class BookController {
     private BookService service;
 
     @GetMapping("list")
-    public String list(Model model){
-        List<Book> list = service.listBook();
-        model.addAttribute("bookList", list);
+    public String list(Model model,
+                       @RequestParam(value = "page", defaultValue = "1") Integer page,
+                       @RequestParam(value = "search", defaultValue = "") String search,
+                       @RequestParam(value = "type", required = false) String type){
+        Map<String, Object> result = service.listBook(page, search, type);
+        model.addAllAttributes(result);
         return "book/list";
 
     }

@@ -18,15 +18,29 @@
 </head>
 <body>
 <div class="container">
-    <h1>월말 정산 내역</h1>
-    <%-- 일일 정산 버튼 --%>
-    <a href="/Revenue/daily">일일 정산</a>
+    <br>
+    <hr>
+    <%--  버튼  --%>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>월별 정산 내역</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <button id="barChartBtn" type="button" class="btn btn-outline-secondary">
+                차트 보기
+            </button>
+            <a href="/Revenue/daily" class="btn btn-outline-secondary">정산 내역</a>
+        </div>
+    </div>
+    <hr>
+
+    <%--  월말 정산 내역 리스트  --%>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">월</th>
-            <th scope="col">매대 금액</th>
+            <th scope="col">수입 금액</th>
             <th scope="col">발주 금액</th>
             <th scope="col">순수익</th>
         </tr>
@@ -45,7 +59,7 @@
             <td colspan="2">합계</td>
             <td>(현금 매출액 - 시재금) + 카드 매출액</td>
             <td>(발주 총액)</td>
-            <td>매대 총액 - 발주 금액 </td>
+            <td>매대 총액 - 발주 금액</td>
         </tr>
         </tfoot>
     </table>

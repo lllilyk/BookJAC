@@ -14,4 +14,10 @@ public class Cart {
     private String writer;
     private String publisher;
     private String inPrice;
+    private Integer outPrice;
+
+    //sum
+    private Integer sumBookCount;
+    private Integer sumInPrice;
+    private Integer sumOutPrice;
 }

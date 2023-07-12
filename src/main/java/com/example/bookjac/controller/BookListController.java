@@ -19,16 +19,16 @@ public class BookListController {
     @Autowired
     private BookListService service;
 
-    @GetMapping("bookList")
+    @GetMapping("customBookList")
     public void bookList(Model model,
                          @RequestParam(value = "page", defaultValue = "1") Integer page,
                          @RequestParam(value = "title", defaultValue = "") String title,
+                         @RequestParam(value = "writer", defaultValue = "") String writer,
                          @RequestParam(value = "publisher", defaultValue = "") String publisher,
-                         @RequestParam(value = "cost", defaultValue = "") String costNum,
+                         @RequestParam(value = "genre", defaultValue = "") String categoryId,
                          @RequestParam(value = "sellingPrice", defaultValue = "") String sellingPriceNum
     ) {
-        System.out.println("costNum = " + costNum);
-        Map<String, Object> result = service.bookList(page, title, publisher, costNum, sellingPriceNum);
+        Map<String, Object> result = service.bookList(page, title, writer, publisher, categoryId, sellingPriceNum);
 
         //model.addAttribute("bookList", result.get("bookList"));
         //model.addAttribute("pageInfo", result.get("pageInfo") );
