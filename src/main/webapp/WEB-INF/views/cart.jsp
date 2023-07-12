@@ -67,7 +67,7 @@
                   <tr>
                       <th style="width:50px;">ID</th>
                       <th style="width:350px;">제목</th>
-                      <th style="width:170px;">출판사</th>
+                      <th style="width:120px;">출판사</th>
                       <th style="width:100px;">단가</th>
                       <th style="width:165px;">발주수량</th>
                       <th style="width:100px;">합계</th>
@@ -95,6 +95,7 @@
                                           <button id="plus_btn_${cartStatus.index}" type="button"
                                                   class="btn btn-light plus_btn">+
                                           </button>
+                                      <button class="btn btn-light change"><i class="fa-solid fa-circle-check"></i></button>
                                       </div>
                                   </div>
                               </div>
@@ -113,7 +114,22 @@
                   <tr>
                       <td colspan="7">
                           <table class="table mb-0" style="text-align: right">
-                              총 합계  :
+                              <tbody>
+                                <tr>
+                                    <td>
+                                        총 주문 상품 수량 : 50
+                                    </td>
+                                </tr>
+                              </tbody>
+                          </table>
+                          <table class="table mb-0" style="text-align: right">
+                              <tbody>
+                              <tr>
+                                  <td>
+                                      총 결제 예상 금액  : 500,000
+                                  </td>
+                              </tr>
+                              </tbody>
                           </table>
                       </td>
                   </tr>
