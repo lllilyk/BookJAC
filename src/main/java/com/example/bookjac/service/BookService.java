@@ -17,7 +17,7 @@ public class BookService {
 private BookMapper mapper;
     public Map<String, Object> listBook(Integer page, String search, String type) {
         // 페이지당 행의 수
-        Integer rowPerPage = 15;
+        Integer rowPerPage = 5;
 
         // 쿼리 LIMIT 절에 사용할 시작 인덱스
         Integer startIndex = (page - 1) * rowPerPage;
@@ -46,7 +46,7 @@ private BookMapper mapper;
         //목록
         List<Book> list = mapper.selectAllPaging(startIndex, rowPerPage, search, type);
         return Map.of("pageInfo", pageInfo,
-                "boardList", list);
+                "bookList", list);
 
     }
 
