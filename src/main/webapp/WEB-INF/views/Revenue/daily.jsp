@@ -62,6 +62,7 @@
                     <option value="1" ${param.selectWay == 1 ? 'selected' : ''}>현금 매출 순</option>
                     <option value="2" ${param.selectWay == 2 ? 'selected' : ''}>카드 매출 순</option>
                     <option value="3" ${param.selectWay == 3 ? 'selected' : ''}>수입내역 순</option>
+                    <option value="4" ${param.selectWay == 4 ? 'selected' : ''}>전체 보기</option>
                 </select>
             </div>
             <div class="col text-end align-self-end">
@@ -94,7 +95,6 @@
             <th scope="col" class="${param.selectWay == 1 ? 'text-danger' : ''}">cash drawer</th>
             <th scope="col" class="${param.selectWay == 2 ? 'text-danger' : ''}">카드 매출액</th>
             <th scope="col" class="${param.selectWay == 3 ? 'text-danger' : ''}">수입내역</th>
-            <th scope="col">순수익</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -112,7 +112,6 @@
                 <td><fmt:formatNumber groupingUsed="true" value="${settlement.cash}"/></td>
                 <td><fmt:formatNumber groupingUsed="true" value="${settlement.card}"/></td>
                 <td><fmt:formatNumber groupingUsed="true" value="${settlement.cash - settlement.vaultCash + settlement.card}"/></td>
-                <td><fmt:formatNumber groupingUsed="true" value=""/>수입내역 - 판 책 원가</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <button type="button" settlement-id="${settlement.id}" class="btn btn-outline-secondary modifyBtn" data-bs-toggle="modal" data-bs-target="#modifyRevenueModal">
@@ -132,7 +131,7 @@
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumCash}"/></th>
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumCard}"/></th>
             <th><fmt:formatNumber groupingUsed="true" value="${sum.sumIncome}"/></th>
-            <th>(순수익 총액)</th>
+            <th></th>
         </tr>
         </tfoot>
     </table>

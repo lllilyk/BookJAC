@@ -26,8 +26,11 @@ public interface RevenueMapper {
             <if test="(year != null and year != '') and (month != null and month != '')">
             WHERE MONTH(inserted) = #{month} AND YEAR(inserted) = #{year}
             </if>
-            <if test="(month == null or month == '') and (startDate == null or startDate == '')">
+            <if test="(month == null or month == '') and (startDate == null or startDate == '') and (selectWay != 4)">
             WHERE YEAR(inserted) = YEAR(CURDATE()) AND MONTH(inserted) = MONTH(CURDATE())
+            </if>
+            <if test="selectWay == 4">
+            ORDER BY inserted DESC
             </if>
             <if test="selectWay == null or selectWay == 0">
             ORDER BY inserted DESC
