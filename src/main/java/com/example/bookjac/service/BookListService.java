@@ -15,7 +15,7 @@ public class BookListService {
     @Autowired
     private BookListMapper mapper;
 
-    public Map<String, Object> bookList(Integer page, String title, String publisher, String costNum, String sellingPriceNum) {
+    public Map<String, Object> bookList(Integer page, String title, String writer, String publisher, String categoryId, String sellingPriceNum) {
         // 페이지당 행의 개수
         Integer rowPerPage = 20;
 
@@ -29,7 +29,7 @@ public class BookListService {
         Integer lastPageNumber = (numOfRecords - 1) / rowPerPage + 1;
 
         //검색 후 페이지 레코드수 구하기
-        Integer searchNumOfRecords = mapper.countAllBySearch(startIndex, rowPerPage, title, publisher, costNum, sellingPriceNum);
+        Integer searchNumOfRecords = mapper.countAllBySearch(startIndex, rowPerPage, title, writer, publisher, sellingPriceNum, categoryId);
         if (searchNumOfRecords == null) {
             searchNumOfRecords = mapper.countAll();
             ;
@@ -44,7 +44,7 @@ public class BookListService {
         pageInfo.put("searchLastPageNum", searchLastPageNumber);
 
         // 전체 도서 목록
-        List<BookList> list = mapper.selectAll(startIndex, rowPerPage, title, publisher, costNum, sellingPriceNum);
+        List<BookList> list = mapper.selectAll(startIndex, rowPerPage, title, writer, publisher, sellingPriceNum, categoryId);
         //System.out.println(list);
         return Map.of("pageInfo", pageInfo, "bookList", list);
     }
