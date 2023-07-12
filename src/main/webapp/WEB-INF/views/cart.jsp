@@ -17,24 +17,51 @@
         .row {
             margin: 10px 0px 20px 0px;
         }
-        .col-md-6{
+       .bottomBtn{
             width:100%;
+            margin-top: 30px;
         }
+       .info {
+           margin-top: 20px;
+       }
     </style>
 </head>
 <body>
-  <%--${cartInfo}--%>
   <div class="ui center aligned container" id="container">
       <div class="row justify-content-center">
           <div class="col-12">
               <div class="row">
                   <div class="col-md-6">
-                      <h2>발주 품목 확인 페이지</h2>
+                      <h1>발주내역 확인</h1>
                   </div>
                   <div class="col-md-6 text-end">
-                      <button type="button" class="btn btn-outline-secondary"><a href="/order/process">돌아가기</a></button>
+                      <button type="button" class="btn btn-outline-primary">미리보기</button><%--발주요청내역서 폼으로 연결--%>
+                      <%--<button type="button" class="btn btn-outline-secondary">돌아가기</button>--%>
+                      <a href="/order/process" class="btn btn-outline-secondary">돌아가기</a>
                   </div>
               </div>
+
+              <table class="table table-bordered info" style="text-align: center">
+                  <thead>
+                  <tr>
+                      <th class="table-dark" style="width:150px;">발주일자</th>
+                      <th class="table-dark" style="width:150px;">납기일자</th>
+                      <th class="table-dark" style="width:150px;">매입처명</th>
+                      <th class="table-dark" style="width:150px;">발주담당자</th>
+                  </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                      <tr>
+                          <%--알맞은 값으로 변경--%>
+                          <td>2023-07-12</td>
+                          <td>2023-07-30</td>
+                          <td>날개 출판유통</td>
+                          <td>이명헌</td>
+                      </tr>
+                  </tbody>
+
+              </table>
+
               <table class="table table-bordered" style="text-align: center">
                   <thead>
                   <tr>
@@ -83,12 +110,22 @@
                           </td>
                       </tr>
                   </c:forEach>
+                  <tr>
+                      <td colspan="7">
+                          <table class="table mb-0" style="text-align: right">
+                              총 합계  :
+                          </table>
+                      </td>
+                  </tr>
                   </tbody>
               </table>
               <div class="row">
-                  <div class="col-md-6 text-end">
+                  <div class="col-md-6 text-center bottomBtn">
+                      <%--취소하시겠습니까? 모달 띄우기--%>
+                      <button type="button" class="btn btn-secondary">취소하기</button>
                       <button type="button" class="btn btn-danger">발주하기</button>
                   </div>
+              </div>
           </div>
       </div>
   </div>

@@ -46,12 +46,12 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>발주 페이지</h1>
+                    <h1>발주내역 등록</h1>
                 </div>
                 <div class="col-md-6 text-end">
                     <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
-                    <button type="button" class="btn btn-outline-primary"> 주문내역확인</button>
-                    <button type="button" class="btn btn-outline-success"><a href="/cart/${member.id}">발주품목</a></button>
+                    <button type="button" class="btn btn-outline-primary">주문내역조회</button>
+                    <a href="/cart/${member.id}" class="btn btn-outline-success">발주품목</a>
                     <%--<button type="button" class="btn btn-outline-danger"> 발주 </button>--%>
                 </div>
             </div>
