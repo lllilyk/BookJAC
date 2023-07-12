@@ -132,7 +132,7 @@
 
     <%--  발주 정보  --%>
     <c:if test="${!empty cart}">
-        <table class="table table-bordered excelTable">
+        <table class="table table-bordered excelTable" id="TableToExport1">
             <thead class="orderInfo">
             <tr class="table-danger">
                 <th colspan="8"><h5><strong>발주 정보</strong></h5></th>

@@ -21,7 +21,7 @@ $("#barChartBtn").click(function () {
                 type: 'bar',
                 data: xInfo[1],
                 order: 2,
-                label: '총 수입트'
+                label: '총 수입'
             }, {
                 type: 'line',
                 data: xInfo[1],
