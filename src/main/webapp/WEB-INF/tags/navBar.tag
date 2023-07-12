@@ -157,7 +157,7 @@
             </a>
         </li>
         <li class="has-subnav">
-            <a href="">
+            <a href="/order/process">
                 <i class="fa fa-globe fa-2x"></i>
                 <span class="nav-text">
                             발주 관리

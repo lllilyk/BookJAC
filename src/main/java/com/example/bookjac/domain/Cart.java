@@ -1,6 +1,7 @@
 package com.example.bookjac.domain;
 
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 public class Cart {
@@ -8,16 +9,24 @@ public class Cart {
     private String memberId;
     private Integer bookId;
     private Integer bookCount;
+    // 합계
+    @Setter
+    private Integer totalPrice;
 
     //book
     private String title;
     private String writer;
     private String publisher;
-    private String inPrice;
+    private Integer inPrice;
     private Integer outPrice;
 
     //sum
     private Integer sumBookCount;
     private Integer sumInPrice;
     private Integer sumOutPrice;
+
+    /*상품 당 총 금액*/
+    public void CalculateTotalPrice(){
+        this.totalPrice = this.inPrice * this.bookCount;
+    }
 }
