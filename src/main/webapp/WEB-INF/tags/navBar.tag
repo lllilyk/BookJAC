@@ -8,6 +8,7 @@
     @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
     @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
     .fa-2x {
         font-size: 2em;
     }
@@ -148,57 +149,85 @@
             </a>
 
         </li>
+
+        <sec:authorize access="isAnonymous()">
         <li>
             <a href="/member/login">
-                <i class="fa fa-map-marker fa-2x"></i>
+                <i class="fa fa-right-to-bracket fa-2x"></i>
                 <span class="nav-text">
                             로그인
                         </span>
             </a>
         </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
         <li class="has-subnav">
-            <a href="">
-                <i class="fa fa-globe fa-2x"></i>
+            <a href="/order/process">
+                <i class="fa fa-basket-shopping fa-2x"></i>
                 <span class="nav-text">
                             발주 관리
                         </span>
             </a>
-
         </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
         <li class="has-subnav">
-            <a href="">
-                <i class="fa fa-comments fa-2x"></i>
+            <a href="bookList">
+                <i class="fa fa-cart-flatbed fa-2x"></i>
                 <span class="nav-text">
                             재고 관리
                         </span>
             </a>
-
         </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
         <li class="has-subnav">
-            <a href="">
-                <i class="fa fa-camera-retro fa-2x"></i>
+            <a href="list">
+                <i class="fa fa-book fa-2x"></i>
                 <span class="nav-text">
                             매대 관리
                         </span>
             </a>
-
         </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
         <li>
             <a href="">
-                <i class="fa fa-film fa-2x"></i>
+                <i class="fa fa-chart-line fa-2x"></i>
                 <span class="nav-text">
                             매출 관리
                         </span>
             </a>
         </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAnonymous()">
         <li>
             <a href="/member/signup">
-                <i class="fa fa-book fa-2x"></i>
+                <i class="fa fa-user-plus fa-2x"></i>
                 <span class="nav-text">
                            회원 가입
                         </span>
             </a>
         </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+        <li>
+            <a href="/member/info?id=<sec:authentication property="name"/>">
+                <i class="fa fa-id-card fa-2x"></i>
+                <span class="nav-text">
+                            마이페이지
+                        </span>
+            </a>
+        </li>
+        </sec:authorize>
+
+        <sec:authorize access="hasAuthority('manager')">
         <li>
             <a href="/member/list">
                 <i class="fa fa-cogs fa-2x"></i>
@@ -207,12 +236,14 @@
                         </span>
             </a>
         </li>
+        </sec:authorize>
 >
     </ul>
 
+    <sec:authorize access="isAuthenticated()">
     <ul class="logout">
         <li>
-            <a href="">
+            <a href="/member/logout">
                 <i class="fa fa-power-off fa-2x"></i>
                 <span class="nav-text">
                             로그아웃
@@ -220,4 +251,6 @@
             </a>
         </li>
     </ul>
+    </sec:authorize>
+
 </nav>

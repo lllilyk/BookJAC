@@ -44,6 +44,10 @@ public class MemberService {
 
         if (passwordEncoder.matches(member.getPassword(), oldMember.getPassword())) {
             // 암호가 같으면?
+
+            // 회원이 작성한 게시물 삭제
+
+            // 회원 테이블 삭제
             cnt = mapper.deleteById(member.getId());
 
         }

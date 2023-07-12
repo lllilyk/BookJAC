@@ -1,7 +1,9 @@
 package com.example.bookjac.domain;
 
 import lombok.Data;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class Member {
@@ -12,5 +14,6 @@ public class Member {
     private String email;
     private String phoneNumber;
     private LocalDateTime inserted;
+    private List<String> authority;
 
 }
