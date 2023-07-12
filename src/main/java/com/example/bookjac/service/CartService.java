@@ -5,6 +5,8 @@ import com.example.bookjac.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CartService implements CartServiceI{
 
@@ -24,6 +26,12 @@ public class CartService implements CartServiceI{
         } catch (Exception e){
             return 0;
         }
+    }
+
+    @Override
+    public List<Cart> getCartList(String memberId) {
+        List<Cart> cart = cartMapper.getCart(memberId);
+        return cart;
     }
 }
 
