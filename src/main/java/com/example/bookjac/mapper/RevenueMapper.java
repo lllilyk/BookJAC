@@ -75,7 +75,9 @@ public interface RevenueMapper {
     Integer modifyDaily(Settlement settlement);
 
     @Select("""
-            SELECT * FROM Sales JOIN Book ON Sales.bookId = Book.id WHERE settlementId = #{settlementId}
+            SELECT * 
+            FROM Sales JOIN Book ON Sales.bookId = Book.id 
+            WHERE settlementId = #{settlementId}
             """)
     List<Sales> selectSalesBySettlementId(Integer settlementId);
 
