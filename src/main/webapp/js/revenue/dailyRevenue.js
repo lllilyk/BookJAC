@@ -21,13 +21,43 @@ $("#selectBtn").click(function () {
                 <td>${sales.title}</td>
                 <td>${sales.totalCount}</td>
                 <td>${sales.soldCount}</td>
-                <td>${sales.inPrice * sales.soldCount}</td>
-                <td>${sales.outPrice * sales.soldCount}</td>
-                <td>${(sales.outPrice * sales.soldCount) - (sales.inPrice * sales.soldCount)}</td>
+                <td>${(sales.inPrice * sales.soldCount).toLocaleString()}</td>
+                <td>${(sales.outPrice * sales.soldCount).toLocaleString()}</td>
+                <td>${(sales.netIncome).toLocaleString()}</td>
                 <td>${sales.pay == 1 ? '현금' : '카드'}</td>
             </tr>
             `);
             });
+
+            //결제 방식을 선택했다면
+            if(payWay == 1 || payWay == 2) {
+                console.log("click")
+                $("#soldBookTableFoot").empty();
+                $("#soldBookTableFoot").append(`
+                <tr>
+                    <th colspan="3">합계</th>
+                    <th>${results.sum.soldCount}</th>
+                    <th>${results.sum.inPrice.toLocaleString()}</th>
+                    <th>${results.sum.outPrice.toLocaleString()}</th>
+                    <th>${results.sum.netIncome.toLocaleString()}</th>
+                    <th></th>
+                </tr>
+                `)
+            }
+
+            if(bookTitle != "") {
+                $("#soldBookTableFoot").empty();
+                $("#soldBookTableFoot").append(`
+                <tr>
+                    <th colspan="3">합계</th>
+                    <th>${results.sum.soldCount}</th>
+                    <th>${results.sum.inPrice.toLocaleString()}</th>
+                    <th>${results.sum.outPrice.toLocaleString()}</th>
+                    <th>${results.sum.netIncome.toLocaleString()}</th>
+                    <th></th>
+                </tr>
+                `)
+            }
         }
     })
 })

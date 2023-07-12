@@ -120,12 +120,11 @@
         </tbody>
         <tfoot id="soldBookTableFoot">
         <tr>
-            <th colspan="2">합계</th>
-            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumSoldCount}"/></th>
-            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumInPrice}"/></th>
-            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumOutPrice}"/></th>
-            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumOutPrice - sum.sumInPrice}"/></th>
-            <th><fmt:formatNumber groupingUsed="true" value="${sum.sumNetIncome}"/></th>
+            <th colspan="3">합계</th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.soldCount}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.inPrice}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.outPrice}"/></th>
+            <th><fmt:formatNumber groupingUsed="true" value="${sum.netIncome}"/></th>
             <th></th>
         </tr>
         </tfoot>
@@ -180,7 +179,7 @@
 <script>
     let label = $("#title").text();
     let orderSum = ${sumCart.sumInPrice};
-    let inPriceSum = ${sum.sumNetIncome};
+    let inPriceSum = ${sum.netIncome};
 </script>
 <script src="/js/revenue/chart.js"></script>
 <script src="/js/revenue/excel.js"></script>

@@ -16,8 +16,5 @@ public class Sales {
     private Integer totalCount;
     private Integer outPrice;
     private Integer inPrice;
-    private Integer sumSoldCount;
-    private Integer sumInPrice;
-    private Integer sumOutPrice;
-    private Integer sumNetIncome;
+    private Integer netIncome;
 }

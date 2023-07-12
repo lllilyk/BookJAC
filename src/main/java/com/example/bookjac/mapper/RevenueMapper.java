@@ -5,7 +5,6 @@ import com.example.bookjac.domain.Sales;
 import com.example.bookjac.domain.Settlement;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -82,10 +81,10 @@ public interface RevenueMapper {
     List<Sales> selectSalesBySettlementId(Integer settlementId);
 
     @Select("""
-            SELECT SUM(soldCount) sumSoldCount, 
-                   SUM(soldCount * inPrice) sumInPrice, 
-                   SUM(soldCount * outPrice) sumOutPrice,
-                   SUM((soldCount * outPrice) - (soldCount * inPrice)) sumNetIncome
+            SELECT SUM(soldCount) soldCount, 
+                   SUM(soldCount * inPrice) inPrice, 
+                   SUM(soldCount * outPrice) outPrice,
+                   SUM((soldCount * outPrice) - (soldCount * inPrice)) netIncome
             FROM Sales JOIN Book ON Sales.bookId = Book.id 
             WHERE  settlementId = #{settlementId};
             """)
@@ -114,13 +113,55 @@ public interface RevenueMapper {
 
     @Select("""
             <script>
-            SELECT * 
+            SELECT *,
+                (soldCount * outPrice) - (soldCount * inPrice) netIncome
             FROM Sales JOIN Book ON Sales.bookId = Book.id 
             WHERE settlementId = #{settlementId}
+            <if test="payWay == 1">
+                AND pay = 1
+            </if>
+            <if test="payWay == 2">
+                AND pay = 2
+            </if>
+            <if test="bookTitle != ''">
+            AND title LIKE '%${bookTitle}%'
+            </if>
             <if test="selectWay == 1">
                 ORDER BY soldCount DESC
             </if>
+            <if test="selectWay == 2">
+                ORDER BY netIncome DESC
+            </if>
+            <if test="selectWay == 3">
+                ORDER BY totalCount ASC
+            </if>
+            <if test="selectWay == 4">
+                ORDER BY totalCount DESC
+            </if>
+            <if test="selectWay == 5">
+                ORDER BY title ASC
+            </if>
             </script>
             """)
-    List<Sales> selectSalesBySearch(Integer settlementId, Integer selectWay);
+    List<Sales> selectSalesBySearch(Integer settlementId, Integer selectWay, Integer payWay, String bookTitle);
+    @Select("""
+            <script>
+            SELECT SUM(soldCount) soldCount, 
+                   SUM(soldCount * inPrice) inPrice, 
+                   SUM(soldCount * outPrice) outPrice,
+                   SUM((soldCount * outPrice) - (soldCount * inPrice)) netIncome
+            FROM Sales JOIN Book ON Sales.bookId = Book.id 
+            WHERE  settlementId = #{settlementId}
+            <if test="bookTitle != ''">
+            AND title LIKE '%${bookTitle}%'
+            </if>
+            <if test="payWay == 1">
+                AND pay = 1
+            </if>
+            <if test="payWay == 2">
+                AND pay = 2
+            </if>
+            </script>
+            """)
+    Sales selectSumDetailBySearch(Integer payWay, Integer settlementId, String bookTitle);
 }

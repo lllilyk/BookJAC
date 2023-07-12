@@ -95,7 +95,7 @@ public class RevenueService {
 
         //총액 조회
         Sales sum = revenueMapper.selectSumDetailBySettlementId(settlementId);
-        System.out.println(sum);
+
         //하루 정산 내역 조회
         Settlement settlement = revenueMapper.selectSettlementById(settlementId);
 
@@ -127,11 +127,14 @@ public class RevenueService {
         Map<String, Object> result = new HashMap<>();
 
         // 하루 판매 내역 조회(책)
-        List<Sales> sales = revenueMapper.selectSalesBySearch(settlementId, selectWay);
+        List<Sales> sales = revenueMapper.selectSalesBySearch(settlementId, selectWay, payWay, bookTitle);
+
+        //총액 조회
+        Sales sum = revenueMapper.selectSumDetailBySearch(payWay, settlementId, bookTitle);
 
         //map에 데이터 저장
         result.put("sales", sales);
-        System.out.println("ser : " +  settlementId + ", " + selectWay + ", " + payWay + ", " + bookTitle);
+        result.put("sum", sum);
         return result;
     }
 }
