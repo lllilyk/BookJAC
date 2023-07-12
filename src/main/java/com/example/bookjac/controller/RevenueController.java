@@ -2,6 +2,7 @@ package com.example.bookjac.controller;
 
 import com.example.bookjac.domain.Settlement;
 import com.example.bookjac.service.RevenueService;
+import jakarta.websocket.OnClose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -55,17 +57,9 @@ public class RevenueController {
     @GetMapping("getDailyInfo")
     @ResponseBody
     public Settlement getDailyInfo(@RequestParam("settlementId") Integer settlementId) {
-        //시간 측정
-        long beforTime = System.currentTimeMillis();
 
         // 일일 정산 수정 시 기존 정보 조회
         Settlement settlement = revenueService.selectSettlementById(settlementId);
-
-        //시간 측정
-        long afterTime = System.currentTimeMillis();
-        long result = (afterTime - beforTime);
-        System.out.println("수정 실행 시간 : " + result);
-
         return settlement;
     }
 
@@ -81,17 +75,33 @@ public class RevenueController {
     }
 
     @GetMapping("monthly")
-    public void monthly() {
+    public void monthly(Model model) {
         // 일일 정산 입력창 forward
+
+        //월별 정보 조회
+        //Map<String, Object> info =  revenueService.selectSettlementForMonth();
     }
 
     @GetMapping("dailyDetail")
     public void dailyDetail(
             @RequestParam("settlementId") Integer settlementId,
             Model model) {
-        //일일 정산 상세 내역 forward
-        Settlement settlement = revenueService.selectSettlementById(settlementId);
+        //일일 정산 상세 내역 조회
+        Map<String, Object> info = revenueService.selectDailyDetailBySettlementId(settlementId);
 
-        model.addAttribute("settlement", settlement);
+        model.addAllAttributes(info);
+    }
+
+    @GetMapping("dailyDetailSearch")
+    @ResponseBody
+    public Map<String, Object> dailyDetail(
+            @RequestParam("settlementId") Integer settlementId,
+            @RequestParam("selectWay") Integer selectWay,
+            @RequestParam("payWay") Integer payWay,
+            @RequestParam("bookTitle") String bookTitle) {
+        //일일 상세 내역 검색 조건별 데이터 조회
+        Map<String, Object> result = revenueService.selectDailyDetailBySearch(settlementId, selectWay, payWay, bookTitle);
+        System.out.println(settlementId + ", " + selectWay + ", " + payWay + ", " + bookTitle);
+        return result;
     }
 }

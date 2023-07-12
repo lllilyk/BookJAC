@@ -21,7 +21,7 @@ $("#barChartBtn").click(function () {
                 type: 'bar',
                 data: xInfo[1],
                 order: 2,
-                label: '총 수입트'
+                label: '총 수입'
             }, {
                 type: 'line',
                 data: xInfo[1],
@@ -50,10 +50,10 @@ $("#doughnutChartBtn").click(function () {
     new Chart(doughnutChart, {
         type: 'doughnut',
         data: {
-            labels: ['순수', '원가 총액', '발주 총액'],
+            labels: ['발주 합계', '순이익 합계'],
             datasets: [{
-                label: 'My First Dataset',
-                data: [12, 19, 3, 5, 2, 3],
+                label: label,
+                data: [orderSum, inPriceSum],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',

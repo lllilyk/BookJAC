@@ -1,5 +1,7 @@
 package com.example.bookjac.service;
 
+import com.example.bookjac.domain.Cart;
+import com.example.bookjac.domain.Sales;
 import com.example.bookjac.domain.Settlement;
 import com.example.bookjac.mapper.RevenueMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +85,56 @@ public class RevenueService {
             res.put("message", "수정되지 않았습니다.");
         }
         return res;
+    }
+
+    public Map<String, Object> selectDailyDetailBySettlementId(Integer settlementId) {
+        Map<String, Object> info = new HashMap<>();
+
+        // 하루 판매 내역 조회(책)
+        List<Sales> sales = revenueMapper.selectSalesBySettlementId(settlementId);
+
+        //총액 조회
+        Sales sum = revenueMapper.selectSumDetailBySettlementId(settlementId);
+
+        //하루 정산 내역 조회
+        Settlement settlement = revenueMapper.selectSettlementById(settlementId);
+
+        //하루 발주 내역 조회
+        //날짜 지정
+        String date = (1900 + settlement.getInserted().getYear()) + "-" + (settlement.getInserted().getMonth()+1) +  "-" +  settlement.getInserted().getDate();
+        //지정된 날짜에 발주된 리스트 조회
+        List<Cart> cartList = revenueMapper.selectOrderCartByDate(date);
+
+        //발주 총 금액, 개수 조회
+        Cart sumCart = revenueMapper.selectCartSum(date);
+
+        //map에 저장
+        info.put("sales", sales);
+        info.put("sum", sum);
+        info.put("settlement", settlement);
+        info.put("cart", cartList);
+        info.put("sumCart", sumCart);
+
+        return info;
+    }
+
+
+    public Map<String, Object> selectDailyDetailBySearch(Integer settlementId, Integer selectWay, Integer payWay, String bookTitle) {
+        //검색 조건에 따른 조회
+        //selectWay : 0=기본값, 1=판매수량, 2=순이익, 3=재고적은순, 4=재고많은순, 5=책제목순
+        //payWay : 0=기본값, 1=현금만, 2=카드만
+        //bookTitle : 책제목
+        Map<String, Object> result = new HashMap<>();
+
+        // 하루 판매 내역 조회(책)
+        List<Sales> sales = revenueMapper.selectSalesBySearch(settlementId, selectWay, payWay, bookTitle);
+
+        //총액 조회
+        Sales sum = revenueMapper.selectSumDetailBySearch(payWay, settlementId, bookTitle);
+
+        //map에 데이터 저장
+        result.put("sales", sales);
+        result.put("sum", sum);
+        return result;
     }
 }
