@@ -2,7 +2,6 @@ package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Member;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -36,13 +35,21 @@ public interface MemberMapper {
     Integer deleteById(String id);
 
     @Update("""
+            <script>
+            
             UPDATE Member
-            SET password = #{password},
+            SET 
+                <if test="password neq null and password neq ''">
+                password = #{password},
+                </if>
+                
                 memberNumber = #{memberNumber},
                 email = #{email},
                 phoneNumber = #{phoneNumber}
             WHERE 
                 id = #{id}
+                
+            </script>
             """)
     Integer update(Member member);
 }

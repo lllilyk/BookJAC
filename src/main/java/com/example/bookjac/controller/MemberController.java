@@ -24,13 +24,18 @@ public class MemberController {
 
     }
 
+    @GetMapping("login")
+    public void loginForm() {
+
+    }
+
     @PostMapping("signup")
     public String signupProcess(Member member, RedirectAttributes rttr) {
 
         try {
             service.signup(member);
             rttr.addFlashAttribute("message", "회원 가입이 완료되었습니다.");
-            return "redirect:/list";
+            return "redirect:/";
         } catch (Exception e) {
             e.printStackTrace();
             rttr.addFlashAttribute("member", member);
@@ -74,8 +79,16 @@ public class MemberController {
     }
 
     @PostMapping("modify")
-    public void modifyProcess(Member member, RedirectAttributes rttr) {
-        boolean ok = service.modify(member);
+    public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
+        boolean ok = service.modify(member, oldPassword);
+
+        if(ok) {
+            rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
+            return "redirect:/member/info?id=" + member.getId();
+        } else {
+            rttr.addFlashAttribute("message", "회원 정보 수정 시 문제가 발생했습니다.");
+            return "redirect:/member/modify?id=" + member.getId();
+        }
 
     }
 }
