@@ -7,7 +7,7 @@
     <!-- 발주 품목 추가 -->
     <insert id="addCart">
         INSERT INTO OrderCart(memberId, bookId, bookCount)
-        VALUES(#{memberId}, #{bookId}, #{bookCount})
+        VALUES(#{memberId},#{bookId}, #{bookCount})
     </insert>
 
     <!-- 발주 품목 삭제 -->

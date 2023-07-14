@@ -7,6 +7,8 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +43,9 @@
     </style>
 </head>
 <body>
+<my:navBar current="orderProcess"></my:navBar>
+<my:alert></my:alert>
+
 <div class="ui center aligned container" id="container">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -51,7 +56,7 @@
                 <div class="col-md-6 text-end">
                     <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
                     <button type="button" class="btn btn-outline-primary">주문내역조회</button>
-                    <a href="/cart/id?id=<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
+                    <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
                     <%--<button type="button" class="btn btn-outline-danger"> 발주 </button>--%>
                 </div>
             </div>

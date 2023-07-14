@@ -25,7 +25,7 @@ public class Cart {
     private Integer sumInPrice;
     private Integer sumOutPrice;
 
-    /*상품 당 총 금액*/
+    /*상품당 총 금액*/
     public void CalculateTotalPrice(){
         this.totalPrice = this.inPrice * this.bookCount;
     }

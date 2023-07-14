@@ -50,13 +50,9 @@ $(".minus_btn").on("click", function (){
     }
 });
 
-/* 서버로 전송할 데이터 */
-const memberId = 'admin'; /* 로그인 기능 구현이 끝나면 값 끌어와야 함 */
-const bookCount = '';
-const data = {memberId, bookCount};
-
 /* 발주 품목 등록 버튼 */
 $(".btn_cart").on("click", function(e) {
+    const data = {};
     let index = $(this).attr("id").split("_")[2];
     let quantity = parseInt($(this).closest("tr").find("input#quantity_input_" + index).val());
 

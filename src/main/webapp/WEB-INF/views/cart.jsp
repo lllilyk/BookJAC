@@ -7,6 +7,8 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +29,10 @@
     </style>
 </head>
 <body>
+
+  <my:navBar current="cart"></my:navBar>
+  <my:alert></my:alert>
+
   <div class="ui center aligned container" id="container">
       <div class="row justify-content-center">
           <div class="col-12">
@@ -56,7 +62,9 @@
                           <td>2023-07-12</td>
                           <td>2023-07-30</td>
                           <td>날개 출판유통</td>
-                          <td>이명헌</td>
+                          <td><sec:authentication property='name'/></td>
+                          <%--<sec:authentication var="authentication" property="principal"/>
+                          <c:set var="username" value="${authentication.name}" />--%>
                       </tr>
                   </tbody>
 
@@ -77,7 +85,7 @@
                   <tbody class="table-group-divider">
                   <c:forEach items="${cartInfo}" var="cart" varStatus="cartStatus">
                       <tr>
-                          <td id="bookIdText_${cartStatus.index}">${cart.cartId }</td>
+                          <td id="bookIdText_${cartStatus.index}">${cart.bookId }</td>
                           <td>${cart.title }</td>
                           <td>${cart.publisher }</td>
                           <td>${cart.inPrice }</td>
