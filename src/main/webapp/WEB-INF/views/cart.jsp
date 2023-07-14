@@ -62,9 +62,7 @@
                           <td>2023-07-12</td>
                           <td>2023-07-30</td>
                           <td>날개 출판유통</td>
-                          <td><sec:authentication property='name'/></td>
-                          <%--<sec:authentication var="authentication" property="principal"/>
-                          <c:set var="username" value="${authentication.name}" />--%>
+                          <td><sec:authentication property='principal.originName'/></td>
                       </tr>
                   </tbody>
 
