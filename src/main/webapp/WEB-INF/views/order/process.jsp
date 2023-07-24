@@ -73,7 +73,7 @@
             <table class="table table-bordered" style="text-align: center">
                 <thead>
                 <tr>
-                    <th style="width:50px;">ID</th>
+                    <th style="width:50px;">ISBN</th>
                     <th style="width:350px;">제목</th>
                     <th style="width:170px;">글쓴이</th>
                     <th style="width:170px;">출판사</th>
