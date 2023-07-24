@@ -167,4 +167,16 @@ public interface RevenueMapper {
             </script>
             """)
     Sales selectSumDetailBySearch(Integer payWay, Integer settlementId, String bookTitle);
+
+    @Select("""
+            SELECT CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0')) AS inserted,
+                   SUM(s.card + s.cash) AS sumIncome,
+                   SUM(b.inPrice * o.bookCount) AS sumOutcome,
+                   SUM((s.card + s.cash) - b.inPrice * o.bookCount) AS sumNetIncome
+            FROM Settlement s
+                     LEFT JOIN OrderCart o ON MONTH(s.inserted) = MONTH(o.inserted)
+                     LEFT JOIN Book b ON o.bookId = b.id
+            GROUP BY CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'))
+            """)
+    List<Settlement> selectSettlementForMonth();
 }

@@ -70,16 +70,16 @@ public class RevenueController {
         // 정산 수정 프로세스 
         Map<String, Object> res = revenueService.modifyDaily(settlement);
 
-        System.out.println(res.get("message"));
         return ResponseEntity.ok().body(res);
     }
 
     @GetMapping("monthly")
     public void monthly(Model model) {
-        // 일일 정산 입력창 forward
-
+        // 월별 정산 입력창 forward
         //월별 정보 조회
-        //Map<String, Object> info =  revenueService.selectSettlementForMonth();
+        Map<String, Object> info =  revenueService.selectSettlementForMonth();
+
+        model.addAllAttributes(info);
     }
 
     @GetMapping("dailyDetail")
@@ -101,7 +101,6 @@ public class RevenueController {
             @RequestParam("bookTitle") String bookTitle) {
         //일일 상세 내역 검색 조건별 데이터 조회
         Map<String, Object> result = revenueService.selectDailyDetailBySearch(settlementId, selectWay, payWay, bookTitle);
-        System.out.println(settlementId + ", " + selectWay + ", " + payWay + ", " + bookTitle);
         return result;
     }
 }

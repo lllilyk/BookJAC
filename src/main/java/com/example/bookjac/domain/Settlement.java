@@ -14,5 +14,6 @@ public class Settlement {
     private Long sumCash;
     private Long sumCard;
     private Long sumIncome;
+    private Long sumOutcome;
     private Long sumNetIncome;
 }

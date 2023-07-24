@@ -46,13 +46,15 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <tr>
-            <th scope="row">3</th>
-            <th scope="row">2023-02-03</th>
-            <th scope="row">1000</th>
-            <th scope="row">1000</th>
-            <th scope="row">1000</th>
-        </tr>
+        <c:forEach items="${list}" var="list" varStatus="num">
+            <tr>
+                <th scope="row">${num.index + 1}</th>
+                <th scope="row"><fmt:formatDate value="${list.inserted}" type="date" pattern="yyyy년 MM월"/> </th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${list.sumIncome}"/></th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${list.sumOutcome != null ? list.sumOutcome : 0}"/></th>
+                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${list.sumNetIncome != null ? list.sumNetIncome : 0}"/></th>
+            </tr>
+        </c:forEach>
         </tbody>
         <tfoot>
         <tr>

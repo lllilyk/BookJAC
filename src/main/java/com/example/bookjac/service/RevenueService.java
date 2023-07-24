@@ -137,4 +137,14 @@ public class RevenueService {
         result.put("sum", sum);
         return result;
     }
+
+    public Map<String, Object> selectSettlementForMonth() {
+        Map<String, Object> info = new HashMap<>();
+
+        //월별 조회
+        List<Settlement> list = revenueMapper.selectSettlementForMonth();
+        info.put("list", list);
+
+        return info;
+    }
 }
