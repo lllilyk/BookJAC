@@ -21,6 +21,19 @@ $(document).ready(function(){
     $(".checkDate").datepicker(config);
 });
 
+/*도서 검색*/
+document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본적인 폼 제출 동작 방지
+
+    // 입력 필드의 값 가져오기
+    var searchText = document.getElementById("searchBook").value;
+
+    // 검색어를 포함한 URL 생성
+    var url = "/order/search?text=" + encodeURIComponent(searchText);
+
+    // 새로운 URL로 페이지 이동
+    window.location.href = url;
+});
 /* 수량 버튼 조작 */
 const maxQuantity = 100; // 최대 허용 수량 설정
 

@@ -57,11 +57,19 @@
                     <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
                     <button type="button" class="btn btn-outline-primary">주문내역조회</button>
                     <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
-                    <%--<button type="button" class="btn btn-outline-danger"> 발주 </button>--%>
                 </div>
             </div>
-            <%--search바--%>
+            <%--네이버 오픈 API를 활용한 도서 검색--%>
+            <div class="container">
+                <form id="bookSearchForm" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" id="searchBook" class="form-control" placeholder="원하시는 도서명을 입력하세요" aria-describedby="bookSearchBtn">
+                        <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                    </div>
+                </form>
+            </div>
 
+            <%--재고 목록--%>
             <table class="table table-bordered" style="text-align: center">
                 <thead>
                 <tr>
@@ -155,32 +163,6 @@
     </div>
 </div>
 
-<%--<script>
-    var IMP = window.IMP;
-    IMP.init("imp00000000");
-
-    function requestPay() {
-        // IMP.request_pay(param, callback) 결제창 호출
-        IMP.request_pay({ // param
-            pg: "INIpayTest",
-            pay_method: "card",
-            merchant_uid: "ORD20180131-0000011",
-            name: "노르웨이 회전 의자",
-            amount: 100,
-            buyer_email: "gildong@gmail.com",
-            buyer_name: "홍길동",
-            buyer_tel: "010-4242-4242",
-            buyer_addr: "서울특별시 강남구 신사동",
-            buyer_postcode: "01181"
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                // 결제 성공 시 로직
-            } else {
-                // 결제 실패 시 로직
-            }
-        });
-    }
-</script>--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <%--datepicker--%>
