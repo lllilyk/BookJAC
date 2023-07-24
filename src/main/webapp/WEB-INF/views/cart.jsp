@@ -74,7 +74,7 @@
                       <th style="width:350px;">제목</th>
                       <th style="width:120px;">출판사</th>
                       <th style="width:100px;">단가</th>
-                      <th style="width:165px;">발주수량</th>
+                      <th style="width:180px;">발주수량</th>
                       <th style="width:100px;">합계</th>
                       <th style="width:70px;">삭제</th>
                   </tr>

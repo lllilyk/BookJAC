@@ -7,7 +7,7 @@ import lombok.Setter;
 public class Cart {
     private Integer cartId;
     private String memberId;
-    private Integer bookId;
+    private String bookId;
     private Integer bookCount;
     // 합계
     @Setter

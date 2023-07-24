@@ -34,6 +34,7 @@ document.getElementById("bookSearchForm").addEventListener("submit", function(ev
     // 새로운 URL로 페이지 이동
     window.location.href = url;
 });
+
 /* 수량 버튼 조작 */
 const maxQuantity = 100; // 최대 허용 수량 설정
 

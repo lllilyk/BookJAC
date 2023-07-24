@@ -11,13 +11,9 @@ public class BookResult {
     private String link;
     private String image;
     private String author;
-    /*private Integer discount;*/
     private String discount;
     private String publisher;
-    /*private Integer isbn;*/
     private String isbn;
     private String description;
-    /*private LocalDateTime pubdate;*/
     private String pubdate;
-
 }

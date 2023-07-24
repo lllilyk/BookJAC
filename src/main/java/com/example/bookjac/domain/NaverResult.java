@@ -7,7 +7,6 @@ import java.util.List;
 
 @Data
 public class NaverResult {
-    /*private LocalDateTime lastBuildDate;*/
     private String lastBuildDate;
     private Integer total;
     private Integer start;

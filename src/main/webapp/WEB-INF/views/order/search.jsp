@@ -57,7 +57,7 @@
                 </tr>
                 </thead>
                 <c:forEach items="${books}" var="book" varStatus="bookStatus">
-                    <tr>
+                    <tr class="${book.isbn == null || book.isbn=='' ? 'd-none' : ''}">
                         <td id="bookIdText_${bookStatus.index}">${book.isbn}</td>
                         <td class="border-box"><img src="${book.image}" alt="${book.title}" /></td>
                         <td>${book.title}</td>
