@@ -2,6 +2,7 @@ package com.example.bookjac.controller;
 
 import com.example.bookjac.domain.Cart;
 import com.example.bookjac.service.CartService;
+import com.example.bookjac.service.NaverBookAPIService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,13 @@ public class CartController {
 
     @Autowired
     public CartService cartService;
+
+    private final NaverBookAPIService naverBookAPIService;
+
+    @Autowired
+    public CartController(NaverBookAPIService naverBookAPIService) {
+        this.naverBookAPIService = naverBookAPIService;
+    }
 
     @GetMapping("cart/{id}")
     @PreAuthorize("isAuthenticated()")
