@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>월말 정산 내역</title>
+    <title id="title">월말 정산 내역</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
@@ -34,6 +34,32 @@
     </div>
     <hr>
 
+    <%--  조회 조건  --%>
+    <div class="row">
+        <form class="row">
+            <h5><strong>조회 조건</strong></h5>
+            <div class="col">
+                <label for="yearInput">연도별 조회</label>
+                <input class="form-control" type="text" placeholder="yyyy으로 입력해주세요." id="yearInput" value="${param.year}">
+            </div>
+            <div class="col">
+                <label>조회 순서</label>
+                <select class="form-select" aria-label="Default select example" id="selectWayInput">
+                    <option value="0" ${param.selectWay == 0 ? 'selected' : ''}>조회 조건 선택</option>
+                    <option value="1" ${param.selectWay == 1 ? 'selected' : ''}>수입내역</option>
+                    <option value="2" ${param.selectWay == 2 ? 'selected' : ''}>발주금액</option>
+                    <option value="3" ${param.selectWay == 3 ? 'selected' : ''}>순수익</option>
+                    <option value="4" ${param.selectWay == 4 ? 'selected' : ''}>전체 보기</option>
+                </select>
+            </div>
+            <div class="col text-end align-self-end">
+                <button type="button" class="btn btn-outline-secondary" id="selectWayBtn">조회</button>
+                <a href="/Revenue/monthly" class="btn btn-outline-secondary">조건 초기화</a>
+            </div>
+        </form>
+    </div>
+    <hr>
+
     <%--  월말 정산 내역 리스트  --%>
     <table class="table table-bordered">
         <thead>
@@ -45,14 +71,14 @@
             <th scope="col">순수익</th>
         </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody class="table-group-divider" id="listBody">
         <c:forEach items="${list}" var="list" varStatus="num">
             <tr>
-                <th scope="row">${num.index + 1}</th>
-                <th scope="row"><fmt:formatDate value="${list.inserted}" type="date" pattern="yyyy년 MM월"/> </th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${list.sumIncome}"/></th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${list.sumOutcome != null ? list.sumOutcome : 0}"/></th>
-                <th scope="row"><fmt:formatNumber groupingUsed="true" value="${list.sumNetIncome != null ? list.sumNetIncome : 0}"/></th>
+                <td>${num.index + 1}</td>
+                <td><fmt:formatDate value="${list.inserted}" type="date" pattern="yyyy년 MM월"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${list.sumIncome}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${list.sumOutcome != null ? list.sumOutcome : 0}"/></td>
+                <td><fmt:formatNumber groupingUsed="true" value="${list.sumNetIncome != null ? list.sumNetIncome : 0}"/></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -67,5 +93,7 @@
     </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/revenue/monthlyRevenue.js"></script>
 </body>
 </html>

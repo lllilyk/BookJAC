@@ -43,7 +43,7 @@ public interface RevenueMapper {
             </if>
             </script>
             """)
-    List<Settlement> selectSettlement(String startDate, String endDate, Integer selectWay,String year, String month);
+    List<Settlement> selectSettlement(String startDate, String endDate, Integer selectWay, String year, String month);
 
     @Select("""
             <script>
@@ -147,6 +147,7 @@ public interface RevenueMapper {
             </script>
             """)
     List<Sales> selectSalesBySearch(Integer settlementId, Integer selectWay, Integer payWay, String bookTitle);
+
     @Select("""
             <script>
             SELECT SUM(soldCount) soldCount, 
@@ -179,4 +180,18 @@ public interface RevenueMapper {
             GROUP BY CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'))
             """)
     List<Settlement> selectSettlementForMonth();
+
+    @Select("""
+            SELECT CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0')) AS inserted,
+                   SUM(s.card + s.cash) AS sumIncome,
+                   SUM(b.inPrice * o.bookCount) AS sumOutcome,
+                   SUM((s.card + s.cash) - b.inPrice * o.bookCount) AS sumNetIncome
+            FROM Settlement s
+                     LEFT JOIN OrderCart o ON YEAR(s.inserted) = YEAR(o.inserted) AND MONTH(s.inserted) = MONTH(o.inserted)
+                     LEFT JOIN Book b ON o.bookId = b.id
+            WHERE YEAR(s.inserted) = #{year}
+            GROUP BY CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'))
+            """)
+    List<Settlement> selectMonthlyBySearch(Integer selectWay, String year);
+
 }

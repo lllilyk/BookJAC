@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -30,7 +31,6 @@ public class RevenueController {
 
         //정산 전체 리스트 조회
         Map<String, Object> info = revenueService.selectSettlement(startDate, endDate, selectWay, yearMonth);
-        System.out.println(startDate + ", " + endDate + ", " + selectWay + ", " + yearMonth);
 
         model.addAllAttributes(info);
     }
@@ -102,5 +102,18 @@ public class RevenueController {
         //일일 상세 내역 검색 조건별 데이터 조회
         Map<String, Object> result = revenueService.selectDailyDetailBySearch(settlementId, selectWay, payWay, bookTitle);
         return result;
+    }
+
+    @GetMapping("monthlySearch")
+    @ResponseBody
+    public List<Settlement> monthlySearch(
+            @RequestParam("selectWay") Integer selectWay,
+            @RequestParam("year") String year) {
+        //월별 조회
+        List<Settlement> result = revenueService.selectMonthlyBySearch(selectWay, year);
+        System.out.println(result);
+        System.out.println(year);
+        return result;
+
     }
 }

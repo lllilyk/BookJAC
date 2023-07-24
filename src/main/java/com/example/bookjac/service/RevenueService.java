@@ -147,4 +147,12 @@ public class RevenueService {
 
         return info;
     }
+
+    public List<Settlement> selectMonthlyBySearch(Integer selectWay, String year) {
+
+        //연도별 조회
+        List<Settlement> list = revenueMapper.selectMonthlyBySearch(selectWay, year);
+
+        return list;
+    }
 }
