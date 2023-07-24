@@ -170,6 +170,35 @@ public interface RevenueMapper {
     Sales selectSumDetailBySearch(Integer payWay, Integer settlementId, String bookTitle);
 
     @Select("""
+            <script>
+            SELECT CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0')) AS inserted,
+                   SUM(s.card + s.cash) AS sumIncome,
+                   SUM(b.inPrice * o.bookCount) AS sumOutcome,
+                   SUM((s.card + s.cash) - b.inPrice * o.bookCount) AS sumNetIncome
+            FROM Settlement s
+                     LEFT JOIN OrderCart o ON YEAR(s.inserted) = YEAR(o.inserted) AND MONTH(s.inserted) = MONTH(o.inserted)
+                     LEFT JOIN Book b ON o.bookId = b.id
+            <if test="selectWay == 4 or (year != null and year != '')">
+            WHERE YEAR(s.inserted) = #{year}
+            </if>
+            GROUP BY CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'))
+            <if test="selectWay == 0 || selectWay == null">
+            ORDER BY s.inserted DESC
+            </if>
+            <if test="selectWay == 1">
+            ORDER BY sumIncome DESC
+            </if>
+            <if test="selectWay == 2">
+            ORDER BY sumOutcome DESC
+            </if>
+            <if test="selectWay == 3">
+            ORDER BY sumNetIncome DESC
+            </if>
+            </script>
+            """)
+    List<Settlement> selectMonthlyBySearch(Integer selectWay, String year);
+
+    @Select("""
             SELECT CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0')) AS inserted,
                    SUM(s.card + s.cash) AS sumIncome,
                    SUM(b.inPrice * o.bookCount) AS sumOutcome,
@@ -180,18 +209,5 @@ public interface RevenueMapper {
             GROUP BY CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'))
             """)
     List<Settlement> selectSettlementForMonth();
-
-    @Select("""
-            SELECT CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0')) AS inserted,
-                   SUM(s.card + s.cash) AS sumIncome,
-                   SUM(b.inPrice * o.bookCount) AS sumOutcome,
-                   SUM((s.card + s.cash) - b.inPrice * o.bookCount) AS sumNetIncome
-            FROM Settlement s
-                     LEFT JOIN OrderCart o ON YEAR(s.inserted) = YEAR(o.inserted) AND MONTH(s.inserted) = MONTH(o.inserted)
-                     LEFT JOIN Book b ON o.bookId = b.id
-            WHERE YEAR(s.inserted) = #{year}
-            GROUP BY CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'))
-            """)
-    List<Settlement> selectMonthlyBySearch(Integer selectWay, String year);
 
 }
