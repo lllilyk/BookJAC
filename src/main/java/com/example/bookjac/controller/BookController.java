@@ -23,9 +23,9 @@ public class BookController {
     @GetMapping("list")
     public String list(Model model,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
-                       @RequestParam(value = "search", defaultValue = "") String search,
-                       @RequestParam(value = "type", required = false) String type){
-        Map<String, Object> result = service.listBook(page, search, type);
+                       @RequestParam(value = "search", defaultValue = "") String search){
+        Map<String, Object> result = service.listBook(page, search);
+
         model.addAllAttributes(result);
         return "book/list";
 
