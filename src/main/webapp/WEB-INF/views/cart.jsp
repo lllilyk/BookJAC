@@ -66,6 +66,8 @@
                   </tbody>
               </table>
 
+              <c:set var="totalQuantity" value="0" />
+              <c:set var="totalPrice" value="0" />
               <table class="table table-bordered" style="text-align: center">
                   <thead>
                   <tr>
@@ -104,8 +106,6 @@
                                   </div>
                               </div>
                           </td>
-                              <%--합계 식--%>
-                              <%--<td><fmt:formatNumber value="${cart.inPrice * cart.bookCount}" pattern="#,### 원" /></td>--%>
                           <td><fmt:formatNumber value="${cart.inPrice * cart.bookCount}" type="currency" currencyCode="KRW" /></td>
                           <td>
                               <button id="btn_cart_${cartStatus.index}" type="button"
@@ -113,6 +113,9 @@
                               </button>
                           </td>
                       </tr>
+                      <!-- totalQuantity와 totalPrice 계산 -->
+                      <c:set var="totalQuantity" value="${totalQuantity + cart.bookCount}" />
+                      <c:set var="totalPrice" value="${totalPrice + (cart.inPrice * cart.bookCount)}" />
                   </c:forEach>
                   <tr>
                       <td colspan="7">
@@ -120,7 +123,7 @@
                               <tbody>
                                 <tr>
                                     <td>
-                                        총 발주 품목 수량 : 50
+                                        총 발주 품목 수량 : <fmt:formatNumber value="${totalQuantity}" />
                                     </td>
                                 </tr>
                               </tbody>
@@ -129,7 +132,7 @@
                               <tbody>
                               <tr>
                                   <td>
-                                      총 결제 예상 금액  : 500,000
+                                      총 결제 예상 금액  : <fmt:formatNumber value="${totalPrice}" type="currency" currencyCode="KRW" />
                                   </td>
                               </tr>
                               </tbody>
