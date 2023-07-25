@@ -171,14 +171,14 @@ public interface RevenueMapper {
 
     @Select("""
             <script>
-            SELECT CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0')) AS inserted,
+            SELECT CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'), '-', '01') AS inserted,
                    SUM(s.card + s.cash) AS sumIncome,
                    SUM(b.inPrice * o.bookCount) AS sumOutcome,
                    SUM((s.card + s.cash) - b.inPrice * o.bookCount) AS sumNetIncome
             FROM Settlement s
                      LEFT JOIN OrderCart o ON YEAR(s.inserted) = YEAR(o.inserted) AND MONTH(s.inserted) = MONTH(o.inserted)
                      LEFT JOIN Book b ON o.bookId = b.id
-            <if test="selectWay == 4 or (year != null and year != '')">
+            <if test="(year != null and year != '')">
             WHERE YEAR(s.inserted) = #{year}
             </if>
             GROUP BY CONCAT(YEAR(s.inserted), '-', LPAD(MONTH(s.inserted), 2, '0'))

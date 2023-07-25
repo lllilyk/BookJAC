@@ -152,7 +152,9 @@ public class RevenueService {
 
         //연도별 조회
         List<Settlement> list = revenueMapper.selectMonthlyBySearch(selectWay, year);
-
+        for(Settlement settlement : list) {
+            System.out.println(settlement);
+        }
         return list;
     }
 }

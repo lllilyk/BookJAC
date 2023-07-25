@@ -18,7 +18,7 @@ $("#selectWayBtn").click(function () {
                     <td>${formattedDate}</td>
                     <td>${settlement.sumIncome}</td>
                     <td>${settlement.sumOutcome != null ? settlement.sumOutcome : 0}</td>
-                    <td>${settlement.sumNetIncome != null ? settlement.sumNetIncome : 0}</td>
+                    <td>${settlement.sumNetIncome != null ? settlement.sumNetIncome : settlement.sumIncome}</td>
                 </tr>
                 `);
             }

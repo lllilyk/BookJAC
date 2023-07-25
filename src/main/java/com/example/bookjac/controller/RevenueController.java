@@ -107,8 +107,8 @@ public class RevenueController {
     @GetMapping("monthlySearch")
     @ResponseBody
     public List<Settlement> monthlySearch(
-            @RequestParam("selectWay") Integer selectWay,
-            @RequestParam("year") String year) {
+            @RequestParam( value = "selectWay", required = false) Integer selectWay,
+            @RequestParam(value = "year", required = false) String year) {
         //월별 조회
         List<Settlement> result = revenueService.selectMonthlyBySearch(selectWay, year);
         System.out.println(result);
