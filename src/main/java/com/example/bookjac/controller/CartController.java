@@ -1,5 +1,6 @@
 package com.example.bookjac.controller;
 
+import com.example.bookjac.domain.BookResult;
 import com.example.bookjac.domain.Cart;
 import com.example.bookjac.service.CartService;
 import com.example.bookjac.service.NaverBookAPIService;
@@ -38,11 +39,10 @@ public class CartController {
         List<Cart> cart = cartService.getCartList(memberId, username);
 
         model.addAttribute("cartInfo", cart);
-
         return "cart";
     }
 
-    @PostMapping("/cart/add")
+   /* @PostMapping("/cart/add")
     @ResponseBody
     public String addCartPOST(Cart cart, Authentication auth){
         cart.setMemberId(auth.getName());
@@ -50,7 +50,13 @@ public class CartController {
         int result = cartService.addCart(cart);
 
         return result + "";
-    }
+    }*/
+   @PostMapping("/cart/add")
+   @ResponseBody
+   public String addCart(@RequestBody Cart cart, Authentication auth) {
+       int result = naverBookAPIService.addCart(cart, auth);
+       return String.valueOf(result);
+   }
 
 }
 

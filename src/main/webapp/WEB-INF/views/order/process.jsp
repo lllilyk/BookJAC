@@ -86,11 +86,11 @@
                 <tbody class="table-group-divider">
                 <c:forEach items="${bookList}" var="book" varStatus="bookStatus">
                     <tr>
-                        <td id="bookIdText_${bookStatus.index}">${book.id }</td>
-                        <td>${book.title }</td>
+                        <td class="bookId" id="bookIdText_${bookStatus.index}">${book.id }</td>
+                        <td class="title">${book.title }</td>
                         <td>${book.writer }</td>
-                        <td>${book.publisher }</td>
-                        <td>${book.inPrice }</td>
+                        <td class="publisher">${book.publisher }</td>
+                        <td class="inPrice">${book.inPrice }</td>
                         <td>${book.totalCount }</td>
                         <td>
                             <div class="btn">

@@ -1,3 +1,26 @@
+/* 캘린더 위젯 적용*/
+const config = {
+    dateFormat: 'yy-mm-dd',
+    showOn: "button",
+    buttonText: "날짜 선택",
+    showButtonPanel: true,
+    currentText: "오늘",
+    closeText: "닫기",
+    prevText: '이전 달',
+    nextText: '다음 달',
+    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    dayNames: ['일','월','화','수','목','금','토'],
+    dayNamesShort: ['일','월','화','수','목','금','토'],
+    dayNamesMin: ['일','월','화','수','목','금','토'],
+    yearSuffix: '년',
+    changeMonth: true,
+    changeYear: true
+}
+$(document).ready(function(){
+    $(".checkDate").datepicker(config);
+});
+
 /* 수량 버튼 조작 */
 const maxQuantity = 100; // 최대 허용 수량 설정
 
@@ -34,17 +57,13 @@ $(".btn_cart").on("click", function(e) {
     let quantity = parseInt($(this).closest("tr").find("input#quantity_input_" + index).val());
 
     if (quantity <= maxQuantity) {
-        data.bookId = $("#bookIsbnText_" + index).text().trim();
+        data.bookId = $("#bookIdText_" + index).text().trim();
         data.bookCount = quantity;
-        data.title = $(this).closest("tr").find(".title").text().trim();
-        data.publisher = $(this).closest("tr").find(".publisher").text().trim();
-        data.inPrice = $(this).closest("tr").find(".inPrice").text().trim();
         /* 서버로 데이터 전송 */
         $.ajax({
             url: '/cart/add',
             type: 'POST',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
+            data: data,
             success: function (result) {
                 cartAlert(result);
             }
@@ -63,3 +82,17 @@ function cartAlert(result){
         alert("발주 품목에 이미 추가되어 있습니다.");
     }
 }
+
+/*도서 검색*/
+document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본적인 폼 제출 동작 방지
+
+    // 입력 필드의 값 가져오기
+    var searchText = document.getElementById("searchBook").value;
+
+    // 검색어를 포함한 URL 생성
+    var url = "/order/search?text=" + encodeURIComponent(searchText);
+
+    // 새로운 URL로 페이지 이동
+    window.location.href = url;
+});

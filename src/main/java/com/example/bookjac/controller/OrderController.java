@@ -29,13 +29,6 @@ import java.util.Map;
 @RequestMapping("order")
 public class OrderController {
 
-   /* *//*네이버 검색 API*//*
-    @Value("${clientId}")
-    private String clientId;
-
-    @Value("${clientSecret}")
-    private String clientSecret;*/
-
     private final NaverBookAPIService naverBookAPIService;
 
     @Autowired
@@ -64,45 +57,10 @@ public class OrderController {
     }
 
     @GetMapping("search")
-    public String orderSearch(@RequestParam String text, Model model){
-       /* *//*json형식의 요청 uri*//*
-        URI uri = UriComponentsBuilder
-                .fromUriString("https://openapi.naver.com")
-                .path("/v1/search/book.json")
-                .queryParam("query", text)
-                .queryParam("display", 10)
-                .queryParam("start", 1)
-                .queryParam("sort", "sim")
-                .encode()
-                .build()
-                .toUri();
+    public String orderSearch(@RequestParam String text, Model model, Authentication auth){
 
-        *//*Spring 요청 제공 클래스*//*
-        RequestEntity<Void> req = RequestEntity
-                .get(uri)
-                .header("X-Naver-Client-Id", clientId)
-                .header("X-Naver-Client-Secret", clientSecret)
-                .build();
-
-        *//*Spring 제공 restTemplate*//*
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> resp = restTemplate.exchange(req, String.class);
-
-        *//*JSON 파싱 (Json 문자열을 객체로 만듦, 문서화)*//*
-        ObjectMapper om = new ObjectMapper();
-        NaverResult result = null;
-
-        try {
-            result = om.readValue(resp.getBody(), NaverResult.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }*/
-
-       List<BookResult> books = naverBookAPIService.searchBooks(text);	// bookresult를 /order/search.jsp에 출력 -> model 선언
+       List<BookResult> books = naverBookAPIService.searchBooks(text, auth);	// bookresult를 /order/search.jsp에 출력 -> model 선언
         model.addAttribute("books", books);
-
         return "order/search";
     }
 

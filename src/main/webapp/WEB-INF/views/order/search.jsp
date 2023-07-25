@@ -58,13 +58,13 @@
                 </thead>
                 <c:forEach items="${books}" var="book" varStatus="bookStatus">
                     <tr class="${book.isbn == null || book.isbn=='' ? 'd-none' : ''}">
-                        <td id="bookIdText_${bookStatus.index}">${book.isbn}</td>
+                        <td class="bookId" id="bookIsbnText_${bookStatus.index}">${book.isbn}</td>
                         <td class="border-box"><img src="${book.image}" alt="${book.title}" /></td>
-                        <td>${book.title}</td>
+                        <td class="title">${book.title}</td>
                         <td>${book.author}</td>
-                        <td>${book.publisher}</td>
+                        <td class="publisher">${book.publisher}</td>
                         <td>${book.pubdate}</td>
-                        <td>${book.discount }</td>
+                        <td class="inPrice">${book.discount }</td>
                         <td>
                             <div class="btn">
                                 <div class="btn_quantity">

@@ -21,20 +21,6 @@ $(document).ready(function(){
     $(".checkDate").datepicker(config);
 });
 
-/*도서 검색*/
-document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // 기본적인 폼 제출 동작 방지
-
-    // 입력 필드의 값 가져오기
-    var searchText = document.getElementById("searchBook").value;
-
-    // 검색어를 포함한 URL 생성
-    var url = "/order/search?text=" + encodeURIComponent(searchText);
-
-    // 새로운 URL로 페이지 이동
-    window.location.href = url;
-});
-
 /* 수량 버튼 조작 */
 const maxQuantity = 100; // 최대 허용 수량 설정
 
@@ -64,6 +50,7 @@ $(".minus_btn").on("click", function (){
     }
 });
 
+
 /* 발주 품목 등록 버튼 */
 $(".btn_cart").on("click", function(e) {
     const data = {};
@@ -73,11 +60,15 @@ $(".btn_cart").on("click", function(e) {
     if (quantity <= maxQuantity) {
         data.bookId = $("#bookIdText_" + index).text().trim();
         data.bookCount = quantity;
+        data.title = $(this).closest("tr").find(".title").text().trim();
+        data.publisher = $(this).closest("tr").find(".publisher").text().trim();
+        data.inPrice = $(this).closest("tr").find(".inPrice").text().trim();
         /* 서버로 데이터 전송 */
         $.ajax({
             url: '/cart/add',
             type: 'POST',
-            data: data,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
             success: function (result) {
                 cartAlert(result);
             }
@@ -97,4 +88,16 @@ function cartAlert(result){
     }
 }
 
+/*도서 검색*/
+document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본적인 폼 제출 동작 방지
 
+    // 입력 필드의 값 가져오기
+    var searchText = document.getElementById("searchBook").value;
+
+    // 검색어를 포함한 URL 생성
+    var url = "/order/search?text=" + encodeURIComponent(searchText);
+
+    // 새로운 URL로 페이지 이동
+    window.location.href = url;
+});
