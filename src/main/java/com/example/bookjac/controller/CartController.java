@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -25,6 +27,14 @@ public class CartController {
     @Autowired
     public CartController(NaverBookAPIService naverBookAPIService) {
         this.naverBookAPIService = naverBookAPIService;
+    }
+
+    @ModelAttribute("currentDate")
+    public String getCurrentDate() {
+        /*현재 날짜를 가져와서 원하는 형식으로 포맷팅*/
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return currentDate.format(formatter);
     }
 
     @GetMapping("cart/{id}")
@@ -42,15 +52,6 @@ public class CartController {
         return "cart";
     }
 
-   /* @PostMapping("/cart/add")
-    @ResponseBody
-    public String addCartPOST(Cart cart, Authentication auth){
-        cart.setMemberId(auth.getName());
-        // 발주 품목 추가
-        int result = cartService.addCart(cart);
-
-        return result + "";
-    }*/
    @PostMapping("/cart/add")
    @ResponseBody
    public String addCart(@RequestBody Cart cart, Authentication auth) {
@@ -59,6 +60,3 @@ public class CartController {
    }
 
 }
-
-
-

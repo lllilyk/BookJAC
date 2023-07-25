@@ -25,6 +25,7 @@
         SELECT cartId, memberId, bookId, bookCount, title, publisher, inPrice
         FROM OrderCart
         WHERE memberId = #{memberId}
+        ORDER BY cartId DESC;
     </select>
 
     <!-- 발주 확인-->

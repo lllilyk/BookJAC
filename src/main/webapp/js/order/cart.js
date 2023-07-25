@@ -1,30 +1,41 @@
-/* 캘린더 위젯 적용*/
-const config = {
-    dateFormat: 'yy-mm-dd',
-    showOn: "button",
-    buttonText: "날짜 선택",
-    showButtonPanel: true,
-    currentText: "오늘",
-    closeText: "닫기",
-    prevText: '이전 달',
-    nextText: '다음 달',
-    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    dayNames: ['일','월','화','수','목','금','토'],
-    dayNamesShort: ['일','월','화','수','목','금','토'],
-    dayNamesMin: ['일','월','화','수','목','금','토'],
-    yearSuffix: '년',
-    changeMonth: true,
-    changeYear: true
-}
-$(document).ready(function(){
+$(document).ready(function() {
+    /* 납기 일자 */
+    // currentDate를 JS Date 객체로 변환
+    var currentDateJS = new Date(currentDate);
+    // 7일을 더한 날짜 계산
+    var deadline = new Date(currentDateJS.getTime());
+    deadline.setDate(deadline.getDate() + 7);
+    // 납기일자 표시
+    var formattedDueDate = deadline.toISOString().slice(0, 10);
+    document.getElementById('deadline').innerText = formattedDueDate;
+});
+
+$(document).ready(function() {
+    /* 캘린더 위젯 적용*/
+    const config = {
+        dateFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonText: "날짜 선택",
+        showButtonPanel: true,
+        currentText: "오늘",
+        closeText: "닫기",
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNames: ['일','월','화','수','목','금','토'],
+        dayNamesShort: ['일','월','화','수','목','금','토'],
+        dayNamesMin: ['일','월','화','수','목','금','토'],
+        yearSuffix: '년',
+        changeMonth: true,
+        changeYear: true
+    }
     $(".checkDate").datepicker(config);
 });
 
 /* 수량 버튼 조작 */
 const maxQuantity = 100; // 최대 허용 수량 설정
-
-/* +버튼으로 수량 조작 */
+// +버튼으로 수량 조작
 $(".plus_btn").on("click", function(){
     let index = $(this).attr("id").split("_")[2];
     let quantityField = $("#quantity_input_" + index);
@@ -36,8 +47,7 @@ $(".plus_btn").on("click", function(){
         quantityField.val(1);
     }
 });
-
-/* -버튼으로 수량 조작 */
+// -버튼으로 수량 조작
 $(".minus_btn").on("click", function (){
     let index = $(this).attr("id").split("_")[2];
     let quantityField = $("#quantity_input_" + index);
@@ -88,7 +98,7 @@ function cartAlert(result){
     }
 }
 
-/*도서 검색*/
+/* 도서 검색 */
 document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
     event.preventDefault(); // 기본적인 폼 제출 동작 방지
 

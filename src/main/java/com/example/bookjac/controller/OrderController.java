@@ -59,7 +59,8 @@ public class OrderController {
     @GetMapping("search")
     public String orderSearch(@RequestParam String text, Model model, Authentication auth){
 
-       List<BookResult> books = naverBookAPIService.searchBooks(text, auth);	// bookresult를 /order/search.jsp에 출력 -> model 선언
+       /*bookresult를 /order/search.jsp에 출력 -> model 선언*/
+       List<BookResult> books = naverBookAPIService.searchBooks(text, auth);
         model.addAttribute("books", books);
         return "order/search";
     }

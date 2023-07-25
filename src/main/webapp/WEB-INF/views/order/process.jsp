@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +91,7 @@
                         <td class="title">${book.title }</td>
                         <td>${book.writer }</td>
                         <td class="publisher">${book.publisher }</td>
-                        <td class="inPrice">${book.inPrice }</td>
+                        <td class="inPrice"><fmt:formatNumber value="${book.inPrice}" type="currency" currencyCode="KRW" /></td>
                         <td>${book.totalCount }</td>
                         <td>
                             <div class="btn">

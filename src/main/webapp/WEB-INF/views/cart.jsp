@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
           <div class="col-12">
               <div class="row">
                   <div class="col-md-6">
-                      <h1>발주내역 확인</h1>
+                      <h1>발주품목 확인</h1>
                   </div>
                   <div class="col-md-6 text-end">
                       <button type="button" class="btn btn-outline-primary">미리보기</button><%--발주요청내역서 폼으로 연결--%>
@@ -57,20 +58,18 @@
                   </thead>
                   <tbody class="table-group-divider">
                       <tr>
-                          <%--알맞은 값으로 변경--%>
-                          <td>2023-07-12</td>
-                          <td>2023-07-30</td>
+                          <td>${currentDate}</td>
+                          <td id="deadline"></td>
                           <td>날개 출판유통</td>
                           <td><sec:authentication property='principal.originName'/></td>
                       </tr>
                   </tbody>
-
               </table>
 
               <table class="table table-bordered" style="text-align: center">
                   <thead>
                   <tr>
-                      <th style="width:50px;">ID</th>
+                      <th style="width:50px;">ISBN</th>
                       <th style="width:350px;">제목</th>
                       <th style="width:120px;">출판사</th>
                       <th style="width:100px;">단가</th>
@@ -85,7 +84,7 @@
                           <td id="bookIdText_${cartStatus.index}">${cart.bookId }</td>
                           <td>${cart.title }</td>
                           <td>${cart.publisher }</td>
-                          <td>${cart.inPrice }</td>
+                          <td><fmt:formatNumber value="${cart.inPrice}" type="currency" currencyCode="KRW" /></td>
                           <td>
                               <div class="btn">
                                   <div class="btn_quantity">
@@ -105,10 +104,9 @@
                                   </div>
                               </div>
                           </td>
-                          <td>
                               <%--합계 식--%>
-                                  <fmt:formatNumber value="${cart.inPrice * cart.bookCount}" pattern="#,### 원" />
-                          </td>
+                              <%--<td><fmt:formatNumber value="${cart.inPrice * cart.bookCount}" pattern="#,### 원" /></td>--%>
+                          <td><fmt:formatNumber value="${cart.inPrice * cart.bookCount}" type="currency" currencyCode="KRW" /></td>
                           <td>
                               <button id="btn_cart_${cartStatus.index}" type="button"
                                       class="btn btn-outline-danger btn_delete_cart"> 삭제
@@ -122,7 +120,7 @@
                               <tbody>
                                 <tr>
                                     <td>
-                                        총 주문 상품 수량 : 50
+                                        총 발주 품목 수량 : 50
                                     </td>
                                 </tr>
                               </tbody>
@@ -153,7 +151,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/order/cartGood.js"></script>
+
+  <script>
+    var currentDate = '${currentDate}';
+  </script>
+  <script src="/js/order/cart.js"></script>
 </body>
 </html>
 
