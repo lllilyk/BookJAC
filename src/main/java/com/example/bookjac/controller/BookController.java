@@ -31,5 +31,12 @@ public class BookController {
 
     }
 
+    @GetMapping("applyEvent")
+    public String ApplyEvent(){
+        return "book/applyEvent";
+    }
+
+
+
 
 }

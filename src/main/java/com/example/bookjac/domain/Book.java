@@ -2,6 +2,8 @@ package com.example.bookjac.domain;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Book {
     private int id;
@@ -14,5 +16,7 @@ public class Book {
     private String totalCount;
     private int inCount;
     private int displayCount;
+    private String event;
+    private Date eventDate;
 
 }
