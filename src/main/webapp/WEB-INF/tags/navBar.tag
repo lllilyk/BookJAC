@@ -211,17 +211,11 @@
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
-<<<<<<< HEAD
-            <li>
-                <a href="">
-                    <i class="fa fa-chart-line fa-2x"></i>
-                    <span class="nav-text">
-=======
+
         <li>
             <a href="/Revenue/daily">
                 <i class="fa fa-chart-line fa-2x"></i>
                 <span class="nav-text">
->>>>>>> origin/master
                             매출 관리
                         </span>
                 </a>
