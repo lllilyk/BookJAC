@@ -60,4 +60,34 @@ public interface BookMapper {
 			</script>
 			""")
 	List<Book> selectAllPaging(Integer startIndex, Integer rowPerPage, String search);
+
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT
+				title,
+				writer,
+				publisher,
+				event,
+				eventStartDate,
+				eventEndDate
+			     
+			FROM Book 
+			
+			where
+				<if test="search neq '' ">
+				   (title  LIKE #{pattern}
+				OR publisher   LIKE #{pattern}
+				OR writer LIKE #{pattern})
+				OR
+				 </if>
+				 (event is Not Null)
+				
+			
+
+			ORDER BY eventStartDate ASC
+			LIMIT #{startIndex}, #{rowPerPage}
+			</script>
+			""")
+	List<Book> selectAllPagingEvent(Integer startIndex, Integer rowPerPage, String search);
 }

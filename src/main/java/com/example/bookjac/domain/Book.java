@@ -17,6 +17,8 @@ public class Book {
     private int inCount;
     private int displayCount;
     private String event;
-    private Date eventDate;
+    private String eventStartDate;
+    private String eventEndDate;
+
 
 }

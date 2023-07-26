@@ -25,8 +25,10 @@ public class BookController {
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "search", defaultValue = "") String search){
         Map<String, Object> result = service.listBook(page, search);
+        Map<String, Object> result1 = service.listEvent(page, search);
 
         model.addAllAttributes(result);
+        model.addAllAttributes(result1);
         return "book/list";
 
     }

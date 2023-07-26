@@ -29,7 +29,10 @@
     </form>
 
     <button type="button" onclick="location.href='/applyEvent'">이벤트 등록</button>
+    <br/>
 
+
+    <h3>이벤트 도서</h3>
     <div>
     <table class="table">
         <thead>
@@ -38,18 +41,20 @@
             <th>작가</th>
             <th>출판사</th>
             <th>이벤트 내용</th>
-            <th>이벤트 기한</th>
+            <th>이벤트 시작일</th>
+            <th>이벤트 종료일</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${bookList}" var="book">
+        <c:forEach items="${eventList}" var="book">
             <tr>
                 <td>${book.title}</td>
 
                 <td>${book.writer}</td>
                 <td>${book.publisher}</td>
                 <td>${book.event}</td>
-                <td>${book.eventDate}</td>
+                <td>${book.eventStartDate}</td>
+                <td>${book.eventEndDate}</td>
 
             </tr>
         </c:forEach>
@@ -80,6 +85,7 @@
                 <td>
                         ${book.title}
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">판매</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">환불</button>
                 </td>
                 <td>${book.writer}</td>
                 <td>${book.publisher}</td>
@@ -105,6 +111,27 @@
             <div class="modal-body">
                 수량 입력(숫자만 입력) :
             <input type="text" name="amount">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">환불 수량을 입력해 주세요.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                수량 입력(숫자만 입력) :
+                <input type="text" name="refund">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
