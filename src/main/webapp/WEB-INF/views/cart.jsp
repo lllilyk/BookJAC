@@ -111,7 +111,9 @@
                                           <button id="plus_btn_${cartStatus.index}" type="button"
                                                   class="btn btn-light plus_btn">+
                                           </button>
-                                      <button class="btn btn-light changeBtn" id="btn_cart_${cartStatus.index}" value="${cart.cartId}"><i class="fa-solid fa-circle-check"></i></button>
+                                          <button class="btn btn-light changeBtn" id="btn_cart_${cartStatus.index}" value="${cart.cartId}">
+                                                <i class="fa-solid fa-circle-check"></i>
+                                          </button>
                                       </div>
                                   </div>
                               </div>

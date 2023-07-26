@@ -35,12 +35,21 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-md-6">
-                    <h3>도서 검색 결과</h3>
+                    <h1>도서 검색 결과</h1>
                 </div>
                 <div class="col-md-6 text-end">
                     <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
                     <a href="/order/process" class="btn btn-outline-secondary">돌아가기</a>
                 </div>
+            </div>
+            <%--네이버 오픈 API를 활용한 도서 검색--%>
+            <div class="container">
+                <form id="bookSearchForm" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" id="searchBook" class="form-control" placeholder="원하시는 도서명을 입력하세요" aria-describedby="bookSearchBtn">
+                        <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                    </div>
+                </form>
             </div>
             <table class="table table-bordered searchResults" style="text-align: center">
                 <thead>
