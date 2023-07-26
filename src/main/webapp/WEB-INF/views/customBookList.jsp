@@ -31,6 +31,8 @@
 </style>
 <body>
 
+<my:navBar current="customBookList"></my:navBar>
+
 <div class="container-lg mt-3">
     <h1><a href="/bookList" style="color: black; text-decoration-line: none">찾으시는 책을 검색 해 보세요.</a></h1>
 </div>
