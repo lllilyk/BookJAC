@@ -98,6 +98,46 @@ function cartAlert(result){
     }
 }
 
+/* 발주 품목 수량 수정 버튼 */
+$(".changeBtn").on("click", function(e) {
+    e.preventDefault(); // 기본 클릭 동작(페이지 이동 등)을 방지
+
+    let index = $(this).attr("id").split("_")[2];
+    let quantity = parseInt($(this).closest("tr").find("input#quantity_input_" + index).val());
+    let cartId = parseInt($(this).closest("tr").find("button#btn_cart_" + index).val());
+
+    if (quantity <= maxQuantity) {
+        $(".update_cartId").val(cartId);
+        $(".update_bookCount").val(quantity);
+
+        /* 서버로 데이터 전송 */
+        $.ajax({
+            url: '/cart/update',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({cartId: cartId, bookCount: quantity}),
+            success: function (response) {
+                // 응답 데이터 확인
+                if (response.result === 'success') {
+                    cartChangeAlert('1'); // 성공적으로 변경되었다는 메시지 출력
+                } else {
+                    cartChangeAlert('0'); // 실패 메시지 출력
+                }
+            }
+        })
+    } else {
+        alert("유효한 수량 값을 입력해주세요");
+    }
+});
+
+function cartChangeAlert(change){
+    if(change == '0'){
+        alert("수량 변경에 실패하였습니다.");
+    } else if(change == '1'){
+        alert("수량이 변경되었습니다.");
+    }
+}
+
 /* 도서 검색 */
 document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
     event.preventDefault(); // 기본적인 폼 제출 동작 방지

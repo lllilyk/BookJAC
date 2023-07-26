@@ -6,6 +6,7 @@ import com.example.bookjac.service.CartService;
 import com.example.bookjac.service.NaverBookAPIService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CartController {
@@ -59,4 +62,22 @@ public class CartController {
        return String.valueOf(result);
    }
 
+   @PostMapping("/cart/update")
+   @ResponseBody
+   public Map<String, String> updateCart(@RequestBody Cart cart, Authentication auth){
+        System.out.println("cart = " + cart);
+        int change = cartService.modifyCount(cart);
+        String id = auth.getName();
+        System.out.println(id);
+
+        /* JSON 형식의 응답 데이터 생성 */
+        Map<String, String> response = new HashMap<>();
+        if(change > 0){
+            response.put("result", "success");
+        } else{
+            response.put("result", "fail");
+        }
+
+        return response;
+   }
 }

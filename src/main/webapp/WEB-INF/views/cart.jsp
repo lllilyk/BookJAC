@@ -34,6 +34,16 @@
   <my:navBar current="cart"></my:navBar>
   <my:alert></my:alert>
 
+  <!-- toast -->
+  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+              <div class="toast-body"></div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+      </div>
+  </div>
+
   <div class="ui center aligned container" id="container">
       <div class="row justify-content-center">
           <div class="col-12">
@@ -101,7 +111,7 @@
                                           <button id="plus_btn_${cartStatus.index}" type="button"
                                                   class="btn btn-light plus_btn">+
                                           </button>
-                                      <button class="btn btn-light change"><i class="fa-solid fa-circle-check"></i></button>
+                                      <button class="btn btn-light changeBtn" id="btn_cart_${cartStatus.index}" value="${cart.cartId}"><i class="fa-solid fa-circle-check"></i></button>
                                       </div>
                                   </div>
                               </div>
@@ -148,6 +158,12 @@
                       <button type="button" class="btn btn-danger">발주하기</button>
                   </div>
               </div>
+
+              <!-- 수량 조정 form -->
+              <form action="/cart/update" method="post" class="quantity_update_form">
+                  <input type="hidden" name="cartId" class="update_cartId">
+                  <input type="hidden" name="bookCount" class="update_bookCount">
+              </form>
           </div>
       </div>
   </div>
