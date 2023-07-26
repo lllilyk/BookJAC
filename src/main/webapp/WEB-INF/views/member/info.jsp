@@ -8,7 +8,7 @@
 <head>
     <title>Title</title>
 </head>
-<body>
+<body style="background: #e2e2e2;">
 
   <my:alert></my:alert>
 
