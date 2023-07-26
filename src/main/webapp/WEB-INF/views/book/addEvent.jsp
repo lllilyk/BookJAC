@@ -20,7 +20,7 @@
 <h1> 이벤트 등록</h1>
     <form method="post">
         <div>
-            <label class="form-label"> 제목 :</label>
+            <label class="form-label"> 책 제목 :</label>
             <input type="text" name="title" value="${book.title}">
         </div>
 

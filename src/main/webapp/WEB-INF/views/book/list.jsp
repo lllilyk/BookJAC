@@ -28,7 +28,7 @@
         </button>
     </form>
 
-    <button type="button" onclick="location.href='/applyEvent'">이벤트 등록</button>
+    <button type="button" onclick="location.href='/addEvent'">이벤트 등록</button>
     <br/>
 
 

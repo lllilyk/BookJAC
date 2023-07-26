@@ -1,6 +1,5 @@
 package com.example.bookjac.controller;
 
-import com.example.bookjac.domain.Book;
 import com.example.bookjac.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,7 +33,7 @@ public class BookController {
 
     @GetMapping("applyEvent")
     public String ApplyEvent(){
-        return "book/applyEvent";
+        return "addEvent";
     }
 
 
