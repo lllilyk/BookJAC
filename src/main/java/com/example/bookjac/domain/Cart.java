@@ -7,7 +7,7 @@ import lombok.Setter;
 public class Cart {
     private Integer cartId;
     private String memberId;
-    private Integer bookId;
+    private String bookId;
     private Integer bookCount;
     // 합계
     @Setter
@@ -25,7 +25,7 @@ public class Cart {
     private Integer sumInPrice;
     private Integer sumOutPrice;
 
-    /*상품 당 총 금액*/
+    /*상품당 총 금액*/
     public void CalculateTotalPrice(){
         this.totalPrice = this.inPrice * this.bookCount;
     }

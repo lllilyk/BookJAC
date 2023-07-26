@@ -125,7 +125,7 @@
     }
     body {
         float: left;
-        background: #e2e2e2;
+        /*background: #e2e2e2;*/
         width: 100%;
         height: 100%;
     }
@@ -163,7 +163,8 @@
 
         <sec:authorize access="isAuthenticated()">
         <li class="has-subnav">
-            <a href="/order/process">
+            <a class="${current eq 'orderProcess' ? 'active' : '' } item"
+               href="/order/process">
                 <i class="fa fa-basket-shopping fa-2x"></i>
                 <span class="nav-text">
                             발주 관리

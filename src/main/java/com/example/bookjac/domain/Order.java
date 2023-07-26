@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class Order {
-    private Integer id;
+    private String id;
     private String title;
     private String writer;
     private String publisher;

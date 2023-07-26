@@ -10,5 +10,8 @@ public interface CartServiceI {
     public int addCart(Cart cart);
 
     /* 발주 품목 리스트 */
-    public List<Cart> getCartList(String memberId);
+    public List<Cart> getCartList(String memberId, String username);
+
+    /* 발주 품목 수량 수정 */
+    public int modifyCount(Cart cart);
 }

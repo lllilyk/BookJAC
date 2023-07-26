@@ -72,3 +72,4 @@ public class MemberService {
         return cnt == 1;
     }
 }
+

@@ -6,8 +6,8 @@
 
     <!-- 발주 품목 추가 -->
     <insert id="addCart">
-        INSERT INTO OrderCart(memberId, bookId, bookCount)
-        VALUES(#{memberId}, #{bookId}, #{bookCount})
+        INSERT INTO OrderCart(memberId, bookId, title, publisher, inPrice, bookCount)
+        VALUES(#{memberId},#{bookId}, #{title}, #{publisher}, #{inPrice}, #{bookCount})
     </insert>
 
     <!-- 발주 품목 삭제 -->
@@ -22,9 +22,10 @@
 
     <!-- 발주 품목 List-->
     <select id="getCart" resultType="com.example.bookjac.domain.Cart">
-        SELECT c.cartId, c.memberId, c.bookId, c.bookCount, b.title, b.writer, b.publisher, b.inPrice
-        FROM OrderCart c LEFT OUTER JOIN Book b ON c.bookId = b.id
+        SELECT cartId, memberId, bookId, bookCount, title, publisher, inPrice
+        FROM OrderCart
         WHERE memberId = #{memberId}
+        ORDER BY cartId DESC;
     </select>
 
     <!-- 발주 확인-->

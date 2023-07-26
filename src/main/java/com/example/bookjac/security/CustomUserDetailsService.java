@@ -4,7 +4,6 @@ import com.example.bookjac.domain.Member;
 import com.example.bookjac.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,14 +30,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         */
 
-        UserDetails user = User.builder()
-                .username(member.getId())
-                .password(member.getPassword())
-                /* 39번째 코드를 풀어 쓴다면
-                .authorities(authorityList)*/
-                .authorities(member.getAuthority().stream().map(SimpleGrantedAuthority::new).toList())
-                .build();
+        CustomUser customUser = new CustomUser(member.getId(), member.getPassword(), member.getAuthority().stream().map(SimpleGrantedAuthority::new).toList());
+        customUser.setOriginName(member.getName());
 
-        return user;
+        return customUser;
     }
 }
