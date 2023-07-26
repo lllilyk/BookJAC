@@ -37,6 +37,7 @@
         </div>
 
         <button type="button" class="btn btn-primary">등록</button>
+
     </form>
 
 
