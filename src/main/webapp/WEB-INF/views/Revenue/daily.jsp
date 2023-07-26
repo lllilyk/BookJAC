@@ -19,6 +19,7 @@
 </head>
 <body>
 <my:alert></my:alert>
+<my:navBar></my:navBar>
 <div class="container">
     <br>
     <hr>

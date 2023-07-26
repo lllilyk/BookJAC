@@ -197,7 +197,7 @@
 
         <sec:authorize access="isAuthenticated()">
         <li>
-            <a href="">
+            <a href="/Revenue/daily">
                 <i class="fa fa-chart-line fa-2x"></i>
                 <span class="nav-text">
                             매출 관리
