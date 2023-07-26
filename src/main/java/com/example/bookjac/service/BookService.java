@@ -83,4 +83,10 @@ private BookMapper mapper;
         return Map.of("pageInfo", pageInfo,
                 "eventList", list);
     }
+
+    // 판매
+    public void bookSell(Book book) {
+        Integer cnt = mapper.bookSellUpdate(book);
+
+    }
 }

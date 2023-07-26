@@ -19,6 +19,9 @@ public class Book {
     private String event;
     private String eventStartDate;
     private String eventEndDate;
+    private int sellAmount;
+
+
 
 
 }

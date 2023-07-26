@@ -11,12 +11,40 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>매대 현황</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<my:navBar current="display"></my:navBar>
 <my:alert></my:alert>
+
+<script>
+    function handleButtonClick(){
+        var sellAmount = document.getElementById("sellAmount").value;
+        var id = document.getElementById("sellNum").value;
+        console.log("sellAmount",sellAmount);
+        console.log("id",id);
+        $.ajax("/sell",{
+            method:"post",
+            contentType: "application/json",
+            data: JSON.stringify({"id" :id, "sellAmount" :sellAmount}),
+            success: function (){
+                location.reload();
+            }
+        })
+    }
+
+    function openModal(event){
+        var clickedButtonId = event.target.id;
+        var id = clickedButtonId.split("_")[1];
+        // 값을 모달 창에 설정
+        var modalValue = document.getElementById("sellNum");
+        modalValue.value = id;
+        console.log("clickedButtonId",clickedButtonId);
+        console.log(id);
+    }
+</script>
 <div class="container-lg">
 
     <h1>매대 현황</h1>
@@ -28,42 +56,7 @@
         </button>
     </form>
 
-    <button type="button" onclick="location.href='/addEvent'">이벤트 등록</button>
-    <br/>
-
-
-    <h3>이벤트 도서</h3>
-    <div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>책 제목</th>
-            <th>작가</th>
-            <th>출판사</th>
-            <th>이벤트 내용</th>
-            <th>이벤트 시작일</th>
-            <th>이벤트 종료일</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${eventList}" var="book">
-            <tr>
-                <td>${book.title}</td>
-
-                <td>${book.writer}</td>
-                <td>${book.publisher}</td>
-                <td>${book.event}</td>
-                <td>${book.eventStartDate}</td>
-                <td>${book.eventEndDate}</td>
-
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    </div>
-
-
-
+    <button type="button" onclick="location.href='/eventBook'">이벤트 도서</button>
 
     <div>
     <table class="table">
@@ -84,8 +77,8 @@
                 <td>${book.id}</td>
                 <td>
                         ${book.title}
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">판매</button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">환불</button>
+                    <button type="button" id="sellBtn_${book.id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal(event)">판매</button>
+                    <button type="button" id="refundBtn_${book.id}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">환불</button>
                 </td>
                 <td>${book.writer}</td>
                 <td>${book.publisher}</td>
@@ -109,16 +102,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <input type="hidden" id="sellNum"/>
                 수량 입력(숫자만 입력) :
-            <input type="text" name="amount">
+            <input type="text" id="sellAmount">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">확인</button>
+                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">확인</button>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <!-- Modal -->
@@ -126,7 +121,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">환불 수량을 입력해 주세요.</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel2">환불 수량을 입력해 주세요.</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

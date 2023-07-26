@@ -3,6 +3,7 @@ package com.example.bookjac.mapper;
 import com.example.bookjac.domain.Book;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 
 import java.util.List;
@@ -41,6 +42,9 @@ public interface BookMapper {
 			<bind name="pattern" value="'%' + search + '%'" />
 			SELECT
 				title,
+				id,
+				displayCount,
+				totalCount,
 				writer,
 				publisher,
 				categoryId
@@ -66,6 +70,9 @@ public interface BookMapper {
 			<bind name="pattern" value="'%' + search + '%'" />
 			SELECT
 				title,
+				id,
+				displayCount,
+				totalCount,
 				writer,
 				publisher,
 				event,
@@ -90,4 +97,12 @@ public interface BookMapper {
 			</script>
 			""")
 	List<Book> selectAllPagingEvent(Integer startIndex, Integer rowPerPage, String search);
+
+	@Update("""
+			UPDATE Book
+			SET displayCount =  displayCount-#{sellAmount}
+			WHERE
+			id = #{id}
+			""")
+	Integer bookSellUpdate(Book book);
 }
