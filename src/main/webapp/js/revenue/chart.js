@@ -7,6 +7,7 @@ $("#barChartBtn").click(function () {
         if (selectWay == 1) {
             return '(현금 매출)'
         } else if (selectWay == 2) {
+
             return '(카드 매출)'
         } else if (selectWay == 3 || selectWay == null || selectWay == 0) {
             return ''
