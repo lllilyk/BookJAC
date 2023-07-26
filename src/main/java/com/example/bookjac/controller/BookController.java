@@ -1,6 +1,5 @@
 package com.example.bookjac.controller;
 
-import com.example.bookjac.domain.Book;
 import com.example.bookjac.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,13 +21,22 @@ public class BookController {
     @GetMapping("list")
     public String list(Model model,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
-                       @RequestParam(value = "search", defaultValue = "") String search,
-                       @RequestParam(value = "type", required = false) String type){
-        Map<String, Object> result = service.listBook(page, search, type);
+                       @RequestParam(value = "search", defaultValue = "") String search){
+        Map<String, Object> result = service.listBook(page, search);
+        Map<String, Object> result1 = service.listEvent(page, search);
+
         model.addAllAttributes(result);
+        model.addAllAttributes(result1);
         return "book/list";
 
     }
+
+    @GetMapping("applyEvent")
+    public String ApplyEvent(){
+        return "addEvent";
+    }
+
+
 
 
 }

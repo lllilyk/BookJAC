@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Title</title>
@@ -18,11 +19,53 @@
 <my:alert></my:alert>
 <div class="container-lg">
 
-    <h1>도서 목록</h1>
+    <h1>매대 현황</h1>
+
     <form action="/list">
     <input name="search" class="searchBar" type="search" placeholder="검색어를 입력하세요.">
-        <button type="submit">검색</button>
+        <button type="submit">검색
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
     </form>
+
+    <button type="button" onclick="location.href='/addEvent'">이벤트 등록</button>
+    <br/>
+
+
+    <h3>이벤트 도서</h3>
+    <div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>책 제목</th>
+            <th>작가</th>
+            <th>출판사</th>
+            <th>이벤트 내용</th>
+            <th>이벤트 시작일</th>
+            <th>이벤트 종료일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${eventList}" var="book">
+            <tr>
+                <td>${book.title}</td>
+
+                <td>${book.writer}</td>
+                <td>${book.publisher}</td>
+                <td>${book.event}</td>
+                <td>${book.eventStartDate}</td>
+                <td>${book.eventEndDate}</td>
+
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    </div>
+
+
+
+
+    <div>
     <table class="table">
         <thead>
         <tr>
@@ -31,9 +74,6 @@
             <th>작가</th>
             <th>출판사</th>
             <th>장르</th>
-            <th>입고가</th>
-            <th>출고가</th>
-            <th>입고수량</th>
             <th>매대수량</th>
             <th>총수량</th>
         </tr>
@@ -42,14 +82,14 @@
         <c:forEach items="${bookList}" var="book">
             <tr>
                 <td>${book.id}</td>
-                <td>${book.title}</td>
+                <td>
+                        ${book.title}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">판매</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">환불</button>
+                </td>
                 <td>${book.writer}</td>
                 <td>${book.publisher}</td>
                 <td>${book.categoryId}</td>
-                <td>${book.inPrice}</td>
-                <td>${book.outPrice}</td>
-                <td>${book.inCount}</td>
-                <td>${book.outPrice}</td>
                 <td>${book.displayCount}</td>
                 <td>${book.totalCount}</td>
             </tr>
@@ -57,7 +97,50 @@
         </tbody>
 
     </table>
+    </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">판매된 수량을 입력해 주세요.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                수량 입력(숫자만 입력) :
+            <input type="text" name="amount">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">환불 수량을 입력해 주세요.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                수량 입력(숫자만 입력) :
+                <input type="text" name="refund">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="container-lg">
     <div class="row">

@@ -25,21 +25,16 @@ public interface BookMapper {
 			SELECT COUNT(*) 
 			FROM Book
 			
-			<where>
-				<if test="(type eq 'all') or (type eq 'title')">
+			where
+			
 				   title  LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'publisher')">
-				OR body   LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'writer')">
+				OR publisher   LIKE #{pattern}
 				OR writer LIKE #{pattern}
-				</if>
-			</where>
+			
 			
 			</script>
 			""")
-    Integer countAll(String search, String type);
+    Integer countAll(String search);
 
 	@Select("""
 			<script>
@@ -52,21 +47,47 @@ public interface BookMapper {
 			     
 			FROM Book 
 			
-			<where>
-				<if test="(type eq 'all') or (type eq 'title')">
+			where
+				
 				   title  LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'publisher')">
-				OR body   LIKE #{pattern}
-				</if>
-				<if test="(type eq 'all') or (type eq 'writer')">
+				OR publisher   LIKE #{pattern}
 				OR writer LIKE #{pattern}
-				</if>
-			</where>
+				
+			
 
 			ORDER BY id DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			</script>
 			""")
-	List<Book> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
+	List<Book> selectAllPaging(Integer startIndex, Integer rowPerPage, String search);
+
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT
+				title,
+				writer,
+				publisher,
+				event,
+				eventStartDate,
+				eventEndDate
+			     
+			FROM Book 
+			
+			where
+				<if test="search neq '' ">
+				   (title  LIKE #{pattern}
+				OR publisher   LIKE #{pattern}
+				OR writer LIKE #{pattern})
+				OR
+				 </if>
+				 (event is Not Null)
+				
+			
+
+			ORDER BY eventStartDate ASC
+			LIMIT #{startIndex}, #{rowPerPage}
+			</script>
+			""")
+	List<Book> selectAllPagingEvent(Integer startIndex, Integer rowPerPage, String search);
 }
