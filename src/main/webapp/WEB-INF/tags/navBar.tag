@@ -165,6 +165,7 @@
             </li>
         </sec:authorize>
 
+        <sec:authorize access="isAuthenticated()">
         <li class="has-subnav">
             <a href="customBookList">
                 <i class="fa fa-cart-flatbed fa-2x"></i>
@@ -173,6 +174,7 @@
                         </span>
             </a>
         </li>
+        </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">

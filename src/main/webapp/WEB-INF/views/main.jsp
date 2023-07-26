@@ -6,7 +6,7 @@
 <html>
 <head>
 </head>
-<body>
+<body style="background: #e2e2e2;">
     <div align="center">
         <h1>메인 페이지</h1>
     </div>
