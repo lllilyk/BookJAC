@@ -168,7 +168,7 @@
         <sec:authorize access="isAuthenticated()">
         <li class="has-subnav">
             <a href="customBookList">
-                <i class="fa fa-cart-flatbed fa-2x"></i>
+                <i class="fa fa-magnifying-glass fa-2x"></i>
                 <span class="nav-text">
                             도서 검색
                         </span>
