@@ -7,7 +7,7 @@
 <head>
     <title>Title</title>
 </head>
-<body>
+<body style="background: #e2e2e2;">
 
 <div class="container-lg">
     <div class="row justify-content-center">

@@ -11,9 +11,7 @@ public class MainController {
 
     @GetMapping("")
     public String main(Authentication authentication) {
-        System.out.println("authentication = " + authentication);
-        System.out.println(authentication.getPrincipal());
-        System.out.println(authentication.getCredentials());
+
         return "main";
     }
 
