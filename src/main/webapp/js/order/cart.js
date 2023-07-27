@@ -98,6 +98,13 @@ function cartAlert(result){
     }
 }
 
+function formatCurrency(number) {
+    const formatter = new Intl.NumberFormat('ko-KR', {
+        style: 'currency',
+        currency: 'KRW',
+    });
+    return formatter.format(number);
+}
 /* 발주 품목 수량 수정 버튼 */
 $(".changeBtn").on("click", function(e) {
     e.preventDefault(); // 기본 클릭 동작(페이지 이동 등)을 방지
@@ -119,6 +126,18 @@ $(".changeBtn").on("click", function(e) {
             success: function (response) {
                 // 응답 데이터 확인
                 if (response.result === 'success') {
+                    $("#inPriceSum").text(formatCurrency(response.inpriceSum));
+                    /*$("#totalQuantity").text("총 발주 품목 수량: " + response.totalQuantity);
+                    $("#totalPrice").text("총 결제 예상 금액: " + response.totalPrice);*/
+
+                    // 총 발주 품목 수량 업데이트
+                    let totalQuantity = document.getElementById("totalQuantity");
+                    totalQuantity.innerText = "총 발주 품목 수량: " + response.totalQuantity;
+
+                    // 총 결제 예상 금액 업데이트
+                    let totalPrice = document.getElementById("totalPrice");
+                    totalPrice.innerText = "총 결제 예상 금액: " + formatCurrency(response.totalPrice);
+
                     cartChangeAlert('1'); // 성공적으로 변경되었다는 메시지 출력
                 } else {
                     cartChangeAlert('0'); // 실패 메시지 출력

@@ -118,7 +118,7 @@
                                   </div>
                               </div>
                           </td>
-                          <td><fmt:formatNumber value="${cart.inPrice * cart.bookCount}" type="currency" currencyCode="KRW" /></td>
+                          <td id="inPriceSum"><fmt:formatNumber value="${cart.inPrice * cart.bookCount}" type="currency" currencyCode="KRW" /></td>
                           <td>
                               <button id="btn_cart_${cartStatus.index}" type="button"
                                       class="btn btn-outline-danger btn_delete_cart"> 삭제
@@ -134,7 +134,7 @@
                           <table class="table mb-0" style="text-align: right">
                               <tbody>
                                 <tr>
-                                    <td>
+                                    <td id="totalQuantity">
                                         총 발주 품목 수량 : <fmt:formatNumber value="${totalQuantity}" />
                                     </td>
                                 </tr>
@@ -143,7 +143,7 @@
                           <table class="table mb-0" style="text-align: right">
                               <tbody>
                               <tr>
-                                  <td>
+                                  <td id="totalPrice">
                                       총 결제 예상 금액  : <fmt:formatNumber value="${totalPrice}" type="currency" currencyCode="KRW" />
                                   </td>
                               </tr>

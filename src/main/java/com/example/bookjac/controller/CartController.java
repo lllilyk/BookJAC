@@ -65,29 +65,35 @@ public class CartController {
    @PostMapping("/cart/update")
    @ResponseBody
    public Map<String, String> updateCart(@RequestBody Cart cart,
-                                         Authentication auth){
+                                         Authentication auth,
+                                         String username){
         int change = cartService.modifyCount(cart);
+        System.out.println(auth.getName());
         String memberId = auth.getName();
+        System.out.println("memberId : " + memberId);
 
         /* JSON 형식의 응답 데이터 생성 */
         Map<String, String> response = new HashMap<>();
         if(change > 0){
             response.put("result", "success");
 
-            /*// 총 발주 품목 수량과 총 결제 예상 금액 계산
-            List<Cart> cartList = cartService.getCartList(memberId);
+            // 총 발주 품목 수량과 총 결제 예상 금액 계산
+            List<Cart> cartList = cartService.getCartList(memberId, username);
 
+            int inPriceSum = 0;
             int totalQuantity = 0;
             int totalPrice = 0;
 
             for (Cart c : cartList) {
+                inPriceSum = c.getInPrice() * c.getBookCount();
                 totalQuantity += c.getBookCount();
                 totalPrice += (c.getInPrice() * c.getBookCount());
             }
 
             // JSP에 표시되는 총 발주 품목 수량과 총 결제 예상 금액 업데이트
+            response.put("inPriceSum", Integer.toString(inPriceSum));
             response.put("totalQuantity", Integer.toString(totalQuantity));
-            response.put("totalPrice", Integer.toString(totalPrice));*/
+            response.put("totalPrice", Integer.toString(totalPrice));
 
         } else{
             response.put("result", "fail");
