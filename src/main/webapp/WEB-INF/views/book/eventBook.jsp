@@ -16,23 +16,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<my:navBar current="event"></my:navBar>
 <my:alert></my:alert>
-
-<h1>이벤트 도서 목록</h1>
 
 
 <div class="container-lg">
-
+    <h1>이벤트 도서 목록</h1>
 
 
     <form action="/list">
         <input name="search" class="searchBar" type="search" placeholder="검색어를 입력하세요.">
-        <button type="submit">검색
+        <button type="submit" class="btn btn-outline-secondary">검색
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </form>
 
-    <button type="button" onclick="location.href='/addEvent'">이벤트 등록</button>
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/addEvent'">이벤트 등록</button>
 
 
     <div>
@@ -50,11 +49,15 @@
             <tbody>
             <c:forEach items="${eventList}" var="book">
                 <tr>
-                    <td>${book.title}</td>
+                    <td>${book.title}
+                        <button type="button" class="btn btn-outline-danger">삭제</button>
+                    </td>
 
                     <td>${book.writer}</td>
                     <td>${book.publisher}</td>
-                    <td>${book.event}</td>
+                    <td>
+                    <a href="/id/${book.id}">${book.event}</a>
+                    </td>
                     <td>${book.eventStartDate}</td>
                     <td>${book.eventEndDate}</td>
 

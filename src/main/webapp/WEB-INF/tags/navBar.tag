@@ -201,7 +201,7 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
-                <a href="list">
+                <a href="/list">
                     <i class="fa fa-book fa-2x"></i>
                     <span class="nav-text">
                             매대 관리

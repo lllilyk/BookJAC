@@ -89,4 +89,12 @@ private BookMapper mapper;
         Integer cnt = mapper.bookSellUpdate(book);
 
     }
+
+    public void bookRefund(Book book) {
+        Integer cnt = mapper.bookRefundUpdate(book);
+    }
+
+    public Book getBook(Integer id) {
+        return mapper.selectById(id);
+    }
 }

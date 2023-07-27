@@ -105,4 +105,19 @@ public interface BookMapper {
 			id = #{id}
 			""")
 	Integer bookSellUpdate(Book book);
+
+	@Update("""
+			UPDATE Book
+			SET displayCount = displayCount + #{refundAmount}
+			WHERE 
+			id = #{id}
+			""")
+	Integer bookRefundUpdate(Book book);
+
+	@Select("""
+			SELECT *
+			FROM Book
+			WHERE id =#{id}
+			""")
+	Book selectById(Integer id);
 }

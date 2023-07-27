@@ -20,6 +20,7 @@
 <my:alert></my:alert>
 
 <script>
+    //판매
     function handleButtonClick(){
         var sellAmount = document.getElementById("sellAmount").value;
         var id = document.getElementById("sellNum").value;
@@ -35,11 +36,35 @@
         })
     }
 
+    // 환불
+    function handleButtonClick2(){
+        var refundAmount = document.getElementById("refundAmount").value;
+        var id = document.getElementById("refundNum").value;
+        $.ajax("/refund",{
+            method:"post",
+            contentType: "application/json",
+            data: JSON.stringify({"id" :id,"refundAmount" :refundAmount}),
+            success: function (){
+                location.reload();
+            }
+        })
+    }
+
     function openModal(event){
         var clickedButtonId = event.target.id;
         var id = clickedButtonId.split("_")[1];
         // 값을 모달 창에 설정
         var modalValue = document.getElementById("sellNum");
+        modalValue.value = id;
+        console.log("clickedButtonId",clickedButtonId);
+        console.log(id);
+    }
+
+    function openModal2(event){
+        var clickedButtonId = event.target.id;
+        var id = clickedButtonId.split("_")[1];
+        // 값을 모달 창에 설정
+        var modalValue = document.getElementById("refundNum");
         modalValue.value = id;
         console.log("clickedButtonId",clickedButtonId);
         console.log(id);
@@ -51,12 +76,12 @@
 
     <form action="/list">
     <input name="search" class="searchBar" type="search" placeholder="검색어를 입력하세요.">
-        <button type="submit">검색
+        <button type="submit" class="btn btn-outline-secondary">검색
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </form>
 
-    <button type="button" onclick="location.href='/eventBook'">이벤트 도서</button>
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/eventBook'">이벤트 도서</button>
 
     <div>
     <table class="table">
@@ -77,8 +102,8 @@
                 <td>${book.id}</td>
                 <td>
                         ${book.title}
-                    <button type="button" id="sellBtn_${book.id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal(event)">판매</button>
-                    <button type="button" id="refundBtn_${book.id}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">환불</button>
+                    <button type="button" id="sellBtn_${book.id}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal(event)">판매</button>
+                    <button type="button" id="refundBtn_${book.id}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="openModal2(event)">환불</button>
                 </td>
                 <td>${book.writer}</td>
                 <td>${book.publisher}</td>
@@ -107,8 +132,8 @@
             <input type="text" id="sellAmount">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="submit" class="btn btn-primary" onclick="handleButtonClick()">확인</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="submit" class="btn btn-outline-primary" onclick="handleButtonClick()">확인</button>
             </div>
         </div>
     </div>
@@ -125,12 +150,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <input type="hidden" id="refundNum"/>
                 수량 입력(숫자만 입력) :
-                <input type="text" name="refund">
+                <input type="text" id="refundAmount">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">확인</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="submit" class="btn btn-outline-primary" onclick="handleButtonClick2()">확인</button>
             </div>
         </div>
     </div>

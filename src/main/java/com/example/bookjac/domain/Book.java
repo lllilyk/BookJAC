@@ -20,6 +20,7 @@ public class Book {
     private String eventStartDate;
     private String eventEndDate;
     private int sellAmount;
+    private int refundAmount;
 
 
 
