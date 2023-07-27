@@ -22,7 +22,7 @@
 
     <!-- 발주 품목 List-->
     <select id="getCart" resultType="com.example.bookjac.domain.Cart">
-        SELECT cartId, memberId, bookId, bookCount, title, publisher, inPrice
+        SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
         FROM OrderCart
         WHERE memberId = #{memberId}
         ORDER BY cartId DESC;

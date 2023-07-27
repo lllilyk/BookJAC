@@ -96,7 +96,7 @@
                       <tr>
                           <td id="bookIdText_${cartStatus.index}">${cart.bookId }</td>
                           <td>${cart.title }</td>
-                          <td></td>
+                          <td>${cart.writer}</td>
                           <td>${cart.publisher }</td>
                           <td><fmt:formatNumber value="${cart.inPrice}" type="currency" currencyCode="KRW" /></td>
                           <td>
