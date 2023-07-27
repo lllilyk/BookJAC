@@ -82,8 +82,9 @@
                   <thead>
                   <tr>
                       <th style="width:50px;">ISBN</th>
-                      <th style="width:350px;">제목</th>
-                      <th style="width:120px;">출판사</th>
+                      <th style="width:300px;">제목</th>
+                      <th style="width:100px;">글쓴이</th>
+                      <th style="width:100px;">출판사</th>
                       <th style="width:100px;">단가</th>
                       <th style="width:180px;">발주수량</th>
                       <th style="width:100px;">합계</th>
@@ -95,6 +96,7 @@
                       <tr>
                           <td id="bookIdText_${cartStatus.index}">${cart.bookId }</td>
                           <td>${cart.title }</td>
+                          <td></td>
                           <td>${cart.publisher }</td>
                           <td><fmt:formatNumber value="${cart.inPrice}" type="currency" currencyCode="KRW" /></td>
                           <td>
@@ -130,7 +132,7 @@
                       <c:set var="totalPrice" value="${totalPrice + (cart.inPrice * cart.bookCount)}" />
                   </c:forEach>
                   <tr>
-                      <td colspan="7">
+                      <td colspan="8">
                           <table class="table mb-0" style="text-align: right">
                               <tbody>
                                 <tr>

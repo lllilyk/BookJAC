@@ -70,7 +70,7 @@
                         <td class="bookId" id="bookIsbnText_${bookStatus.index}">${book.isbn}</td>
                         <td class="border-box"><img src="${book.image}" alt="${book.title}" /></td>
                         <td class="title">${book.title}</td>
-                        <td>${book.author}</td>
+                        <td class="writer">${book.author}</td>
                         <td class="publisher">${book.publisher}</td>
                         <td>${book.pubdate}</td>
                         <td class="inPrice">${book.discount }</td>

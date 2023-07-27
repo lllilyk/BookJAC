@@ -87,7 +87,7 @@
                     <tr>
                         <td class="bookId" id="bookIdText_${bookStatus.index}">${book.id }</td>
                         <td class="title">${book.title }</td>
-                        <td>${book.writer }</td>
+                        <td class="writer">${book.writer }</td>
                         <td class="publisher">${book.publisher }</td>
                         <td class="inPrice"><fmt:formatNumber value="${book.inPrice}" type="currency" currencyCode="KRW" /></td>
                         <td>${book.totalCount }</td>

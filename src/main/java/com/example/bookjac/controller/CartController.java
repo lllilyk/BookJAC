@@ -68,9 +68,7 @@ public class CartController {
                                           Authentication auth,
                                           String username){
         int change = cartService.modifyCount(cart);
-        System.out.println(auth.getName());
         String memberId = auth.getName();
-        System.out.println("memberId : " + memberId);
 
         Cart modified = cartService.getCart(cart.getCartId());
 

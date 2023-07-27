@@ -71,6 +71,7 @@ $(".btn_cart").on("click", function(e) {
         data.bookId = $("#bookIdText_" + index).text().trim();
         data.bookCount = quantity;
         data.title = $(this).closest("tr").find(".title").text().trim();
+        data.writer = $(this).closest("tr").find(".writer").text();
         data.publisher = $(this).closest("tr").find(".publisher").text().trim();
         data.inPrice = $(this).closest("tr").find(".inPrice").text().trim();
         /* 서버로 데이터 전송 */
