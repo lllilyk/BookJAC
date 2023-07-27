@@ -29,4 +29,11 @@ public class Cart {
     public void CalculateTotalPrice(){
         this.totalPrice = this.inPrice * this.bookCount;
     }
+
+    public Integer getInPrice(){
+        if(inPrice == null){
+            return 0;
+        }
+        return inPrice;
+    }
 }

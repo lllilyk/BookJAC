@@ -6,8 +6,8 @@
 
     <!-- 발주 품목 추가 -->
     <insert id="addCart">
-        INSERT INTO OrderCart(memberId, bookId, title, publisher, inPrice, bookCount)
-        VALUES(#{memberId},#{bookId}, #{title}, #{publisher}, #{inPrice}, #{bookCount})
+        INSERT INTO OrderCart(memberId, bookId, title, writer, publisher, inPrice, bookCount)
+        VALUES(#{memberId},#{bookId}, #{title}, #{writer}, #{publisher}, #{inPrice}, #{bookCount})
     </insert>
 
     <!-- 발주 품목 삭제 -->
@@ -32,6 +32,13 @@
     <select id="checkCart" resultType="com.example.bookjac.domain.Cart">
         SELECT * FROM OrderCart
         WHERE memberId = #{memberId} and bookId = #{bookId}
+    </select>
+
+    <!-- 발주 품목별 변경 결과 확인 -->
+    <select id="getCartById" resultType="com.example.bookjac.domain.Cart">
+        SELECT *
+        FROM OrderCart
+        WHERE cartId = #{cartId}
     </select>
 
 </mapper>

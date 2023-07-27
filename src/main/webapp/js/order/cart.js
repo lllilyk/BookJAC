@@ -126,9 +126,10 @@ $(".changeBtn").on("click", function(e) {
             success: function (response) {
                 // 응답 데이터 확인
                 if (response.result === 'success') {
-                    $("#inPriceSum").text(formatCurrency(response.inpriceSum));
-                    /*$("#totalQuantity").text("총 발주 품목 수량: " + response.totalQuantity);
-                    $("#totalPrice").text("총 결제 예상 금액: " + response.totalPrice);*/
+                    // 합계 금액 업데이트
+                    let inPriceSum = response.inPriceSum;
+                    let inPriceSumEach = document.getElementById("inPriceSum_" + index);
+                    inPriceSumEach.innerText = formatCurrency(inPriceSum);
 
                     // 총 발주 품목 수량 업데이트
                     let totalQuantity = document.getElementById("totalQuantity");

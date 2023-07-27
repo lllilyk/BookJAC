@@ -22,4 +22,6 @@ public interface CartMapper {
 
     /* 발주 확인 */
     public Cart checkCart(Cart cart);
+
+    Cart getCartById(int cartId);
 }
