@@ -5,10 +5,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <html>
 <head>
+    <style>
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        img {
+            width: 50vw;
+            height: 50vh;
+        }
+
+    </style>
 </head>
 <body style="background: #e2e2e2;">
-    <div align="center">
-        <h1>메인 페이지</h1>
+    <div>
+        <img src="/images/BOOKJAC logo2 gray.png">
     </div>
 
     <my:navBar></my:navBar>

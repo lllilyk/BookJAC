@@ -53,4 +53,18 @@ public interface MemberMapper {
             </script>
             """)
     Integer update(Member member);
+
+    @Select("""
+            SELECT *
+            FROM Member
+            WHERE email = #{email}
+            """)
+    Member selectByEmail(String email);
+
+    @Select("""
+            SELECT * 
+            FROM Member
+            WHERE phoneNumber = #{phoneNumber}
+            """)
+    Member selectByPhoneNumber(String phoneNumber);
 }
