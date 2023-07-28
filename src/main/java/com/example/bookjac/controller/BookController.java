@@ -30,20 +30,41 @@ public class BookController {
 
     }
 
-    @GetMapping("addEvent")
-    public void AddEvent(){
+//    @GetMapping("addEvent")
+//    public void AddEventForm(){
+//    }
+//
+//    @PostMapping("addEvent")
+//    public String addProcess(Book book, RedirectAttributes rttr){
+//        boolean ok = service.addEvent(book);
+//        if(ok){
+//            return"redirect:/eventBook";
+//        }else {
+//            rttr.addFlashAttribute("book",book);
+//            return"redirect:/addEvent";
+//        }
+//    }
+
+    // 이벤트 등록
+    @GetMapping("addEvent/{id}")
+    public String addEvent(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("book", service.getBook(id));
+        return "book/addEvent";
     }
 
-    @PostMapping("addEvent")
-    public String addProcess(Book book, RedirectAttributes rttr){
+    @PostMapping("addEvent/{id}")
+    public String addEventProcess(Book book, RedirectAttributes rttr){
         boolean ok = service.addEvent(book);
+
         if(ok){
-            return"redirect:/list";
+            rttr.addAttribute("success","success");
+            return "redirect:/eventBook";
         }else {
-            rttr.addFlashAttribute("book",book);
-            return"redirect:/addEvent";
+            rttr.addAttribute("fail","fail");
+            return "redirect:/addEvent/"+book.getId();
         }
     }
+
 
     //수정버튼 눌렀을때 수정폼 보여줌
     @GetMapping("modifyEvent/{id}")
@@ -59,7 +80,7 @@ public class BookController {
 
         if(ok){
             rttr.addAttribute("success","success");
-            return "list";
+            return "redirect:/eventBook";
         }else {
             rttr.addAttribute("fail","fail");
             return "redirect:/modifyEvent/"+book.getId();

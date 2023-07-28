@@ -31,7 +31,6 @@
         </button>
     </form>
 
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/addEvent'">이벤트 등록</button>
 
     <button type="button" class="btn btn-outline-secondary" onclick="location.href='/list'">매대 현황</button>
 

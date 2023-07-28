@@ -94,6 +94,7 @@
             <th>장르</th>
             <th>매대수량</th>
             <th>총수량</th>
+            <th>이벤트</th>
         </tr>
         </thead>
         <tbody>
@@ -104,12 +105,16 @@
                         ${book.title}
                     <button type="button" id="sellBtn_${book.id}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal(event)">판매</button>
                     <button type="button" id="refundBtn_${book.id}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="openModal2(event)">환불</button>
+
                 </td>
                 <td>${book.writer}</td>
                 <td>${book.publisher}</td>
                 <td>${book.categoryId}</td>
                 <td>${book.displayCount}</td>
                 <td>${book.totalCount}</td>
+                <td>
+                    <a class="btn btn-outline-secondary" href="/addEvent/${book.id}">이벤트 등록</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

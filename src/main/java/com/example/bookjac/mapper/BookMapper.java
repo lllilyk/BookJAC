@@ -133,16 +133,14 @@ public interface BookMapper {
 			""")
 	int update(Book book);
 
-	@Delete("""
-			DELETE FROM Book
+	@Update("""
+			UPDATE Book
+			SET event = Null
 			WHERE id = #{id}
 			""")
 	int deleteById(Integer id);
 
-	@Insert("""
-			INSERT INTO Book (title,writer,publisher,event,eventStartDate,eventEndDate)
-			VALUES(#{title},#{writer},#{publisher},#{event},#{eventStartDate},#{eventEndDate})
-			""")
-	@Options(useGeneratedKeys = true, keyProperty = "id")
-	int insert(Book book);
+
+
+
 }

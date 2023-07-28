@@ -111,7 +111,7 @@ private BookMapper mapper;
     }
 
     public boolean addEvent(Book book) {
-        int cnt = mapper.insert(book);
+        int cnt = mapper.update(book);
         return cnt==1;
     }
 }

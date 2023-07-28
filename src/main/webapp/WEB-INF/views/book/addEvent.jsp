@@ -17,8 +17,8 @@
 </head>
 <body>
 <div class="container-lg">
-<h1> 이벤트 등록</h1>
-    <form method="post">
+<h1> ${book.title}의 이벤트 등록</h1>
+    <form method="post" id="addEventForm">
         <div>
             <label class="form-label"> 책 제목 :</label>
             <input type="text" name="title" value="${book.title}"/>
@@ -33,18 +33,20 @@
         </div>
 
         <div>
-            이벤트 상세내용 : <textarea rows="10"></textarea>
+            이벤트 상세내용 : <textarea name="event" rows="10"></textarea>
         </div>
 
         <div>
-            이벤트 시작일 : <input type="date"/>
+            이벤트 시작일 : <input type="date" name="eventStartDate" value="${book.eventStartDate}"/>
         </div>
 
         <div>
-            이벤트 종료일 : <input type="date"/>
+            이벤트 종료일 : <input type="date" name="eventEndDate" value="${book.eventEndDate}"/>
         </div>
 
-        <button type="submit" class="btn btn-primary">등록</button>
+        <div>
+        <button type="submit" class="btn btn-primary" form="addEventForm">등록</button>
+        </div>
 
     </form>
 
