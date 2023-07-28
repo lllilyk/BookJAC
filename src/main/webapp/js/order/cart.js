@@ -159,6 +159,33 @@ function cartChangeAlert(change){
     }
 }
 
+/* 발주 품목 삭제 버튼 */
+$(".btn_delete_cart").on("click", function(e) {
+    e.preventDefault(); // 기본 클릭 동작(페이지 이동 등)을 방지
+    let index = $(this).attr("id").split("_")[2];
+    let cartId = parseInt($(this).closest("tr").find("button#btn_cart_" + index).val());
+
+    /* 삭제 폼에 해당 cartId를 설정*/
+    $(".delete_cartId").val(cartId);
+
+    /* 서버로 데이터 전송 */
+    $.ajax({
+        url: '/cart/delete/' + cartId,
+        type: 'DELETE',
+        success: function(response){
+            cartDeleteAlert(response.result); // 성공적으로 변경되었다는 메시지 출력
+        }
+    })
+});
+
+function cartDeleteAlert(result){
+    if(result == 'fail'){
+        alert("발주 품목에서 삭제하지 못하였습니다.");
+    } else if(result == 'success'){
+        alert("발주 품목에서 삭제되었습니다.");
+    }
+}
+
 /* 도서 검색 */
 document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
     event.preventDefault(); // 기본적인 폼 제출 동작 방지

@@ -157,9 +157,9 @@
               </table>
               <div class="row">
                   <div class="col-md-6 text-center bottomBtn">
-                      <%--취소하시겠습니까? 모달 띄우기--%>
-                      <button type="button" class="btn btn-secondary">취소하기</button>
+                      <%--발주하시겠습니까? 모달 띄우기--%>
                       <button type="button" class="btn btn-danger">발주하기</button>
+                      <%--성공적으로 발주 완료되었습니다. 모달 띄우기 '확인'버튼 누르면 발주 내역 확인 페이지로 이동--%>
                   </div>
               </div>
 
@@ -167,6 +167,12 @@
               <form action="/cart/update" method="post" class="quantity_update_form">
                   <input type="hidden" name="cartId" class="update_cartId">
                   <input type="hidden" name="bookCount" class="update_bookCount">
+              </form>
+
+              <!-- 발주 품목 삭제 form -->
+              <form action="/cart/delete" method="post" class="quantity_delete_form">
+                  <input type="hidden" name="cartId" class="delete_cartId">
+                  <input type="hidden" name="memberId" value="${member.memberId}">
               </form>
           </div>
       </div>
