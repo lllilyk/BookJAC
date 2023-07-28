@@ -172,8 +172,8 @@ $(".btn_delete_cart").on("click", function(e) {
     $.ajax({
         url: '/cart/delete/' + cartId,
         type: 'DELETE',
-        success: function(response){
-            cartDeleteAlert(response.result); // 성공적으로 변경되었다는 메시지 출력
+        success: function(responseD){
+            cartDeleteAlert(responseD.result); // 성공적으로 변경되었다는 메시지 출력
         }
     })
 });

@@ -112,13 +112,13 @@ public class CartController {
         int delete = cartService.deleteCart(cartId);
         System.out.println(delete);
         /* 응답 */
-        Map<String, String> response = new HashMap<>();
+        Map<String, String> responseD = new HashMap<>();
         if(delete > 0) {
-            response.put("result", "success");
+            responseD.put("result", "success");
         } else {
-            response.put("result", "fail");
+            responseD.put("result", "fail");
         }
 
-        return response;
+        return responseD;
     }
 }
