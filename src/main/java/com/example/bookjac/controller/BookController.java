@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.Map;
+
+
 
 @Controller
 @RequestMapping("/")
@@ -28,9 +31,18 @@ public class BookController {
     }
 
     @GetMapping("addEvent")
-    public String AddEvent(){
+    public void AddEvent(){
+    }
 
-        return "book/addEvent";
+    @PostMapping("addEvent")
+    public String addProcess(Book book, RedirectAttributes rttr){
+        boolean ok = service.addEvent(book);
+        if(ok){
+            return"redirect:/list";
+        }else {
+            rttr.addFlashAttribute("book",book);
+            return"redirect:/addEvent";
+        }
     }
 
     //수정버튼 눌렀을때 수정폼 보여줌
@@ -38,6 +50,32 @@ public class BookController {
     public String modifyEvent(@PathVariable("id") Integer id, Model model){
         model.addAttribute("book", service.getBook(id));
         return "book/modifyEvent";
+    }
+
+    //수정 눌렀을때 수정되게
+    @PostMapping("modifyEvent/{id}")
+    public String modifyProcess(Book book, RedirectAttributes rttr){
+        boolean ok = service.modify(book);
+
+        if(ok){
+            rttr.addAttribute("success","success");
+            return "list";
+        }else {
+            rttr.addAttribute("fail","fail");
+            return "redirect:/modifyEvent/"+book.getId();
+        }
+    }
+
+    // 이벤트 삭제
+    @PostMapping("removeEvent")
+    public String remove(Integer id, RedirectAttributes rttr, String title){
+        boolean ok = service.remove(id);
+        if(ok){
+            rttr.addFlashAttribute("message", title + "의 이벤트가 삭제되었습니다.");
+            return "redirect:/list";
+        } else {
+            return "redirect:/id/" +id;
+        }
     }
 
     @GetMapping("/id/{id}")

@@ -21,6 +21,7 @@ public class Book {
     private String eventEndDate;
     private int sellAmount;
     private int refundAmount;
+    private String checkEvent;
 
 
 

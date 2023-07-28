@@ -33,6 +33,7 @@
 
     <button type="button" class="btn btn-outline-secondary" onclick="location.href='/addEvent'">이벤트 등록</button>
 
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/list'">매대 현황</button>
 
     <div>
         <table class="table">
@@ -49,9 +50,7 @@
             <tbody>
             <c:forEach items="${eventList}" var="book">
                 <tr>
-                    <td>${book.title}
-                        <button type="button" class="btn btn-outline-danger">삭제</button>
-                    </td>
+                    <td>${book.title}</td>
 
                     <td>${book.writer}</td>
                     <td>${book.publisher}</td>
@@ -66,6 +65,8 @@
             </tbody>
         </table>
     </div>
+
+  <div>${message}</div>
 
 
 

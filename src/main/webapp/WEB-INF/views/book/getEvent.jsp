@@ -43,7 +43,16 @@
 
 <div>
     <a class="btn btn-outline-secondary" href="/modifyEvent/${book.id}">수정하기</a>
+    <button class="btn btn-outline-danger" form="removeForm" type="submit">삭제하기</button>
 </div>
+</div>
+
+<div class="d-done">
+    <form action="/removeEvent" method="post" id="removeForm">
+        <input type="text" name="id" value="${book.id}"/>
+    </form>
+</div>
+
 
 
 

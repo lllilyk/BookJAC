@@ -97,4 +97,21 @@ private BookMapper mapper;
     public Book getBook(Integer id) {
         return mapper.selectById(id);
     }
+
+    // 수정 잘 되었으면 1
+    public boolean modify(Book book) {
+        int cnt =mapper.update(book);
+        return cnt ==1;
+    }
+
+    //이벤트 삭제
+    public boolean remove(Integer id) {
+        int cnt = mapper.deleteById(id);
+        return cnt==1;
+    }
+
+    public boolean addEvent(Book book) {
+        int cnt = mapper.insert(book);
+        return cnt==1;
+    }
 }

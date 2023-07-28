@@ -21,22 +21,30 @@
     <form method="post">
         <div>
             <label class="form-label"> 책 제목 :</label>
-            <input type="text" name="title" value="${book.title}">
+            <input type="text" name="title" value="${book.title}"/>
         </div>
 
         <div>
-            작가 : <input type="text" name="writer" value="${book.writer}">
+            작가 : <input type="text" name="writer" value="${book.writer}"/>
         </div>
 
         <div>
-            출판사 : <input type="text" name="publisher" value="${book.publisher}">
+            출판사 : <input type="text" name="publisher" value="${book.publisher}"/>
         </div>
 
         <div>
             이벤트 상세내용 : <textarea rows="10"></textarea>
         </div>
 
-        <button type="button" class="btn btn-primary">등록</button>
+        <div>
+            이벤트 시작일 : <input type="date"/>
+        </div>
+
+        <div>
+            이벤트 종료일 : <input type="date"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">등록</button>
 
     </form>
 

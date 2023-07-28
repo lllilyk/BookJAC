@@ -1,9 +1,7 @@
 package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Book;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 
 import java.util.List;
@@ -100,7 +98,9 @@ public interface BookMapper {
 
 	@Update("""
 			UPDATE Book
-			SET displayCount =  displayCount-#{sellAmount}
+			SET displayCount =  displayCount-#{sellAmount},
+				totalCount = inCount + displayCount
+		
 			WHERE
 			id = #{id}
 			""")
@@ -108,7 +108,8 @@ public interface BookMapper {
 
 	@Update("""
 			UPDATE Book
-			SET displayCount = displayCount + #{refundAmount}
+			SET displayCount = displayCount + #{refundAmount},
+				totalCount = inCount + displayCount
 			WHERE 
 			id = #{id}
 			""")
@@ -120,4 +121,28 @@ public interface BookMapper {
 			WHERE id =#{id}
 			""")
 	Book selectById(Integer id);
+
+	@Update("""
+			UPDATE Book
+			SET 
+				event = #{event},
+				eventStartDate = #{eventStartDate},
+				eventEndDate = #{eventEndDate}
+			WHERE id = #{id}
+				
+			""")
+	int update(Book book);
+
+	@Delete("""
+			DELETE FROM Book
+			WHERE id = #{id}
+			""")
+	int deleteById(Integer id);
+
+	@Insert("""
+			INSERT INTO Book (title,writer,publisher,event,eventStartDate,eventEndDate)
+			VALUES(#{title},#{writer},#{publisher},#{event},#{eventStartDate},#{eventEndDate})
+			""")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	int insert(Book book);
 }
