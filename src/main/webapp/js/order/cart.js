@@ -163,8 +163,9 @@ function cartChangeAlert(change){
 $(".btn_delete_cart").on("click", function(e) {
     e.preventDefault(); // 기본 클릭 동작(페이지 이동 등)을 방지
     let index = $(this).attr("id").split("_")[2];
+    /*let quantity = parseInt($(this).closest("tr").find("input#quantity_input_" + index).val());*/
     let cartId = parseInt($(this).closest("tr").find("button#btn_cart_" + index).val());
-
+    let cartRow = $(this).closest("tr");
     /* 삭제 폼에 해당 cartId를 설정*/
     $(".delete_cartId").val(cartId);
 
@@ -173,7 +174,20 @@ $(".btn_delete_cart").on("click", function(e) {
         url: '/cart/delete/' + cartId,
         type: 'DELETE',
         success: function(responseD){
-            cartDeleteAlert(responseD.result); // 성공적으로 변경되었다는 메시지 출력
+            // 응답 데이터 확인
+            if (responseD.result === 'success') {
+                cartRow.remove();
+                /* 성공적으로 삭제된 경우 해당 행을 테이블에서 제거 */
+                cartDeleteAlert(responseD.result); // 성공적으로 변경되었다는 메시지 출력
+
+                // 총 발주 품목 수량 업데이트
+                let totalQuantity = document.getElementById("totalQuantity");
+                totalQuantity.innerText = "총 발주 품목 수량: " + responseD.totalQuantity;
+
+                // 총 결제 예상 금액 업데이트
+                let totalPrice = document.getElementById("totalPrice");
+                totalPrice.innerText = "총 결제 예상 금액: " + formatCurrency(responseD.totalPrice);
+            }
         }
     })
 });
@@ -183,6 +197,7 @@ function cartDeleteAlert(result){
         alert("발주 품목에서 삭제하지 못하였습니다.");
     } else if(result == 'success'){
         alert("발주 품목에서 삭제되었습니다.");
+
     }
 }
 

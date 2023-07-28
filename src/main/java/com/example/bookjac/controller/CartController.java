@@ -106,15 +106,33 @@ public class CartController {
     /* AJAX에 맞게 변경해야 함 */
     @DeleteMapping("/cart/delete/{cartId}")
     @ResponseBody
-    public Map<String, String> deleteCart(@PathVariable("cartId") Integer cartId){
+    public Map<String, String> deleteCart(@PathVariable("cartId") Integer cartId,
+                                          Authentication auth,
+                                          String username){
 
         /* cartId에 해당하는 발주 품목 삭제 */
         int delete = cartService.deleteCart(cartId);
         System.out.println(delete);
+        String memberId = auth.getName();
+
         /* 응답 */
         Map<String, String> responseD = new HashMap<>();
         if(delete > 0) {
             responseD.put("result", "success");
+            // 총 발주 품목 수량과 총 결제 예상 금액 계산
+            List<Cart> cartList = cartService.getCartList(memberId, username);
+
+            int totalQuantity = 0;
+            int totalPrice = 0;
+
+            for (Cart c : cartList) {
+                totalQuantity += c.getBookCount();
+                totalPrice += (c.getInPrice() * c.getBookCount());
+            }
+
+            // JSP에 표시되는 총 발주 품목 수량과 총 결제 예상 금액 업데이트
+            responseD.put("totalQuantity", Integer.toString(totalQuantity));
+            responseD.put("totalPrice", Integer.toString(totalPrice));
         } else {
             responseD.put("result", "fail");
         }

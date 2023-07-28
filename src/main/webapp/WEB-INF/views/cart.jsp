@@ -93,7 +93,7 @@
                   </thead>
                   <tbody class="table-group-divider">
                   <c:forEach items="${cartInfo}" var="cart" varStatus="cartStatus">
-                      <tr>
+                      <tr id="cartRow_${cartStatus.index}">
                           <td id="bookIdText_${cartStatus.index}">${cart.bookId }</td>
                           <td>${cart.title }</td>
                           <td>${cart.writer}</td>
