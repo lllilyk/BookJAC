@@ -163,7 +163,6 @@ function cartChangeAlert(change){
 $(".btn_delete_cart").on("click", function(e) {
     e.preventDefault(); // 기본 클릭 동작(페이지 이동 등)을 방지
     let index = $(this).attr("id").split("_")[2];
-    /*let quantity = parseInt($(this).closest("tr").find("input#quantity_input_" + index).val());*/
     let cartId = parseInt($(this).closest("tr").find("button#btn_cart_" + index).val());
     let cartRow = $(this).closest("tr");
     /* 삭제 폼에 해당 cartId를 설정*/

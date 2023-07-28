@@ -103,7 +103,6 @@ public class CartController {
         return response;
     }
 
-    /* AJAX에 맞게 변경해야 함 */
     @DeleteMapping("/cart/delete/{cartId}")
     @ResponseBody
     public Map<String, String> deleteCart(@PathVariable("cartId") Integer cartId,
@@ -112,10 +111,9 @@ public class CartController {
 
         /* cartId에 해당하는 발주 품목 삭제 */
         int delete = cartService.deleteCart(cartId);
-        System.out.println(delete);
         String memberId = auth.getName();
 
-        /* 응답 */
+        /* 응답 데이터 */
         Map<String, String> responseD = new HashMap<>();
         if(delete > 0) {
             responseD.put("result", "success");
