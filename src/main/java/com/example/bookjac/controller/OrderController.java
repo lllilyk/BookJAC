@@ -1,6 +1,7 @@
 package com.example.bookjac.controller;
 
 import com.example.bookjac.domain.*;
+import com.example.bookjac.service.CartService;
 import com.example.bookjac.service.NaverBookAPIService;
 import com.example.bookjac.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class OrderController {
 
         if(ok){
             rttr.addFlashAttribute("message", "발주가 성공적으로 처리되었습니다.");
-            return "redirect:/order/details/id/" + od.getId();
+            return "redirect:/order/details";
         } else {
             rttr.addFlashAttribute("message", "발주 처리 중 문제가 발생하였습니다.");
             return "redirect:/order/cart";
@@ -82,15 +83,31 @@ public class OrderController {
         return "order/details";
     }
 
-    @GetMapping("/id/{id}")
+    /*@GetMapping("/id/{id}")
     public String eachOrderDetails(@PathVariable("id") Integer id,
+                                   *//*@RequestParam("inserted") String inserted,*//*
+                                   Model model,
+                                   Authentication auth) {
+        *//*OrderDetails od = service.getOrderDetails(id, auth);
+        model.addAttribute("od", od);*//*
+
+        String name = auth.getName();
+        System.out.println(name);
+        // orderCart 테이블에서 주문자의 이름(name)과 주문 날짜(date)를 기준으로 주문 내역 조회
+        List<Cart> orderCartList = service.getOrderCartByNameAndDate(name, inserted);
+        model.addAttribute("orderCartList", orderCartList);
+
+        return "order/each";
+    }*/
+
+    @GetMapping("/each")
+    public String eachOrderDetails(@RequestParam("inserted") String inserted,
                                    Model model,
                                    Authentication auth){
+        String name = auth.getName();
 
-        /*OrderDetails od = service.getOrderDetails(id, auth);
-        model.addAttribute("od", od);*/
-
-
+        List<Cart> orderCartList = service.getOrderCartList(inserted, name);
+        model.addAttribute("orderCartList", orderCartList);
         return "order/each";
     }
 }

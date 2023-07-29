@@ -1,5 +1,6 @@
 package com.example.bookjac.mapper;
 
+import com.example.bookjac.domain.Cart;
 import com.example.bookjac.domain.Order;
 import com.example.bookjac.domain.OrderDetails;
 import org.apache.ibatis.annotations.Insert;
@@ -55,6 +56,20 @@ public interface OrderMapper {
 			</script>
             """)
     List<OrderDetails> selectAllPages(Integer startIndex, Integer recordsInOrderDetails, String search);
+
+    @Select("""
+            select cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
+            FROM OrderCart
+            WHERE memberId = #{name}
+            """)
+    List<Cart> getOrderCart(String inserted);
+
+   /* @Select("""
+            SELECT *
+            FROM OrderCart
+            WHERE memberId = #{name} AND inserted = #{inserted}
+            """)
+    List<Cart> getOrderCartByNameAndDate(String name, String inserted);*/
 
     /*@Select("""
             SELECT *

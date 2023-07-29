@@ -75,6 +75,25 @@ public class OrderService {
                       "orderDetailsList", list);
     }
 
+    public List<Cart> getOrderCartList(String inserted, String name) {
+        List<Cart> cart = mapper.getOrderCart(inserted);
+
+        for(Cart c : cart){
+            c.setMemberId(name);
+        }
+        return cart;
+    }
+
+    /* 발주 담당의 이름과 일자로 발주 내역 확인 */
+    /*public List<Cart> getOrderCartByNameAndDate(String name, String inserted) {
+        List<Cart> cart = mapper.getOrderCartByNameAndDate(name, inserted);
+
+        for(Cart c : cart){
+            c.setMemberId(name);
+        }
+        return cart;
+    }*/
+
     /*public OrderDetails getOrderDetails(Integer id, Authentication auth) {
         OrderDetails od = mapper.selectById(id);
         return od;

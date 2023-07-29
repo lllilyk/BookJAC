@@ -54,9 +54,7 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
-                    <button type="button" class="btn btn-outline-primary">주문내역조회</button>
-                    <%--<button type="button" class="btn btn-outline-primary">미리보기</button>
-                    <a href="/order/process" class="btn btn-outline-secondary">돌아가기</a>--%>
+                    <button type="button" class="btn btn-warning">날짜 선택 후 클릭!</button>
                 </div>
             </div>
 
@@ -84,7 +82,7 @@
                     <c:forEach items="${orderDetailsList}" var="od" varStatus="orderDetails">
                         <tr>
                             <td>${od.name}</td>
-                            <td><a href="/order/details/${od.id}">${od.inserted}</a></td>
+                            <td><a href="/order/each?inserted=${od.inserted}">${od.inserted}</a></td>
                             <td>${od.totalQuantity}</td>
                             <td>${od.totalPrice}</td>
                         </tr>

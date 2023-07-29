@@ -34,16 +34,6 @@
   <my:navBar current="cart"></my:navBar>
   <my:alert></my:alert>
 
-  <!-- toast -->
-  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
-      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="d-flex">
-              <div class="toast-body"></div>
-              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-      </div>
-  </div>
-
   <div class="ui center aligned container" id="container">
       <div class="row justify-content-center">
           <div class="col-12">
@@ -160,7 +150,6 @@
               <div class="row">
                   <div class="col-md-6 text-center bottomBtn">
                       <button type="button" class="btn btn-danger addOrderDetails">발주하기</button>
-                      <%--성공적으로 발주 완료되었습니다. 모달 띄우기 '확인'버튼 누르면 발주 내역 확인 페이지로 이동--%>
                   </div>
               </div>
 
