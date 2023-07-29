@@ -5,6 +5,7 @@ import com.example.bookjac.domain.Order;
 import com.example.bookjac.domain.OrderDetails;
 import com.example.bookjac.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -73,4 +74,9 @@ public class OrderService {
         return Map.of("pageInfo", pageInfo,
                       "orderDetailsList", list);
     }
+
+    /*public OrderDetails getOrderDetails(Integer id, Authentication auth) {
+        OrderDetails od = mapper.selectById(id);
+        return od;
+    }*/
 }

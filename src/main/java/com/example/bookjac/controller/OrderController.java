@@ -3,21 +3,13 @@ package com.example.bookjac.controller;
 import com.example.bookjac.domain.*;
 import com.example.bookjac.service.NaverBookAPIService;
 import com.example.bookjac.service.OrderService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -88,6 +80,18 @@ public class OrderController {
         model.addAllAttributes(result);
 
         return "order/details";
+    }
+
+    @GetMapping("/id/{id}")
+    public String eachOrderDetails(@PathVariable("id") Integer id,
+                                   Model model,
+                                   Authentication auth){
+
+        /*OrderDetails od = service.getOrderDetails(id, auth);
+        model.addAttribute("od", od);*/
+
+
+        return "order/each";
     }
 }
 

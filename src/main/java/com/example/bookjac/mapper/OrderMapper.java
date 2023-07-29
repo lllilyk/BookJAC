@@ -55,4 +55,11 @@ public interface OrderMapper {
 			</script>
             """)
     List<OrderDetails> selectAllPages(Integer startIndex, Integer recordsInOrderDetails, String search);
+
+    /*@Select("""
+            SELECT *
+            FROM OrderDetails
+            WHERE id = #{id}
+            """)
+    OrderDetails selectById(Integer id);*/
 }
