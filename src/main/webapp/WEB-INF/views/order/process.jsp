@@ -118,7 +118,6 @@
                 </tbody>
             </table>
         </div>
-        <%--<button class="btn btn-danger" onclick="requestPay()">결제하기</button>--%>
     </div>
 </div>
 </div>

@@ -71,11 +71,23 @@ public class OrderController {
 
         if(ok){
             rttr.addFlashAttribute("message", "발주가 성공적으로 처리되었습니다.");
-            return "redirect:/order/details/id" + od.getId();
+            return "redirect:/order/details/id/" + od.getId();
         } else {
             rttr.addFlashAttribute("message", "발주 처리 중 문제가 발생하였습니다.");
             return "redirect:/order/cart";
         }
+    }
+
+    @GetMapping("details")
+    @PreAuthorize("isAuthenticated()")
+    public String list(Model model,
+                       @RequestParam(value="page", defaultValue = "1") Integer page,
+                       @RequestParam(value="search", defaultValue = "") String search){
+
+        Map<String, Object> result = service.orderDetailsList(page, search);
+        model.addAllAttributes(result);
+
+        return "order/details";
     }
 }
 

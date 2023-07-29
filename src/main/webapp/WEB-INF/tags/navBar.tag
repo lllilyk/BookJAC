@@ -190,6 +190,18 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
+                <a class="${current eq 'orderList' ? 'active' : '' } item"
+                   href="/order/details">
+                    <i class="fa fa-basket-shopping fa-2x"></i>
+                    <span class="nav-text">
+                            발주 내역
+                        </span>
+                </a>
+            </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+            <li class="has-subnav">
                 <a href="#">
                     <i class="fa fa-cart-flatbed fa-2x"></i>
                     <span class="nav-text">

@@ -59,12 +59,12 @@
 
               <table class="table table-bordered info" style="text-align: center">
                   <thead>
-                  <tr>
-                      <th class="table-dark" style="width:150px;">발주일자</th>
-                      <th class="table-dark" style="width:150px;">납기일자</th>
-                      <th class="table-dark" style="width:150px;">매입처명</th>
-                      <th class="table-dark" style="width:150px;">발주담당자</th>
-                  </tr>
+                      <tr>
+                          <th class="table-dark" style="width:150px;">발주일자</th>
+                          <th class="table-dark" style="width:150px;">납기일자</th>
+                          <th class="table-dark" style="width:150px;">매입처명</th>
+                          <th class="table-dark" style="width:150px;">발주담당자</th>
+                      </tr>
                   </thead>
                   <tbody class="table-group-divider">
                       <tr>
@@ -80,16 +80,16 @@
               <c:set var="totalPrice" value="0" />
               <table class="table table-bordered" style="text-align: center">
                   <thead>
-                  <tr>
-                      <th style="width:50px;">ISBN</th>
-                      <th style="width:300px;">제목</th>
-                      <th style="width:100px;">글쓴이</th>
-                      <th style="width:100px;">출판사</th>
-                      <th style="width:100px;">단가</th>
-                      <th style="width:180px;">발주수량</th>
-                      <th style="width:100px;">합계</th>
-                      <th style="width:70px;">삭제</th>
-                  </tr>
+                      <tr>
+                          <th style="width:50px;">ISBN</th>
+                          <th style="width:300px;">제목</th>
+                          <th style="width:100px;">글쓴이</th>
+                          <th style="width:100px;">출판사</th>
+                          <th style="width:100px;">단가</th>
+                          <th style="width:180px;">발주수량</th>
+                          <th style="width:100px;">합계</th>
+                          <th style="width:70px;">삭제</th>
+                      </tr>
                   </thead>
                   <tbody class="table-group-divider">
                   <c:forEach items="${cartInfo}" var="cart" varStatus="cartStatus">

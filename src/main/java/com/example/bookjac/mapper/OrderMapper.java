@@ -36,4 +36,23 @@ public interface OrderMapper {
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(OrderDetails od);
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM OrderDetails
+            """)
+    Integer countAllOrderDetails();
+
+    @Select("""
+            <script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT *
+			FROM OrderDetails
+			WHERE name LIKE #{pattern}
+				OR inserted LIKE #{pattern}
+			ORDER BY id DESC
+			LIMIT #{startIndex}, #{recordsInOrderDetails}
+			</script>
+            """)
+    List<OrderDetails> selectAllPages(Integer startIndex, Integer recordsInOrderDetails, String search);
 }

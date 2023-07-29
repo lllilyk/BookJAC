@@ -222,9 +222,25 @@ $(document).ready(function() {
         hiddenInput.name = 'currentDateJS';
         hiddenInput.value = currentDateJS.toISOString();
         document.getElementById('orderProcessForm').appendChild(hiddenInput);
+
         // inserted 값을 설정
         var insertedInput = document.getElementsByName('inserted')[0];
         insertedInput.value = currentDate; // currentDate 값을 설정
+
+        // 토스트 메시지 설정 및 표시
+        var toastMessage = "${flash.message}";
+        if (toastMessage) {
+            var toastBody = document.querySelector('.toast-body');
+            toastBody.innerText = toastMessage;
+
+            var toastElement = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+
+            // 해당하는 경로로 페이지 이동
+            // (현재 페이지 URL에 "/order/add"가 포함된 경로로 이동하도록 설정)
+            window.location.href = window.location.href.replace("/order/add", "/order/details/id" + od.getId());
+        }
     });
 });
 

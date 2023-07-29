@@ -47,4 +47,30 @@ public class OrderService {
         int cnt = mapper.insert(od);
         return cnt == 1;
     }
+
+    public Map<String, Object> orderDetailsList(Integer page, String search) {
+        Integer recordsInOrderDetails = 10;
+
+        Integer startIndex = (page -1) * recordsInOrderDetails;
+
+        Integer countAllOrderDetails = mapper.countAllOrderDetails();
+
+        Integer lastPageNum = (countAllOrderDetails -1) / recordsInOrderDetails + 1;
+
+        Integer leftPageNum = page -3;
+        leftPageNum = Math.max(leftPageNum, 1);
+
+        Integer rightPageNum = page +2;
+        rightPageNum = Math.min(rightPageNum, lastPageNum);
+
+        Map<String, Object> pageInfo = new HashMap<>();
+        pageInfo.put("leftPageNum", leftPageNum);
+        pageInfo.put("rightPageNum", rightPageNum);
+        pageInfo.put("currentPageNum", page);
+        pageInfo.put("lastPageNum", lastPageNum);
+
+        List<OrderDetails> list = mapper.selectAllPages(startIndex, recordsInOrderDetails, search);
+        return Map.of("pageInfo", pageInfo,
+                      "orderDetailsList", list);
+    }
 }
