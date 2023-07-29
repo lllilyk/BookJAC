@@ -31,8 +31,8 @@ public interface OrderMapper {
     List<Order> selectAllPage(Integer startIndex, Integer booksInPage);
 
     @Insert("""
-            INSERT INTO OrderDetails (name, totalQuantity, totalPrice)
-            VALUES (#{name}, #{totalQuantity}, #{totalPrice})
+            INSERT INTO OrderDetails (name, inserted, totalQuantity, totalPrice)
+            VALUES (#{name}, #{inserted}, #{totalQuantity}, #{totalPrice})
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(OrderDetails od);

@@ -67,8 +67,6 @@ public class OrderController {
     public String addOrderDetails(OrderDetails od,
                                   RedirectAttributes rttr,
                                   Authentication auth) throws Exception{
-
-        od.setName(auth.getName());
         boolean ok = service.addOrderDetails(od);
 
         if(ok){

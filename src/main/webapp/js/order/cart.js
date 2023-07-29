@@ -203,10 +203,28 @@ function cartDeleteAlert(result){
     }
 }
 
-/* 발주하기 버튼 클릭시 */
+/* 발주하기 버튼 클릭시의 발주확인 modal */
 $(document).ready(function () {
     $(".addOrderDetails").on("click", function () {
-        $(".modal").modal("show");
+        $(".orderConfirmModal").modal("show");
+    });
+});
+
+/* 발주확인 modal 내의 '이대로 발주할게요'버튼을 눌렀을 때 */
+$(document).ready(function() {
+    $(".addOrderDetailsBtn").on("click", function() {
+        // currentDate를 JS Date 객체로 변환
+        var currentDateJS = new Date(currentDate);
+
+        // currentDateJS를 hidden input으로 폼에 추가
+        var hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'currentDateJS';
+        hiddenInput.value = currentDateJS.toISOString();
+        document.getElementById('orderProcessForm').appendChild(hiddenInput);
+        // inserted 값을 설정
+        var insertedInput = document.getElementsByName('inserted')[0];
+        insertedInput.value = currentDate; // currentDate 값을 설정
     });
 });
 

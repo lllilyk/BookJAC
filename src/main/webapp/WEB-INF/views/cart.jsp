@@ -165,7 +165,7 @@
               </div>
 
               <%--modal--%>
-              <div class="modal" tabindex="-1">
+              <div class="orderConfirmModal modal" tabindex="-1">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <div class="modal-header">
@@ -173,11 +173,17 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
+                              <form id="orderProcessForm" action="/order/add" method="post" >
+                                  <input type="hidden" name="name" value="<sec:authentication property='principal.originName'/>">
+                                  <input type="hidden" name="inserted" value="${currentDate}">
+                                  <input type="hidden" name="totalQuantity" value="<fmt:formatNumber value='${totalQuantity}' />">
+                                  <input type="hidden" name="totalPrice" value="<fmt:formatNumber value='${totalPrice}' type='currency' currencyCode='KRW' />">
+                              </form>
                               <p>발주 품목과 수량이 맞는지 다시 한 번 확인해주세요.</p>
                           </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">다시 확인할래요</button>
-                              <button type="button" class="btn btn-outline-danger">이대로 발주할게요</button>
+                              <button type="submit" form="orderProcessForm" class="btn btn-outline-danger addOrderDetailsBtn">이대로 발주할게요</button>
                           </div>
                       </div>
                   </div>
@@ -194,6 +200,7 @@
                   <input type="hidden" name="cartId" class="delete_cartId">
                   <input type="hidden" name="memberId" value="${member.memberId}">
               </form>
+
           </div>
       </div>
   </div>

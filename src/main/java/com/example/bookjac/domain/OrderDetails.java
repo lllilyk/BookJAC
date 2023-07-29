@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class OrderDetails {
     private Integer id;
     private String name;
-    private LocalDateTime inserted;
-    private Integer totalQuantity;
-    private Integer totalPrice;
+    private String inserted;
+    private String totalQuantity;
+    private String totalPrice;
 }
