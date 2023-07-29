@@ -95,12 +95,11 @@ public interface RevenueMapper {
 
     @Select("""
             SELECT
-                b.title title,
-                b.inPrice inPrice,
-                b.outPrice outPrice,
-                oc.bookCount bookCount,
-                b.inPrice * oc.bookCount sumInPrice
-            FROM OrderCart oc JOIN Book b ON oc.bookId = b.id 
+                *,
+                inPrice * 1.1 outPrice,
+                inPrice * OrderCart.bookCount sumInPrice,
+                SUM(bookCount) sumBookCount
+            FROM OrderCart
             WHERE inserted = #{date}
             """)
     List<Cart> selectOrderCartByDate(String date);
