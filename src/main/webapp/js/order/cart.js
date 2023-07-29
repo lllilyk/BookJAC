@@ -1,3 +1,6 @@
+const toastElement = document.querySelector("#liveToast")
+const toast = bootstrap.Toast.getOrCreateInstance(toastElement);
+
 $(document).ready(function() {
     /* 납기 일자 */
     // currentDate를 JS Date 객체로 변환
@@ -199,6 +202,13 @@ function cartDeleteAlert(result){
 
     }
 }
+
+/* 발주하기 버튼 클릭시 */
+$(document).ready(function () {
+    $(".addOrderDetails").on("click", function () {
+        $(".modal").modal("show");
+    });
+});
 
 /* 도서 검색 */
 document.getElementById("bookSearchForm").addEventListener("submit", function(event) {

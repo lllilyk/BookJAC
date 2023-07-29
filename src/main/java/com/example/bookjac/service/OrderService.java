@@ -1,6 +1,8 @@
 package com.example.bookjac.service;
 
+import com.example.bookjac.domain.Cart;
 import com.example.bookjac.domain.Order;
+import com.example.bookjac.domain.OrderDetails;
 import com.example.bookjac.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,10 @@ public class OrderService {
 
         return Map.of("pageInfo", pageInfo,
                       "bookList", list);
+    }
+
+    public boolean addOrderDetails(OrderDetails od) throws Exception{
+        int cnt = mapper.insert(od);
+        return cnt == 1;
     }
 }

@@ -1,7 +1,10 @@
 package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Order;
+import com.example.bookjac.domain.OrderDetails;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -26,4 +29,11 @@ public interface OrderMapper {
             LIMIT #{startIndex}, #{booksInPage}
             """)
     List<Order> selectAllPage(Integer startIndex, Integer booksInPage);
+
+    @Insert("""
+            INSERT INTO OrderDetails (name, totalQuantity, totalPrice)
+            VALUES (#{name}, #{totalQuantity}, #{totalPrice})
+            """)
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(OrderDetails od);
 }

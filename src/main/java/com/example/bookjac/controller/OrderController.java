@@ -1,9 +1,6 @@
 package com.example.bookjac.controller;
 
-import com.example.bookjac.domain.Book;
-import com.example.bookjac.domain.BookResult;
-import com.example.bookjac.domain.NaverResult;
-import com.example.bookjac.domain.Order;
+import com.example.bookjac.domain.*;
 import com.example.bookjac.service.NaverBookAPIService;
 import com.example.bookjac.service.OrderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -65,5 +63,21 @@ public class OrderController {
         return "order/search";
     }
 
+    @PostMapping("add")
+    public String addOrderDetails(OrderDetails od,
+                                  RedirectAttributes rttr,
+                                  Authentication auth) throws Exception{
+
+        od.setName(auth.getName());
+        boolean ok = service.addOrderDetails(od);
+
+        if(ok){
+            rttr.addFlashAttribute("message", "발주가 성공적으로 처리되었습니다.");
+            return "redirect:/order/details/id" + od.getId();
+        } else {
+            rttr.addFlashAttribute("message", "발주 처리 중 문제가 발생하였습니다.");
+            return "redirect:/order/cart";
+        }
+    }
 }
 

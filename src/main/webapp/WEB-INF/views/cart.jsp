@@ -159,9 +159,27 @@
               </table>
               <div class="row">
                   <div class="col-md-6 text-center bottomBtn">
-                      <%--발주하시겠습니까? 모달 띄우기--%>
-                      <button type="button" class="btn btn-danger">발주하기</button>
+                      <button type="button" class="btn btn-danger addOrderDetails">발주하기</button>
                       <%--성공적으로 발주 완료되었습니다. 모달 띄우기 '확인'버튼 누르면 발주 내역 확인 페이지로 이동--%>
+                  </div>
+              </div>
+
+              <%--modal--%>
+              <div class="modal" tabindex="-1">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title">발주 확인</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <p>발주 품목과 수량이 맞는지 다시 한 번 확인해주세요.</p>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">다시 확인할래요</button>
+                              <button type="button" class="btn btn-outline-danger">이대로 발주할게요</button>
+                          </div>
+                      </div>
                   </div>
               </div>
 
