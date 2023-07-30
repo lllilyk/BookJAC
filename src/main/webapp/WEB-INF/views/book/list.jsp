@@ -9,11 +9,21 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
     <title>매대 현황</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+
+    <style>
+        .searchBar{
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
 <my:navBar current="display"></my:navBar>
@@ -72,16 +82,18 @@
 </script>
 <div class="container-lg">
 
-    <h1>매대 현황</h1>
+    <h1 style="text-decoration: solid; margin-top: 50px;margin-bottom: 50px;">매대 현황</h1>
 
     <form action="/list">
-    <input name="search" class="searchBar" type="search" placeholder="검색어를 입력하세요.">
+        <div class="searchBar">
+    <input name="search" class="searchBook" type="search" placeholder="찾으시는 도서를 입력하세요." style="width: 550px; height: 40px; border-radius:5px; ">
         <button type="submit" class="btn btn-outline-secondary">검색
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        </div>
     </form>
 
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/eventBook'">이벤트 도서</button>
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/eventBook'" style="margin-bottom: 20px;">이벤트 도서</button>
 
     <div>
     <table class="table">
@@ -113,7 +125,13 @@
                 <td>${book.displayCount}</td>
                 <td>${book.totalCount}</td>
                 <td>
-                    <a class="btn btn-outline-secondary" href="/addEvent/${book.id}">이벤트 등록</a>
+                    <c:if test="${book.checkEvent == '0'}">
+                        <a class="btn btn-outline-secondary" href="/addEvent/${book.id}">이벤트 등록</a>
+                    </c:if>
+                    <c:if test="${book.checkEvent == '1'}">
+                        <a class="btn btn-outline-warning" href="/id/${book.id}">이벤트중</a>
+                    </c:if>
+
                 </td>
             </tr>
         </c:forEach>
@@ -133,8 +151,13 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="sellNum"/>
-                수량 입력(숫자만 입력) :
-            <input type="text" id="sellAmount">
+                수량 입력(숫자만 입력) : ${book.title}
+            <input type="text" id="sellAmount"/>
+                <c:if test="${book.checkEvent == '1'}">
+                    이벤트중인 책입니다.
+                </br>
+                    ${book.event}
+                </c:if>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
@@ -202,4 +225,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+<script src="semantic/dist/semantic.min.js"></script>
 </body>

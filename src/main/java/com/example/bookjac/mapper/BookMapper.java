@@ -12,7 +12,7 @@ public interface BookMapper {
     //게시글 목록
     @Select("""
             SELECT
-            id, title,writer,publisher,categoryId,inPrice,outPrice,totalCount,inCount,displayCount
+            id, title,writer,publisher,categoryId,inPrice,outPrice,totalCount,inCount,displayCount,checkEvent
             FROM Book
             ORDER By id DESC
             """)
@@ -45,7 +45,8 @@ public interface BookMapper {
 				totalCount,
 				writer,
 				publisher,
-				categoryId
+				categoryId,
+				checkEvent
 			     
 			FROM Book 
 			
@@ -127,7 +128,8 @@ public interface BookMapper {
 			SET 
 				event = #{event},
 				eventStartDate = #{eventStartDate},
-				eventEndDate = #{eventEndDate}
+				eventEndDate = #{eventEndDate},
+				checkEvent = 1
 			WHERE id = #{id}
 				
 			""")
@@ -135,7 +137,11 @@ public interface BookMapper {
 
 	@Update("""
 			UPDATE Book
-			SET event = Null
+			SET event = Null,
+			checkEvent = 0,
+			eventStartDate = Null,
+			eventEndDate = Null
+			
 			WHERE id = #{id}
 			""")
 	int deleteById(Integer id);

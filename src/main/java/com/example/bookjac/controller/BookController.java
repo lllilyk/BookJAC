@@ -93,7 +93,7 @@ public class BookController {
         boolean ok = service.remove(id);
         if(ok){
             rttr.addFlashAttribute("message", title + "의 이벤트가 삭제되었습니다.");
-            return "redirect:/list";
+            return "redirect:/eventBook";
         } else {
             return "redirect:/id/" +id;
         }

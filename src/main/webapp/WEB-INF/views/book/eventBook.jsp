@@ -14,6 +14,12 @@
     <title>이벤트 도서 목록</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .searchBar{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <my:navBar current="event"></my:navBar>
@@ -21,19 +27,22 @@
 
 
 <div class="container-lg">
-    <h1>이벤트 도서 목록</h1>
+    <h1 style="text-decoration: solid; margin-top: 50px;margin-bottom: 50px;">이벤트 도서 목록</h1>
 
 
     <form action="/list">
-        <input name="search" class="searchBar" type="search" placeholder="검색어를 입력하세요.">
+        <div class="searchBar">
+        <input name="search" class="searchBook" type="search" placeholder="찾으시는 도서를 입력하세요." style="width: 550px; height: 40px; border-radius:5px; ">
         <button type="submit" class="btn btn-outline-secondary">검색
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        </div>
     </form>
 
 
-    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/list'">매대 현황</button>
-
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/list'" style="margin-bottom: 20px;">
+        매대 현황</button>
+</br>
     <div>
         <table class="table">
             <thead>
