@@ -20,6 +20,11 @@
         .row {
             margin: 10px 0px 20px 0px;
         }
+        .bookSearchContainer {
+            padding: 10px;
+            border: solid;
+            border-color: lightgray;
+        }
     </style>
 </head>
 <body>
@@ -37,26 +42,54 @@
                     <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
                 </div>
             </div>
-            <div class="rowForSearch">
+
+            <div class="bookSearchContainer container-lg mt-3 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <form id="bookSearchInDBForm" action="/order/process">
+                            <div class="input-group mb-3">
+                                <label for="inputTitle" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">보유 도서</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="search" name="search" class="form-control" id="inputTitle" placeholder="등록되어 있는 도서인지 확인해 보세요" aria-describedby="bookSearchINDBBtn"
+                                    style="height: 50px;">
+                                <button class="btn btn-outline-secondary" type="submit" id="bookSearchInDBBtn">검색</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form id="bookSearchForm" method="get">
+                            <div class="input-group mb-3">
+                                <label for="searchBook" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">신규 도서</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" id="searchBook" class="form-control" placeholder="원하는 도서명을 검색해 보세요" aria-describedby="bookSearchBtn"
+                                       style="height: 50px;">
+                                <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
                 <%-- 도서의 전산 등록 여부 검색하기 --%>
-                <div class="container">
+                <%--<div class="container">
                     <form id="bookSearchInDBForm" action="/order/process">
                         <div class="input-group mb-3">
                             <input type="search" name="search" class="form-control" placeholder="등록되어있는 도서인지 확인해보세요" aria-describedby="bookSearchINDBBtn">
                             <button class="btn btn-outline-secondary" type="submit" id="bookSearchInDBBtn">검색</button>
                         </div>
                     </form>
-                </div>
+                </div>--%>
                 <%--네이버 오픈 API를 활용한 도서 검색--%>
-                <div class="container">
+                <%--<div class="container">
                     <form id="bookSearchForm" method="get">
                         <div class="input-group mb-3">
                             <input type="text" id="searchBook" class="form-control" placeholder="등록되지 않은 도서명을 검색해보세요" aria-describedby="bookSearchBtn">
                             <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
                         </div>
                     </form>
-                </div>
-            </div>
+                </div>--%>
+
 
             <%--재고 목록--%>
             <table class="table table-bordered" style="text-align: center">
