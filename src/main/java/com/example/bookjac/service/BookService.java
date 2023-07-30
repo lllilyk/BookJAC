@@ -17,7 +17,7 @@ public class BookService {
 private BookMapper mapper;
     public Map<String, Object> listBook(Integer page, String search) {
         // 페이지당 행의 수
-        Integer rowPerPage = 5;
+        Integer rowPerPage = 10;
 
         // 쿼리 LIMIT 절에 사용할 시작 인덱스
         Integer startIndex = (page - 1) * rowPerPage;
@@ -52,7 +52,7 @@ private BookMapper mapper;
 
     public Map<String, Object> listEvent(Integer page, String search) {
         // 페이지당 행의 수
-        Integer rowPerPage = 5;
+        Integer rowPerPage = 15;
 
         // 쿼리 LIMIT 절에 사용할 시작 인덱스
         Integer startIndex = (page - 1) * rowPerPage;
@@ -82,5 +82,36 @@ private BookMapper mapper;
         List<Book> list = mapper.selectAllPagingEvent(startIndex, rowPerPage, search);
         return Map.of("pageInfo", pageInfo,
                 "eventList", list);
+    }
+
+    // 판매
+    public void bookSell(Book book) {
+        Integer cnt = mapper.bookSellUpdate(book);
+
+    }
+
+    public void bookRefund(Book book) {
+        Integer cnt = mapper.bookRefundUpdate(book);
+    }
+
+    public Book getBook(Integer id) {
+        return mapper.selectById(id);
+    }
+
+    // 수정 잘 되었으면 1
+    public boolean modify(Book book) {
+        int cnt =mapper.update(book);
+        return cnt ==1;
+    }
+
+    //이벤트 삭제
+    public boolean remove(Integer id) {
+        int cnt = mapper.deleteById(id);
+        return cnt==1;
+    }
+
+    public boolean addEvent(Book book) {
+        int cnt = mapper.update(book);
+        return cnt==1;
     }
 }

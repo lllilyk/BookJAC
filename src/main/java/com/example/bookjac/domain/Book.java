@@ -19,6 +19,11 @@ public class Book {
     private String event;
     private String eventStartDate;
     private String eventEndDate;
+    private int sellAmount;
+    private int refundAmount;
+    private String checkEvent;
+
+
 
     // 디스플레이 필요 여부
     private int safeDisplayCount;
