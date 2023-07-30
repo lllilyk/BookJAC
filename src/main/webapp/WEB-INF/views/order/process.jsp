@@ -29,6 +29,17 @@
             text-align: center;
             vertical-align: middle;
         }
+        .active > .page-link, .page-link.active {
+            z-index: 3;
+            background-color: black;
+            border-color: black;
+        }
+        .pagination {
+            --bs-pagination-color: black;
+            --bs-pagination-active-border-color: black;
+            --bs-pagination-focus-color: black;
+            --bs-pagination-hover-color: black;
+        }
     </style>
 </head>
 <body>
