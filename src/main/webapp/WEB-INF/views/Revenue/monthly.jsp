@@ -91,14 +91,6 @@
             </tr>
         </c:forEach>
         </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="2">합계</td>
-            <td>(현금 매출액 - 시재금) + 카드 매출액</td>
-            <td>(발주 총액)</td>
-            <td>매대 총액 - 발주 금액</td>
-        </tr>
-        </tfoot>
     </table>
 </div>
 

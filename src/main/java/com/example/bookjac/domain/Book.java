@@ -20,5 +20,8 @@ public class Book {
     private String eventStartDate;
     private String eventEndDate;
 
+    // 디스플레이 필요 여부
+    private int safeDisplayCount;
+
 
 }
