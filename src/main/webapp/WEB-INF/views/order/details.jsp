@@ -71,7 +71,7 @@
                                 <label for="inputTitle" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">발주담당자로 검색</label>
                             </div>
                             <div class="input-group mb-3 bookSearchBar">
-                                <input type="search" name="search" class="form-control" id="inputTitle" placeholder="이름을 입력하세요" aria-describedby="bookSearchBtn" style="text-align: center;">
+                                <input type="search" name="search" class="form-control" id="inputTitle" placeholder="이름을 입력하세요" aria-describedby="bookSearchBtn" style="text-align: center; width:500px; margin-left: 50px;">
                                 <button class="btn btn-dark" type="submit" id="bookSearchBtn">검색</button>
                             </div>
                         </form>

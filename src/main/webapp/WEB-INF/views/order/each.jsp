@@ -33,9 +33,10 @@
             <h1><sec:authentication property='principal.originName'/>님의 발주 내역</h1>
         </div>
         <div class="col-md-6 text-end">
+            <a href="/order/details" class="btn btn-outline-success">다운로드</a>
             <a href="/order/details" class="btn btn-outline-secondary">돌아가기</a>
         </div>
-
+      </div>
           <table class="table table-bordered info" style="text-align: center">
               <thead>
                   <tr>
