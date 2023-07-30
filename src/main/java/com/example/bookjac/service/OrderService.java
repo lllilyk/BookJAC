@@ -17,7 +17,7 @@ public class OrderService {
     @Autowired
     private OrderMapper mapper;
 
-    public Map<String, Object> listOrder(Integer page) {
+    public Map<String, Object> listOrder(Integer page, String search) {
         Integer booksInPage = 10;
 
         Integer startIndex = (page -1) * booksInPage;
@@ -38,7 +38,7 @@ public class OrderService {
         pageInfo.put("currentPageNum", page);
         pageInfo.put("lastPageNum", lastPageNum);
 
-        List<Order> list = mapper.selectAllPage(startIndex, booksInPage);
+        List<Order> list = mapper.selectAllPage(startIndex, booksInPage, search);
 
         return Map.of("pageInfo", pageInfo,
                       "bookList", list);

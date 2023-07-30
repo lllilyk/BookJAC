@@ -37,14 +37,25 @@
                     <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
                 </div>
             </div>
-            <%--네이버 오픈 API를 활용한 도서 검색--%>
-            <div class="container">
-                <form id="bookSearchForm" method="get">
-                    <div class="input-group mb-3">
-                        <input type="text" id="searchBook" class="form-control" placeholder="원하시는 도서명을 입력하세요" aria-describedby="bookSearchBtn">
-                        <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
-                    </div>
-                </form>
+            <div class="rowForSearch">
+                <%-- 도서의 전산 등록 여부 검색하기 --%>
+                <div class="container">
+                    <form id="bookSearchInDBForm" action="/order/process">
+                        <div class="input-group mb-3">
+                            <input type="search" name="search" class="form-control" placeholder="등록되어있는 도서인지 확인해보세요" aria-describedby="bookSearchINDBBtn">
+                            <button class="btn btn-outline-secondary" type="submit" id="bookSearchInDBBtn">검색</button>
+                        </div>
+                    </form>
+                </div>
+                <%--네이버 오픈 API를 활용한 도서 검색--%>
+                <div class="container">
+                    <form id="bookSearchForm" method="get">
+                        <div class="input-group mb-3">
+                            <input type="text" id="searchBook" class="form-control" placeholder="등록되지 않은 도서명을 검색해보세요" aria-describedby="bookSearchBtn">
+                            <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <%--재고 목록--%>

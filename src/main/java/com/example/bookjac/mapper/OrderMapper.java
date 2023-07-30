@@ -19,6 +19,8 @@ public interface OrderMapper {
     Integer countAll();
 
     @Select("""
+            <script>
+			<bind name="pattern" value="'%' + search + '%'" />
             SELECT id,
                    title,
                    writer,
@@ -26,10 +28,15 @@ public interface OrderMapper {
                    inPrice,
                    totalCount
             FROM Book
+            WHERE title LIKE #{pattern}
+				OR writer LIKE #{pattern}
+				OR publisher LIKE #{pattern}
+				OR id LIKE #{pattern}
             ORDER BY totalCount
             LIMIT #{startIndex}, #{booksInPage}
+            </script>
             """)
-    List<Order> selectAllPage(Integer startIndex, Integer booksInPage);
+    List<Order> selectAllPage(Integer startIndex, Integer booksInPage, String search);
 
     @Insert("""
             INSERT INTO OrderDetails (name, inserted, totalQuantity, totalPrice)

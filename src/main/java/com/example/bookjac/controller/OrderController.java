@@ -33,12 +33,12 @@ public class OrderController {
     @PreAuthorize("isAuthenticated()")
     public String orderProcess(Model model,
                                @RequestParam(value="page", defaultValue = "1") Integer page,
+                               @RequestParam(value="search", defaultValue = "") String search,
                                Authentication auth){
 
         /* 현재 인증된 사용자의 이름(username) 가져오기 */
         String username = auth.getName();
-
-        Map<String, Object> result = service.listOrder(page);
+        Map<String, Object> result = service.listOrder(page, search);
         model.addAllAttributes(result);
 
         /* 사용자 이름을 order/process.jsp로 전달 */
