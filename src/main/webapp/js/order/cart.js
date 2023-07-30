@@ -158,7 +158,7 @@ $(".btn_delete_cart").on("click", function(e) {
 
                 // 총 발주 품목 수량 업데이트
                 let totalQuantity = document.getElementById("totalQuantity");
-                totalQuantity.innerText = "총 발주 품목 수량: " + responseD.totalQuantity;
+                totalQuantity.innerText = "총 발주 수량: " + responseD.totalQuantity;
 
                 // 총 결제 예상 금액 업데이트
                 let totalPrice = document.getElementById("totalPrice");
