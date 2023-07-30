@@ -200,7 +200,7 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
-                <a href="/inventory/inventoryList">
+                <a href="/inventory/inboundSellingList">
                     <i class="fa fa-cart-flatbed fa-2x"></i>
                     <span class="nav-text">
                             입고 내역
@@ -211,7 +211,7 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
-                <a href="/inventory/inboundSellingList">
+                <a href="/inventory/inventoryList">
                     <i class="fa fa-industry fa-2x"></i>
                     <span class="nav-text">
                             재고 목록
@@ -232,12 +232,12 @@
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
-            <li>
-                <a href="">
+            <li class="has-subnav">
+                <a href="/Revenue/daily">
                     <i class="fa fa-chart-line fa-2x"></i>
                     <span class="nav-text">
                             매출 관리
-                        </span>
+                    </span>
                 </a>
             </li>
         </sec:authorize>

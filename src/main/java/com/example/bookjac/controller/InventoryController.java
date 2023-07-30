@@ -1,5 +1,6 @@
 package com.example.bookjac.controller;
 
+import com.example.bookjac.domain.Book;
 import com.example.bookjac.domain.Cart;
 import com.example.bookjac.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +61,10 @@ public class InventoryController {
         model.addAllAttributes(result);
     }
 
+    //입고된 도서 조회
+    @PostMapping("")
+    public void inboundedList(Model model) {
+        List<Book> inboundedList = service.inboundedList();
+
+    }
 }
