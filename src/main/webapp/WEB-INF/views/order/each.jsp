@@ -17,10 +17,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .row {
-            margin: 10px 0px 20px 0px;
+            margin: 20px 0px 30px 0px;
         }
         .hidden-td {
             display: none;
+        }
+        .table-bordered {
+            text-align: center;
+            border-collapse: collapse;
+            border: 5px solid lightgrey;
         }
     </style>
 </head>
@@ -45,7 +50,7 @@
           <c:set var="totalPrice" value="0" />
           <c:set var="inserted" value="${orderCartList[0].inserted}" />
           <c:set var="memberId" value="${orderCartList[0].memberId}" />
-          <table class="table table-bordered" style="text-align: center">
+          <table class="table table-bordered" style="text-align: center; border-collapse: collapse;">
               <thead>
               <tr>
                   <td colspan="8">
