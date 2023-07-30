@@ -19,4 +19,16 @@ $(document).ready(function() {
         changeYear: true
     }
     $(".checkDate").datepicker(config);
+
+    // 검색 버튼 클릭 이벤트 처리
+    $(".dateBtn").click(function() {
+        // 발주일자 입력값 가져오기
+        const selectedDate = $(".checkDate").val();
+
+        // 테이블의 모든 행 숨기기
+        $("table.table tbody tr").hide();
+
+        // 입력된 발주일자와 동일한 inserted 값을 가진 행 표시
+        $("table.table tbody tr:contains('" + selectedDate + "')").show();
+    });
 });

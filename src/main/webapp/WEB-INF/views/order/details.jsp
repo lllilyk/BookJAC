@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
-                    <button type="button" class="btn btn-warning">날짜 선택 후 클릭!</button>
+                    <button type="button" class="btn btn-warning dateBtn">날짜 선택 후 클릭!</button>
                 </div>
             </div>
 

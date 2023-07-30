@@ -58,11 +58,18 @@ public interface OrderMapper {
     List<OrderDetails> selectAllPages(Integer startIndex, Integer recordsInOrderDetails, String search);
 
     @Select("""
-            select cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
+            SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
             FROM OrderCart
             WHERE memberId = #{name}
             """)
     List<Cart> getOrderCart(String inserted);
+
+    /*@Select("""
+            SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
+            FROM OrderCart
+            WHERE inserted = #{inserted}
+            """)
+    List<Cart> selectByDate(String inserted);*/
 
    /* @Select("""
             SELECT *
