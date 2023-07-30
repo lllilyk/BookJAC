@@ -10,7 +10,23 @@
 
 <html>
 <head>
+    <style>
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        img {
+            width: 50vw;
+            height: 50vh;
+        }
+
+    </style>
 </head>
+
 <body style="background: #e2e2e2;">
 <div align="center">
     <h1>메인 페이지</h1>

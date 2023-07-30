@@ -27,6 +27,23 @@
                         PASSWORD
                         </label>
                         <input id="inputPassword" class="form-control" type="text" name="password" value="" />
+                        <div class="form-text">
+                            입력하지 않으면 기존 패스워드를 유지합니다.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="inputPasswordCheck">
+                            PASSWORD 확인
+                        </label>
+                        <input id="inputPasswordCheck" class="form-control" type="text" value="" />
+                        <div id="passwordSuccessText" class="d-none form-text text-primary">
+                            <i class="fa-solid fa-check"></i>
+                            패스워드가 일치 합니다.
+                        </div>
+                        <div id="passwordFailText" class="d-none form-text text-danger">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            패스워드가 일치하지 않습니다.
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="inputName">
@@ -53,7 +70,7 @@
                         <input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber}" />
                     </div>
 
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-secondary">수정</button>
+                    <button id="modifyButton" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="disabled btn btn-secondary">수정</button>
                 </form>
             </div>
         </div>
@@ -69,11 +86,11 @@
                 </div>
                 <div class="modal-body">
                     <label for="inputOldPassword" class="form-label"></label>
-                    <input form="modifyForm" id="inputOldPassword" class="form-control" name="oldPassword" type="text" />
+                    <input form="modifyForm" id="inputOldPassword" class="form-control" name="oldPassword" type="password" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="submit" form="modifyForm" class="btn btn-primary">확인</button>
+                    <button type="submit" form="modifyForm" class="btn btn-primary ">확인</button>
                 </div>
             </div>
         </div>
@@ -82,6 +99,8 @@
     <my:navBar></my:navBar>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/member/modify.js"></script>
 
 </body>
 </html>

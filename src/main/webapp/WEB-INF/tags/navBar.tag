@@ -35,7 +35,6 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        height: 100%;
         left: 0;
         width: 60px;
         overflow: hidden;
@@ -130,7 +129,7 @@
         float: left;
         /*background: #e2e2e2;*/
         width: 100%;
-        height: 100%;
+        height: 100vh;
     }
 
     @font-face {
@@ -151,7 +150,15 @@
                            홈
                         </span>
             </a>
+        </li>
 
+        <li class="has-subnav">
+            <a href="customBookList">
+                <i class="fa fa-magnifying-glass fa-2x"></i>
+                <span class="nav-text">
+                            도서 검색
+                        </span>
+            </a>
         </li>
 
         <sec:authorize access="isAnonymous()">
@@ -211,6 +218,7 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
+
                 <a href="/inventory/inventoryList">
                     <i class="fa fa-industry fa-2x"></i>
                     <span class="nav-text">
@@ -222,6 +230,7 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
+
                 <a href="/list">
                     <i class="fa fa-book fa-2x"></i>
                     <span class="nav-text">

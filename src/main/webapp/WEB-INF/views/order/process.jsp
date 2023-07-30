@@ -25,6 +25,7 @@
             border: solid;
             border-color: lightgray;
         }
+
     </style>
 </head>
 <body>
