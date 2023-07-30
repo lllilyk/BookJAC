@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-6 text-end">
             <a href="/order/details" class="btn btn-outline-success">다운로드</a>
-            <a href="/order/details" class="btn btn-outline-secondary">돌아가기</a>
+            <a href="/order/details" class="btn btn-outline-dark">돌아가기</a>
         </div>
       </div>
 

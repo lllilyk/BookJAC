@@ -22,7 +22,7 @@
         }
        .bottomBtn{
             width:100%;
-            margin-top: 30px;
+            margin-top: 10px;
         }
        .info {
            margin-top: 20px;
@@ -42,7 +42,7 @@
                       <h1>발주품목 확인</h1>
                   </div>
                   <div class="col-md-6 text-end">
-                      <a href="/order/process" class="btn btn-outline-secondary">돌아가기</a>
+                      <a href="/order/process" class="btn btn-outline-dark">돌아가기</a>
                   </div>
               </div>
 
@@ -148,7 +148,7 @@
               </table>
               <div class="row">
                   <div class="col-md-6 text-center bottomBtn">
-                      <button type="button" class="btn btn-danger addOrderDetails">발주하기</button>
+                      <button type="button" class="btn btn-danger addOrderDetails" style="font-size: 18px;">발주하기</button>
                   </div>
               </div>
 
@@ -167,10 +167,10 @@
                                   <input type="hidden" name="totalQuantity" value="<fmt:formatNumber value='${totalQuantity}' />">
                                   <input type="hidden" name="totalPrice" value="<fmt:formatNumber value='${totalPrice}' type='currency' currencyCode='KRW' />">
                               </form>
-                              <p>발주 품목과 수량이 맞는지 다시 한 번 확인해주세요.</p>
+                              <p>발주 품목과 수량이 맞는지 다시 한번 확인해 주세요.</p>
                           </div>
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">다시 확인할래요</button>
+                              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">다시 확인할래요</button>
                               <button type="submit" form="orderProcessForm" class="btn btn-outline-danger addOrderDetailsBtn">이대로 발주할게요</button>
                           </div>
                       </div>

@@ -54,7 +54,7 @@
                     <h1>발주품목 등록</h1>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
+                    <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-dark" style="font-size: 20px;">발주품목</a>
                 </div>
             </div>
 
