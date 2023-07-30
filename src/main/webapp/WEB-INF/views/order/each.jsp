@@ -19,6 +19,9 @@
         .row {
             margin: 10px 0px 20px 0px;
         }
+        .hidden-td {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -30,36 +33,36 @@
     <div class="col-12">
       <div class="row">
         <div class="col-md-6">
-            <h1><sec:authentication property='principal.originName'/>님의 발주 내역</h1>
+            <h1>발주 상세 내역</h1>
         </div>
         <div class="col-md-6 text-end">
             <a href="/order/details" class="btn btn-outline-success">다운로드</a>
             <a href="/order/details" class="btn btn-outline-secondary">돌아가기</a>
         </div>
       </div>
-          <table class="table table-bordered info" style="text-align: center">
-              <thead>
-                  <tr>
-                      <th class="table-dark" style="width:150px;">발주일자</th>
-                      <th class="table-dark" style="width:150px;">납기일자</th>
-                      <th class="table-dark" style="width:150px;">매입처명</th>
-                      <th class="table-dark" style="width:150px;">발주담당자</th>
-                  </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                  <tr>
-                      <td>${inserted}</td>
-                      <td id="deadline"></td>
-                      <td>날개 출판유통</td>
-                      <td><sec:authentication property='principal.originName'/></td>
-                  </tr>
-              </tbody>
-          </table>
 
           <c:set var="totalQuantity" value="0" />
           <c:set var="totalPrice" value="0" />
+          <c:set var="inserted" value="${orderCartList[0].inserted}" />
+          <c:set var="memberId" value="${orderCartList[0].memberId}" />
           <table class="table table-bordered" style="text-align: center">
               <thead>
+              <tr>
+                  <td colspan="8">
+                      <table class="table mb-0" style="text-align: center; width: 100%;">
+                          <tbody>
+                          <tr>
+                              <td id="orderDate" style="text-align: center; border: 0px; font-weight: bold; font-size: 16px;">
+                                  발주 일자 : ${inserted}
+                              </td>
+                              <td id="orderManager" style="text-align: center; border: 0px; font-weight: bold; font-size: 16px;">
+                                  발주 담당자  : ${memberId}
+                              </td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </td>
+              </tr>
               <tr>
                   <th style="width:50px;">ISBN</th>
                   <th style="width:350px;">제목</th>
@@ -71,44 +74,46 @@
               </tr>
               </thead>
               <tbody class="table-group-divider">
-              <c:forEach items="${orderCartList}" var="oc" >
+                  <c:forEach items="${orderCartList}" var="oc" >
+                      <tr>
+                          <td class="hidden-td">${oc.memberId}</td>
+                          <td class="hidden-td">${oc.inserted}</td>
+                          <td>${oc.bookId }</td>
+                          <td>${oc.title }</td>
+                          <td>${oc.writer}</td>
+                          <td>${oc.publisher }</td>
+                          <td><fmt:formatNumber value="${oc.inPrice}" type="currency" currencyCode="KRW" /></td>
+                          <td>${oc.bookCount}</td>
+                          <td class="inPriceSumEach">
+                              <fmt:formatNumber value="${oc.inPrice * oc.bookCount}" type="currency" currencyCode="KRW" />
+                          </td>
+                      </tr>
+                      <!-- totalQuantity와 totalPrice 계산 -->
+                      <c:set var="totalQuantity" value="${totalQuantity + oc.bookCount}" />
+                      <c:set var="totalPrice" value="${totalPrice + (oc.inPrice * oc.bookCount)}" />
+                  </c:forEach>
                   <tr>
-                      <td>${oc.bookId }</td>
-                      <td>${oc.title }</td>
-                      <td>${oc.writer}</td>
-                      <td>${oc.publisher }</td>
-                      <td><fmt:formatNumber value="${oc.inPrice}" type="currency" currencyCode="KRW" /></td>
-                      <td>${oc.bookCount}</td>
-                      <td class="inPriceSumEach">
-                          <fmt:formatNumber value="${oc.inPrice * oc.bookCount}" type="currency" currencyCode="KRW" />
+                      <td colspan="8">
+                          <table class="table mb-0" style="text-align: right">
+                              <tbody>
+                              <tr>
+                                  <td id="totalQuantity" style="font-weight: bold; font-size: 15px;">
+                                      총 발주 수량 : <fmt:formatNumber value="${totalQuantity}" />
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                          <table class="table mb-0" style="text-align: right">
+                              <tbody>
+                              <tr>
+                                  <td id="totalPrice" style="font-weight: bold; font-size: 15px;">
+                                      총 결제 예상 금액  : <fmt:formatNumber value="${totalPrice}" type="currency" currencyCode="KRW" />
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
                       </td>
                   </tr>
-                  <!-- totalQuantity와 totalPrice 계산 -->
-                  <c:set var="totalQuantity" value="${totalQuantity + oc.bookCount}" />
-                  <c:set var="totalPrice" value="${totalPrice + (oc.inPrice * oc.bookCount)}" />
-              </c:forEach>
-              <tr>
-                  <td colspan="8">
-                      <table class="table mb-0" style="text-align: right">
-                          <tbody>
-                          <tr>
-                              <td id="totalQuantity">
-                                  총 발주 수량 : <fmt:formatNumber value="${totalQuantity}" />
-                              </td>
-                          </tr>
-                          </tbody>
-                      </table>
-                      <table class="table mb-0" style="text-align: right">
-                          <tbody>
-                          <tr>
-                              <td id="totalPrice">
-                                  총 결제 예상 금액  : <fmt:formatNumber value="${totalPrice}" type="currency" currencyCode="KRW" />
-                              </td>
-                          </tr>
-                          </tbody>
-                      </table>
-                  </td>
-              </tr>
               </tbody>
           </table>
       </div>
