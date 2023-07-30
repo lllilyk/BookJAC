@@ -39,6 +39,15 @@
             height: 35px;
             font-weight: bold;
         }
+        .bookSearchBar{
+            width: 500px;
+            height: 50px;
+        }
+        .nameSearchContainer {
+            padding: 10px;
+            border: solid;
+            border-color: lightgray;
+        }
     </style>
 </head>
 <body>
@@ -52,20 +61,24 @@
                 <div class="col-md-6">
                     <h1>전체 발주 내역</h1>
                 </div>
-                <div class="col-md-6 text-end">
-                    <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
-                    <button type="button" class="btn btn-warning dateBtn">날짜 선택 후 클릭!</button>
-                </div>
             </div>
 
-            <%-- 발주 담당자별 발주내역 검색하기 --%>
-            <div class="container">
-                <form id="bookSearchForm" action="/order/details">
-                    <div class="input-group mb-3">
-                        <input type="search" name="search" class="form-control" placeholder="이름을 입력하세요" aria-describedby="bookSearchBtn">
-                        <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+            <div class="nameSearchContainer container-lg mt-3 mb-4">
+                <div class="row g-3">
+                <%-- 발주 담당자별 발주내역 검색하기 --%>
+                    <div class="col-md-6">
+                        <form id="bookSearchForm" action="/order/details">
+                            <div class="input-group mb-3 bookSearchBar">
+                                <input type="search" name="search" class="form-control" placeholder="이름을 입력하세요" aria-describedby="bookSearchBtn">
+                                <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                    <div class="col-md-6">
+                        <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
+                        <button type="button" class="btn btn-warning dateBtn">날짜 선택 후 클릭!</button>
+                    </div>
+                </div>
             </div>
 
             <%--발주 내역 list--%>
