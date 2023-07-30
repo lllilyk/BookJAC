@@ -97,8 +97,7 @@ public interface RevenueMapper {
             SELECT
                 *,
                 inPrice * 1.1 outPrice,
-                inPrice * OrderCart.bookCount sumInPrice,
-                SUM(bookCount) sumBookCount
+                inPrice * OrderCart.bookCount sumInPrice
             FROM OrderCart
             WHERE inserted = #{date}
             """)
@@ -106,9 +105,9 @@ public interface RevenueMapper {
 
     @Select("""
             SELECT
-                SUM(oc.bookCount) sumBookCount,
-                SUM(b.inPrice * oc.bookCount) sumInPrice
-            FROM OrderCart oc JOIN Book b ON oc.bookId = b.id
+                SUM(bookCount) sumBookCount,
+                SUM(inPrice * bookCount) sumInPrice
+            FROM OrderCart
             WHERE inserted = #{date}
             """)
     Cart selectCartSum(String date);
