@@ -78,4 +78,15 @@ public class InventoryService {
 
         return Map.of("pageInfo", pageInfo, "inventoryList", result);
     }
+
+    public List<Book> inboundedList() {
+        List selectList = mapper.selectAllOrder();
+
+        Integer toBookList = mapper.insertInboundedList(selectList);
+
+        List<Book> result = mapper.selectAll();
+
+
+        return result;
+    }
 }

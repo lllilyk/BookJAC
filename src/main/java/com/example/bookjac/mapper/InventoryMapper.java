@@ -2,6 +2,7 @@ package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Book;
 import com.example.bookjac.domain.Cart;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -45,4 +46,11 @@ public interface InventoryMapper {
             ORDER By id DESC
             """)
     List<Book> selectAll();
+
+    @Insert("""
+            INSERT INTO Book (id, title, writer, publisher, outPrice, totalCount, inCount, displayCount)
+            VALUES (#{id}, #{title}, #{writer}, #{publisher}, #{outPrice}, #{totalCount}, #{inCount}, #{displayCount})
+            """)
+    Integer insertInboundedList(List<Book> result);
+
 }
