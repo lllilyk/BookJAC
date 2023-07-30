@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -67,7 +67,7 @@
             </div>
             <div class="col">
                 <label>책 검색</label>
-                <input class="form-control" type="text" value="${param.title}" id="bookTitle">
+                <%--                <input class="form-control" type="text" value="${param.title}" id="bookTitle">--%>
             </div>
             <div class="col">
                 <input class="form-control d-none" type="text" id="settlementId" value="${param.settlementId}">
@@ -168,7 +168,8 @@
             </tfoot>
         </table>
     </c:if>
-
+    <br>
+    <br>
 </div>
 <%--정산 아이디 : ${settlement.id}, 현금 : ${settlement.cash}, 카드 : ${settlement.card}, 시재금 : ${settlement.vaultCash}, 작성일 : ${settlement.inserted}--%>
 

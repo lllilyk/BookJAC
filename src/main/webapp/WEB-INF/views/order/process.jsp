@@ -13,31 +13,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <title>발주품목 등록 페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <style>
         .row {
             margin: 10px 0px 20px 0px;
         }
-
-        .ui-datepicker-trigger {
-            margin-left: 5px;
-            width: 14%;
-            height: 38px;
-            background-color: white;
-            border-radius: 10%;
-            border-color: gold;
-            font-size: 15px;
-            cursor:pointer;
-        }
-
-        .checkDate{
-            text-align: center;
-            width: 150px;
-            height: 35px;
-            font-weight: bold;
+        .bookSearchContainer {
+            padding: 10px;
+            border: solid;
+            border-color: lightgray;
         }
 
     </style>
@@ -51,24 +37,41 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>발주내역 등록</h1>
+                    <h1>발주품목 등록</h1>
                 </div>
                 <div class="col-md-6 text-end">
-                    <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
-                    <button type="button" class="btn btn-outline-primary">주문내역조회</button>
                     <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
                 </div>
             </div>
-            <%--네이버 오픈 API를 활용한 도서 검색--%>
-            <div class="container">
-                <form id="bookSearchForm" method="get">
-                    <div class="input-group mb-3">
-                        <input type="text" id="searchBook" class="form-control" placeholder="원하시는 도서명을 입력하세요" aria-describedby="bookSearchBtn">
-                        <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
-                    </div>
-                </form>
-            </div>
 
+            <div class="bookSearchContainer container-lg mt-3 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <form id="bookSearchInDBForm" action="/order/process">
+                            <div class="input-group mb-3">
+                                <label for="inputTitle" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">보유 도서</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="search" name="search" class="form-control" id="inputTitle" placeholder="등록되어 있는 도서인지 확인해 보세요" aria-describedby="bookSearchINDBBtn"
+                                    style="height: 50px;">
+                                <button class="btn btn-outline-secondary" type="submit" id="bookSearchInDBBtn">검색</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form id="bookSearchForm" method="get">
+                            <div class="input-group mb-3">
+                                <label for="searchBook" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">신규 도서</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" id="searchBook" class="form-control" placeholder="원하는 도서명을 검색해 보세요" aria-describedby="bookSearchBtn"
+                                       style="height: 50px;">
+                                <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <%--재고 목록--%>
             <table class="table table-bordered" style="text-align: center">
                 <thead>
@@ -88,7 +91,7 @@
                     <tr>
                         <td class="bookId" id="bookIdText_${bookStatus.index}">${book.id }</td>
                         <td class="title">${book.title }</td>
-                        <td>${book.writer }</td>
+                        <td class="writer">${book.writer }</td>
                         <td class="publisher">${book.publisher }</td>
                         <td class="inPrice"><fmt:formatNumber value="${book.inPrice}" type="currency" currencyCode="KRW" /></td>
                         <td>${book.totalCount }</td>
@@ -119,7 +122,6 @@
                 </tbody>
             </table>
         </div>
-        <%--<button class="btn btn-danger" onclick="requestPay()">결제하기</button>--%>
     </div>
 </div>
 </div>
@@ -165,9 +167,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<%--datepicker--%>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="/js/order/cart.js"></script>
 </body>
 </html>

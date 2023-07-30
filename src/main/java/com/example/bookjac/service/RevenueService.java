@@ -104,7 +104,7 @@ public class RevenueService {
         String date = (1900 + settlement.getInserted().getYear()) + "-" + (settlement.getInserted().getMonth()+1) +  "-" +  settlement.getInserted().getDate();
         //지정된 날짜에 발주된 리스트 조회
         List<Cart> cartList = revenueMapper.selectOrderCartByDate(date);
-
+        System.out.println(date);
         //발주 총 금액, 개수 조회
         Cart sumCart = revenueMapper.selectCartSum(date);
 

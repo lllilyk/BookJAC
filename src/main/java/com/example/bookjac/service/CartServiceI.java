@@ -14,4 +14,10 @@ public interface CartServiceI {
 
     /* 발주 품목 수량 수정 */
     public int modifyCount(Cart cart);
+
+    /* 발주 품목별 변경 결과 확인 */
+    Cart getCart(int cartId);
+
+    /* 발주 품목 삭제 */
+    public int deleteCart(int cartId);
 }

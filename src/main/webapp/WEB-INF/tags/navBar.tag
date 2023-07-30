@@ -172,11 +172,20 @@
             </li>
         </sec:authorize>
 
+        <li class="has-subnav">
+            <a href="/customBookList">
+                <i class="fa fa-magnifying-glass fa-2x"></i>
+                <span class="nav-text">
+                            도서 검색
+                        </span>
+            </a>
+        </li>
+
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
                 <a class="${current eq 'orderProcess' ? 'active' : '' } item"
                    href="/order/process">
-                    <i class="fa fa-basket-shopping fa-2x"></i>
+                    <i class="fa fa-solid fa-cart-plus fa-2x"></i>
                     <span class="nav-text">
                             발주 관리
                         </span>
@@ -186,10 +195,11 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
-                <a href="#">
-                    <i class="fa fa-cart-flatbed fa-2x"></i>
+                <a class="${current eq 'orderList' ? 'active' : '' } item"
+                   href="/order/details">
+                    <i class="fa fa-solid fa-cart-arrow-down fa-2x"></i>
                     <span class="nav-text">
-                            재고 관리
+                            발주 내역
                         </span>
                 </a>
             </li>
@@ -197,6 +207,30 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
+                <a href="/inventory/inboundSellingList">
+                    <i class="fa fa-cart-flatbed fa-2x"></i>
+                    <span class="nav-text">
+                            입고 내역
+                        </span>
+                </a>
+            </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+            <li class="has-subnav">
+
+                <a href="/inventory/inventoryList">
+                    <i class="fa fa-industry fa-2x"></i>
+                    <span class="nav-text">
+                            재고 목록
+                        </span>
+                </a>
+            </li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+            <li class="has-subnav">
+
                 <a href="/list">
                     <i class="fa fa-book fa-2x"></i>
                     <span class="nav-text">
@@ -207,13 +241,12 @@
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
-
-        <li>
-            <a href="/Revenue/daily">
-                <i class="fa fa-chart-line fa-2x"></i>
-                <span class="nav-text">
+            <li class="has-subnav">
+                <a href="/Revenue/daily">
+                    <i class="fa fa-chart-line fa-2x"></i>
+                    <span class="nav-text">
                             매출 관리
-                        </span>
+                    </span>
                 </a>
             </li>
         </sec:authorize>

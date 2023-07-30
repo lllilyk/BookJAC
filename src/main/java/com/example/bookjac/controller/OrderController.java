@@ -1,25 +1,16 @@
 package com.example.bookjac.controller;
 
-import com.example.bookjac.domain.Book;
-import com.example.bookjac.domain.BookResult;
-import com.example.bookjac.domain.NaverResult;
-import com.example.bookjac.domain.Order;
+import com.example.bookjac.domain.*;
+import com.example.bookjac.service.CartService;
 import com.example.bookjac.service.NaverBookAPIService;
 import com.example.bookjac.service.OrderService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URI;
 import java.util.List;
@@ -42,12 +33,12 @@ public class OrderController {
     @PreAuthorize("isAuthenticated()")
     public String orderProcess(Model model,
                                @RequestParam(value="page", defaultValue = "1") Integer page,
+                               @RequestParam(value="search", defaultValue = "") String search,
                                Authentication auth){
 
         /* 현재 인증된 사용자의 이름(username) 가져오기 */
         String username = auth.getName();
-
-        Map<String, Object> result = service.listOrder(page);
+        Map<String, Object> result = service.listOrder(page, search);
         model.addAllAttributes(result);
 
         /* 사용자 이름을 order/process.jsp로 전달 */
@@ -65,5 +56,59 @@ public class OrderController {
         return "order/search";
     }
 
+    @PostMapping("add")
+    public String addOrderDetails(OrderDetails od,
+                                  RedirectAttributes rttr,
+                                  Authentication auth) throws Exception{
+        boolean ok = service.addOrderDetails(od);
+
+        if(ok){
+            rttr.addFlashAttribute("message", "발주가 성공적으로 처리되었습니다.");
+            return "redirect:/order/details";
+        } else {
+            rttr.addFlashAttribute("message", "발주 처리 중 문제가 발생하였습니다.");
+            return "redirect:/order/cart";
+        }
+    }
+
+    @GetMapping("details")
+    @PreAuthorize("isAuthenticated()")
+    public String list(Model model,
+                       @RequestParam(value="page", defaultValue = "1") Integer page,
+                       @RequestParam(value="search", defaultValue = "") String search){
+
+        Map<String, Object> result = service.orderDetailsList(page, search);
+        model.addAllAttributes(result);
+
+        return "order/details";
+    }
+
+    /*@GetMapping("/id/{id}")
+    public String eachOrderDetails(@PathVariable("id") Integer id,
+                                   *//*@RequestParam("inserted") String inserted,*//*
+                                   Model model,
+                                   Authentication auth) {
+        *//*OrderDetails od = service.getOrderDetails(id, auth);
+        model.addAttribute("od", od);*//*
+
+        String name = auth.getName();
+        System.out.println(name);
+        // orderCart 테이블에서 주문자의 이름(name)과 주문 날짜(date)를 기준으로 주문 내역 조회
+        List<Cart> orderCartList = service.getOrderCartByNameAndDate(name, inserted);
+        model.addAttribute("orderCartList", orderCartList);
+
+        return "order/each";
+    }*/
+
+    @GetMapping("/each")
+    public String eachOrderDetails(@RequestParam("inserted") String inserted,
+                                   Model model,
+                                   Authentication auth){
+        String name = auth.getName();
+
+        List<Cart> orderCartList = service.getOrderCartList(inserted, name);
+        model.addAttribute("orderCartList", orderCartList);
+        return "order/each";
+    }
 }
 
