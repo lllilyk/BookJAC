@@ -178,7 +178,7 @@
             <li class="has-subnav">
                 <a class="${current eq 'orderProcess' ? 'active' : '' } item"
                    href="/order/process">
-                    <i class="fa fa-basket-shopping fa-2x"></i>
+                    <i class="fa fa-solid fa-cart-plus fa-2x"></i>
                     <span class="nav-text">
                             발주 관리
                         </span>
@@ -190,7 +190,7 @@
             <li class="has-subnav">
                 <a class="${current eq 'orderList' ? 'active' : '' } item"
                    href="/order/details">
-                    <i class="fa fa-basket-shopping fa-2x"></i>
+                    <i class="fa fa-solid fa-cart-arrow-down fa-2x"></i>
                     <span class="nav-text">
                             발주 내역
                         </span>

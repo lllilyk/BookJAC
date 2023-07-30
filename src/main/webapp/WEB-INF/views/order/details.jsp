@@ -40,7 +40,6 @@
             font-weight: bold;
         }
         .bookSearchBar{
-            width: 500px;
             height: 50px;
         }
         .nameSearchContainer {
@@ -68,15 +67,23 @@
                 <%-- 발주 담당자별 발주내역 검색하기 --%>
                     <div class="col-md-6">
                         <form id="bookSearchForm" action="/order/details">
+                            <div class="input-group mb-3">
+                                <label for="inputTitle" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">발주담당자로 검색</label>
+                            </div>
                             <div class="input-group mb-3 bookSearchBar">
-                                <input type="search" name="search" class="form-control" placeholder="이름을 입력하세요" aria-describedby="bookSearchBtn">
+                                <input type="search" name="search" class="form-control" id="inputTitle" placeholder="이름을 입력하세요" aria-describedby="bookSearchBtn">
                                 <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
-                        <button type="button" class="btn btn-warning dateBtn">날짜 선택 후 클릭!</button>
+                        <div class="input-group mb-3">
+                            <label for="searchByDate" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">발주일자로 검색</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="searchByDate" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
+                            <button type="button" class="btn btn-warning dateBtn">날짜 선택 후 클릭!</button>
+                        </div>
                     </div>
                 </div>
             </div>
