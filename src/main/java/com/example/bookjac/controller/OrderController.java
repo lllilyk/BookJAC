@@ -83,28 +83,9 @@ public class OrderController {
         return "order/details";
     }
 
-    /*@GetMapping("/id/{id}")
-    public String eachOrderDetails(@PathVariable("id") Integer id,
-                                   *//*@RequestParam("inserted") String inserted,*//*
-                                   Model model,
-                                   Authentication auth) {
-        *//*OrderDetails od = service.getOrderDetails(id, auth);
-        model.addAttribute("od", od);*//*
-
-        String name = auth.getName();
-        System.out.println(name);
-        // orderCart 테이블에서 주문자의 이름(name)과 주문 날짜(date)를 기준으로 주문 내역 조회
-        List<Cart> orderCartList = service.getOrderCartByNameAndDate(name, inserted);
-        model.addAttribute("orderCartList", orderCartList);
-
-        return "order/each";
-    }*/
-
     @GetMapping("/each")
     public String eachOrderDetails(@RequestParam("inserted") String inserted,
-                                   Model model,
-                                   Authentication auth){
-        /*String name = auth.getName();*/
+                                   Model model){
 
         List<Cart> orderCartList = service.getOrderCartList(inserted);
         model.addAttribute("orderCartList", orderCartList);
