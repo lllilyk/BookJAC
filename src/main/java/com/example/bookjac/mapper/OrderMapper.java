@@ -65,7 +65,7 @@ public interface OrderMapper {
     List<OrderDetails> selectAllPages(Integer startIndex, Integer recordsInOrderDetails, String search);
 
     @Select("""
-            SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
+            SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice, inserted
             FROM OrderCart
             WHERE inserted = #{inserted}
             """)

@@ -38,20 +38,20 @@
 
           <table class="table table-bordered info" style="text-align: center">
               <thead>
-              <tr>
-                  <th class="table-dark" style="width:150px;">발주일자</th>
-                  <th class="table-dark" style="width:150px;">납기일자</th>
-                  <th class="table-dark" style="width:150px;">매입처명</th>
-                  <th class="table-dark" style="width:150px;">발주담당자</th>
-              </tr>
+                  <tr>
+                      <th class="table-dark" style="width:150px;">발주일자</th>
+                      <th class="table-dark" style="width:150px;">납기일자</th>
+                      <th class="table-dark" style="width:150px;">매입처명</th>
+                      <th class="table-dark" style="width:150px;">발주담당자</th>
+                  </tr>
               </thead>
               <tbody class="table-group-divider">
-              <tr>
-                  <td>${inserted}</td>
-                  <td id="deadline"></td>
-                  <td>날개 출판유통</td>
-                  <td><sec:authentication property='principal.originName'/></td>
-              </tr>
+                  <tr>
+                      <td>${inserted}</td>
+                      <td id="deadline"></td>
+                      <td>날개 출판유통</td>
+                      <td><sec:authentication property='principal.originName'/></td>
+                  </tr>
               </tbody>
           </table>
 
@@ -61,24 +61,24 @@
               <thead>
               <tr>
                   <th style="width:50px;">ISBN</th>
-                  <th style="width:300px;">제목</th>
-                  <th style="width:100px;">글쓴이</th>
+                  <th style="width:350px;">제목</th>
+                  <th style="width:150px;">글쓴이</th>
                   <th style="width:100px;">출판사</th>
-                  <th style="width:100px;">단가</th>
-                  <th style="width:180px;">발주수량</th>
+                  <th style="width:80px;">단가</th>
+                  <th style="width:80px;">발주수량</th>
                   <th style="width:100px;">합계</th>
               </tr>
               </thead>
               <tbody class="table-group-divider">
-              <c:forEach items="${orderCartList}" var="oc" varStatus="orderCartListStatus">
-                  <tr id="cartRow_${orderCartListStatus.index}">
-                      <td id="bookIdText_${orderCartListStatus.index}">${oc.bookId }</td>
+              <c:forEach items="${orderCartList}" var="oc" >
+                  <tr>
+                      <td>${oc.bookId }</td>
                       <td>${oc.title }</td>
                       <td>${oc.writer}</td>
                       <td>${oc.publisher }</td>
                       <td><fmt:formatNumber value="${oc.inPrice}" type="currency" currencyCode="KRW" /></td>
                       <td>${oc.bookCount}</td>
-                      <td class="inPriceSumEach" id="inPriceSum_${orderCartListStatus.index}">
+                      <td class="inPriceSumEach">
                           <fmt:formatNumber value="${oc.inPrice * oc.bookCount}" type="currency" currencyCode="KRW" />
                       </td>
                   </tr>
@@ -118,7 +118,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    var date = '${date}';
+    var date = '${orderCartJson}';
 </script>
 <script src="/js/order/each.js"></script>
 </body>

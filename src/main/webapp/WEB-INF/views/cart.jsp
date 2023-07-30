@@ -42,7 +42,6 @@
                       <h1>발주품목 확인</h1>
                   </div>
                   <div class="col-md-6 text-end">
-                      <button type="button" class="btn btn-outline-primary">미리보기</button><%--발주요청내역서 폼으로 연결--%>
                       <a href="/order/process" class="btn btn-outline-secondary">돌아가기</a>
                   </div>
               </div>

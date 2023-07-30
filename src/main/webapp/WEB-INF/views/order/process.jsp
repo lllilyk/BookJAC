@@ -25,6 +25,10 @@
             border: solid;
             border-color: lightgray;
         }
+        td{
+            text-align: center;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
