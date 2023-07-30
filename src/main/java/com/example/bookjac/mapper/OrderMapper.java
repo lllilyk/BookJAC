@@ -67,7 +67,7 @@ public interface OrderMapper {
     @Select("""
             SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
             FROM OrderCart
-            WHERE memberId = #{name}
+            WHERE inserted = #{inserted}
             """)
     List<Cart> getOrderCart(String inserted);
 

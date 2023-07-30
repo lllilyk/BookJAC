@@ -104,9 +104,9 @@ public class OrderController {
     public String eachOrderDetails(@RequestParam("inserted") String inserted,
                                    Model model,
                                    Authentication auth){
-        String name = auth.getName();
+        /*String name = auth.getName();*/
 
-        List<Cart> orderCartList = service.getOrderCartList(inserted, name);
+        List<Cart> orderCartList = service.getOrderCartList(inserted);
         model.addAttribute("orderCartList", orderCartList);
         return "order/each";
     }

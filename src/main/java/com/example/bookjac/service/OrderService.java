@@ -80,12 +80,8 @@ public class OrderService {
         return cart;
     }*/
 
-    public List<Cart> getOrderCartList(String inserted, String name) {
+    public List<Cart> getOrderCartList(String inserted) {
         List<Cart> cart = mapper.getOrderCart(inserted);
-
-        for(Cart c : cart){
-            c.setMemberId(name);
-        }
         return cart;
     }
 
