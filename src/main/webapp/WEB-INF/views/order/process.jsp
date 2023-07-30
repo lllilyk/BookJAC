@@ -88,7 +88,7 @@
                 <tbody class="table-group-divider">
                 <c:forEach items="${bookList}" var="book" varStatus="bookStatus">
                     <tr>
-                        <td class="bookId" id="bookIdText_${bookStatus.index}">${book.id }</td>
+                        <td class="bookId" id="bookIdText_${bookStatus.index}">${book.isbn }</td>
                         <td class="title">${book.title }</td>
                         <td class="writer">${book.writer }</td>
                         <td class="publisher">${book.publisher }</td>
@@ -113,7 +113,7 @@
                         </td>
                         <td>
                             <button id="btn_cart_${bookStatus.index}" type="button"
-                                    class="btn btn-outline-danger btn_cart"> 등록
+                                    class="btn btn-light btn_cart"> <i class="fa-solid fa-circle-check"></i>
                             </button>
                         </td>
                     </tr>

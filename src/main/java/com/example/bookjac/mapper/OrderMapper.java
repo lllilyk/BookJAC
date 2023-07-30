@@ -21,7 +21,7 @@ public interface OrderMapper {
     @Select("""
             <script>
 			<bind name="pattern" value="'%' + search + '%'" />
-            SELECT id,
+            SELECT isbn,
                    title,
                    writer,
                    publisher,
@@ -31,7 +31,7 @@ public interface OrderMapper {
             WHERE title LIKE #{pattern}
 				OR writer LIKE #{pattern}
 				OR publisher LIKE #{pattern}
-				OR id LIKE #{pattern}
+				OR isbn LIKE #{pattern}
             ORDER BY totalCount
             LIMIT #{startIndex}, #{booksInPage}
             </script>

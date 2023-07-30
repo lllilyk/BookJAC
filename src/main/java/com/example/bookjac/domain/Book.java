@@ -6,14 +6,15 @@ import java.util.Date;
 
 @Data
 public class Book {
-    private String id;
+    private Integer id;
+    private String isbn;
     private String title;
     private String writer;
     private String publisher;
     private String categoryId;
-    private String inPrice;
+    private Integer inPrice;
     private String outPrice;
-    private String totalCount;
+    private Integer totalCount;
     private int inCount;
     private int displayCount;
     private String event;
