@@ -21,12 +21,12 @@ public interface MemberMapper {
             """)
     List<Member> selectAll();
 
-    @ResultMap("memberMap")
     @Select("""
             SELECT * 
             FROM Member m LEFT JOIN MemberAuthority ma ON m.id = ma.memberId
             WHERE id = #{id}
             """)
+    @ResultMap("memberMap")
     Member selectById(String id);
 
     @Delete("""
