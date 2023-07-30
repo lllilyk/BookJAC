@@ -90,6 +90,7 @@ public class NaverBookAPIService {
         Cart cartData = new Cart();
         cartData.setMemberId(memberId);
         cartData.setTitle(cart.getTitle());
+        cartData.setWriter(cart.getWriter());
         cartData.setPublisher(cart.getPublisher());
         cartData.setInPrice(cart.getInPrice());
         cartData.setBookCount(cart.getBookCount());
