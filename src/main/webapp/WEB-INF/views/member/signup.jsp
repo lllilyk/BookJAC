@@ -21,8 +21,8 @@
                     <div class="mb-3">
                         <label for="inputId" class="form-label">아이디</label>
                         <input id="inputId" type="text" class="form-control" name="id" value="${member.id}"/>
-                        <div id="availableIdMessage">사용 가능한 ID 입니다.</div>
-                        <div id="notAvailableMessage">사용 불가능한 ID 입니다.</div>
+                        <div class="d-none" id="availableIdMessage">사용 가능한 ID 입니다.</div>
+                        <div class="d-none" id="notAvailableMessage">사용 불가능한 ID 입니다.</div>
                         <button type="button" id="checkIdBtn">중복확인</button> <%--submit 역할 못하게 type 값 button으로--%>
                     </div>
                     <div class="mb-3">
@@ -45,22 +45,22 @@
                         <label for="inputName" class="form-label">이름</label>
                         <input id="inputName" type="text" class="form-control" name="name" value="${member.name}" />
                     </div>
-                    <%--<div class="mb-3">
+                    <div class="mb-3">
                         <label for="inputMemberNum" class="form-label">사원번호</label>
                         <input id="inputMemberNum" type="text" class="form-control" name="memberNumber" value="${member.memberNumber}" />
-                    </div>--%>
+                    </div>
                     <div class="mb-3">
                         <label for="inputEmail" class="form-label">이메일</label>
                         <input id="inputEmail" type="email" class="form-control" name="email" value="${member.email}" />
-                        <div id="availableEmailMessage">사용 가능한 이메일 입니다.</div>
-                        <div id="notAvailableEmailMessage">사용 불가능한 이메일 입니다.</div>
+                        <div class="d-none" id="availableEmailMessage">사용 가능한 이메일 입니다.</div>
+                        <div class="d-none" id="notAvailableEmailMessage">사용 불가능한 이메일 입니다.</div>
                         <button type="button" id="checkEmailBtn">중복확인</button>
                     </div>
                     <div class="mb-3">
                         <label for="inputPhoneNum" class="form-label">전화번호</label>
                         <input id="inputPhoneNum" type="text" class="form-control" name="phoneNumber" value="${member.phoneNumber}" />
-                        <div id="availablePhoneNumberMessage">사용 가능한 전화번호 입니다.</div>
-                        <div id="notAvailablePhoneNumberMessage">사용 불가능한 전화번호 입니다.</div>
+                        <div class="d-none" id="availablePhoneNumberMessage">사용 가능한 전화번호 입니다.</div>
+                        <div class="d-none" id="notAvailablePhoneNumberMessage">사용 불가능한 전화번호 입니다.</div>
                         <button type="button" id="checkPhoneNumberBtn">중복확인</button>
                     </div>
                     <div class="mb-3">

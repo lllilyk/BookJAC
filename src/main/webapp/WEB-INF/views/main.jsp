@@ -21,9 +21,9 @@
 
     </style>
 </head>
-<body style="background: #e2e2e2;">
+<body>
     <div>
-        <img src="/images/BOOKJAC logo2 gray.png">
+        <img src="/images/BOOKJAC logo3.png">
     </div>
 
     <my:navBar></my:navBar>

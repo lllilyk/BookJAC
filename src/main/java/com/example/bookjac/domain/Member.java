@@ -11,7 +11,7 @@ public class Member {
     private String id;
     private String password;
     private String name;
-    private LocalDate memberNumber;
+    private String memberNumber;
     private String email;
     private String phoneNumber;
     private LocalDateTime inserted;

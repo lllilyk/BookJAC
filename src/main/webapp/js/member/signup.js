@@ -13,56 +13,15 @@ function enableSubmit() {
     }
 }
 
-// input 아이디에 키보드 입력 발생 시
+// 아이디 input에 키보드 입력 발생 시
 $("#inputId").keyup(function () {
    // 아이디 중복 확인 다시
    checkId = false;
    $("#availableIdMessage").addClass("d-none");
    $("#notAvailableMessage").addClass("d-none");
+
    // submit 버튼 비활성화
     enableSubmit();
-});
-
-// 전화번호 중복확인 버튼이 클릭되면
-$("#checkPhoneNumberBtn").click(function () {
-   const phoneNumber = $("#inputPhoneNum").val();
-
-   $.ajax("/member/checkPhoneNumber/" + phoneNumber, {
-       success: function (data) {
-
-           if (data.available) {
-               $("#availablePhoneNumberMessage").removeClass("d-none");
-               $("#notAvailablePhoneNumberMessage").addClass("d-none");
-               checkPhoneNumber = true;
-           } else {
-               $("#availablePhoneNumberMessage").addClass("d-none");
-               $("#notAvailablePhoneNumberMessage").removeClass("d-none");
-               checkPhoneNumber = false;
-           }
-       },
-       complete: enableSubmit
-   })
-});
-
-// email 중복확인 버튼이 클릭되면
-$("#checkEmailBtn").click(function () {
-    const email = $("#inputEmail").val();
-
-    $.ajax("/member/checkEmail/" + email, {
-        success: function (data) {
-
-            if (data.available) {
-                $("#availableEmailMessage").removeClass("d-none");
-                $("#notAvailableEmailMessage").addClass("d-none");
-                checkEmail = true;
-            } else {
-                $("#availableEmailMessage").addClass("d-none");
-                $("#notAvailableEmailMessage").removeClass("d-none");
-                checkEmail = false;
-            }
-        },
-        complete: enableSubmit
-    })
 });
 
 // id 중복확인 버튼이 클릭되면
@@ -87,6 +46,77 @@ $("#checkIdBtn").click(function () {
         },
         complete: enableSubmit
     })
+});
+
+// email input에 키보드 입력 발생 시
+$("#inputEmail").keyup(function () {
+   // email 중복 다시 확인
+   checkEmail = false;
+   $("#availableEmailMessage").addClass("d-none");
+   $("#notAvailableEmailMessage").removeClass("d-none");
+
+   // submit 버튼 비활성화
+    enableSubmit();
+});
+
+// email 중복확인 버튼이 클릭되면
+$("#checkEmailBtn").click(function () {
+    const email = $("#inputEmail").val();
+
+    $.ajax("/member/checkEmail/" + email, {
+        success: function (data) {
+
+            if (data.available) {
+                $("#availableEmailMessage").removeClass("d-none");
+                $("#notAvailableEmailMessage").addClass("d-none");
+                checkEmail = true;
+            } else {
+                $("#availableEmailMessage").addClass("d-none");
+                $("#notAvailableEmailMessage").removeClass("d-none");
+                checkEmail = false;
+            }
+        },
+        complete: enableSubmit
+    })
+});
+
+// 전화번호 input에 키보드 입력 발생 시
+$("#inputPhoneNum").keyup(function () {
+   // 전화번호 중복 다시 확인
+   checkPhoneNumber = false;
+   $("#availablePhoneNumberMessage").addClass("d-none");
+   $("#notAvailablePhoneNumberMessage").removeClass("d-none");
+
+   // submit 버튼 비활성화
+    enableSubmit();
+});
+
+// 전화번호 중복확인 버튼이 클릭되면
+$("#checkPhoneNumberBtn").click(function () {
+   const phoneNumber = $("#inputPhoneNum").val();
+
+   $.ajax("/member/checkPhoneNumber/" + phoneNumber, {
+       success: function (data) {
+
+           if (data.available) {
+               $("#availablePhoneNumberMessage").removeClass("d-none");
+               $("#notAvailablePhoneNumberMessage").addClass("d-none");
+               checkPhoneNumber = true;
+           } else {
+               $("#availablePhoneNumberMessage").addClass("d-none");
+               $("#notAvailablePhoneNumberMessage").removeClass("d-none");
+               checkPhoneNumber = false;
+           }
+       },
+       complete: function() {
+           console.log("complete start")
+           console.log("complete", checkId)
+           console.log("complete", checkEmail)
+           console.log("complete", checkPhoneNumber)
+           console.log("complete", checkPassword)
+           enableSubmit();
+       }
+   })
 });
 
 // 패스워드, 패스워드 체크 인풋에 키업 이벤트가 발생하면
