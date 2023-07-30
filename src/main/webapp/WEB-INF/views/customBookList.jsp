@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
       integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
@@ -31,10 +32,10 @@
 </style>
 <body>
 
-<my:navBar current="customBookList"></my:navBar>
+<my:navBar current="/customBookList"></my:navBar>
 
 <div class="container-lg mt-3">
-    <h1><a href="/bookList" style="color: black; text-decoration-line: none">찾으시는 책을 검색 해 보세요.</a></h1>
+    <h1><a href="/customBookList" style="color: black; text-decoration-line: none">찾으시는 책을 검색 해 보세요.</a></h1>
 </div>
 
 <%-- search --%>

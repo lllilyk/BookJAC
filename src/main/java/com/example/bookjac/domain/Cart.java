@@ -3,6 +3,8 @@ package com.example.bookjac.domain;
 import lombok.Data;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Data
 public class Cart {
     private Integer cartId;
@@ -19,6 +21,11 @@ public class Cart {
     private String publisher;
     private Integer inPrice;
     private Integer outPrice;
+    private boolean inbounded;
+    private LocalDate inserted;
+    private Integer totalCount;
+    private LocalDate inboundedDate;
+    private boolean showInbound;
 
     //sum
     private Integer sumBookCount;
@@ -26,7 +33,7 @@ public class Cart {
     private Integer sumOutPrice;
 
     /*상품당 총 금액*/
-    public void CalculateTotalPrice(){
+    public void CalculateTotalPrice() {
         this.totalPrice = this.inPrice * this.bookCount;
     }
 }
