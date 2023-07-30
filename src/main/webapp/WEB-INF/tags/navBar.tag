@@ -232,12 +232,12 @@
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
-            <li>
-                <a href="">
+            <li class="has-subnav">
+                <a href="/Revenue/daily">
                     <i class="fa fa-chart-line fa-2x"></i>
                     <span class="nav-text">
                             매출 관리
-                        </span>
+                    </span>
                 </a>
             </li>
         </sec:authorize>
