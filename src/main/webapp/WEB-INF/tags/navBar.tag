@@ -210,7 +210,7 @@
 
         <sec:authorize access="isAuthenticated()">
             <li class="has-subnav">
-                <a href="list">
+                <a href="/list">
                     <i class="fa fa-book fa-2x"></i>
                     <span class="nav-text">
                             매대 관리
@@ -220,12 +220,12 @@
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
-            <li>
-                <a href="">
+            <li class="has-subnav">
+                <a href="/Revenue/daily">
                     <i class="fa fa-chart-line fa-2x"></i>
                     <span class="nav-text">
                             매출 관리
-                        </span>
+                    </span>
                 </a>
             </li>
         </sec:authorize>

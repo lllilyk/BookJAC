@@ -1,8 +1,7 @@
 package com.example.bookjac.mapper;
 
 import com.example.bookjac.domain.Book;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 
 import java.util.List;
@@ -13,7 +12,7 @@ public interface BookMapper {
     //게시글 목록
     @Select("""
             SELECT
-            id, title,writer,publisher,categoryId,inPrice,outPrice,totalCount,inCount,displayCount
+            id, title,writer,publisher,categoryId,inPrice,outPrice,totalCount,inCount,displayCount,checkEvent
             FROM Book
             ORDER By id DESC
             """)
@@ -41,9 +40,13 @@ public interface BookMapper {
 			<bind name="pattern" value="'%' + search + '%'" />
 			SELECT
 				title,
+				id,
+				displayCount,
+				totalCount,
 				writer,
 				publisher,
-				categoryId
+				categoryId,
+				checkEvent
 			     
 			FROM Book 
 			
@@ -66,6 +69,9 @@ public interface BookMapper {
 			<bind name="pattern" value="'%' + search + '%'" />
 			SELECT
 				title,
+				id,
+				displayCount,
+				totalCount,
 				writer,
 				publisher,
 				event,
@@ -90,4 +96,57 @@ public interface BookMapper {
 			</script>
 			""")
 	List<Book> selectAllPagingEvent(Integer startIndex, Integer rowPerPage, String search);
+
+	@Update("""
+			UPDATE Book
+			SET displayCount =  displayCount-#{sellAmount},
+				totalCount = inCount + displayCount
+		
+			WHERE
+			id = #{id}
+			""")
+	Integer bookSellUpdate(Book book);
+
+	@Update("""
+			UPDATE Book
+			SET displayCount = displayCount + #{refundAmount},
+				totalCount = inCount + displayCount
+			WHERE 
+			id = #{id}
+			""")
+	Integer bookRefundUpdate(Book book);
+
+	@Select("""
+			SELECT *
+			FROM Book
+			WHERE id =#{id}
+			""")
+	Book selectById(Integer id);
+
+	@Update("""
+			UPDATE Book
+			SET 
+				event = #{event},
+				eventStartDate = #{eventStartDate},
+				eventEndDate = #{eventEndDate},
+				checkEvent = 1
+			WHERE id = #{id}
+				
+			""")
+	int update(Book book);
+
+	@Update("""
+			UPDATE Book
+			SET event = Null,
+			checkEvent = 0,
+			eventStartDate = Null,
+			eventEndDate = Null
+			
+			WHERE id = #{id}
+			""")
+	int deleteById(Integer id);
+
+
+
+
 }

@@ -37,6 +37,7 @@ $(".btn_cart").on("click", function(e) {
         data.bookId = $("#bookIsbnText_" + index).text().trim();
         data.bookCount = quantity;
         data.title = $(this).closest("tr").find(".title").text().trim();
+        data.writer = $(this).closest("tr").find(".writer").text();
         data.publisher = $(this).closest("tr").find(".publisher").text().trim();
         data.inPrice = $(this).closest("tr").find(".inPrice").text().trim();
         /* 서버로 데이터 전송 */
@@ -63,3 +64,17 @@ function cartAlert(result){
         alert("발주 품목에 이미 추가되어 있습니다.");
     }
 }
+
+/* 도서 검색 */
+document.getElementById("bookSearchForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본적인 폼 제출 동작 방지
+
+    // 입력 필드의 값 가져오기
+    var searchText = document.getElementById("searchBook").value;
+
+    // 검색어를 포함한 URL 생성
+    var url = "/order/search?text=" + encodeURIComponent(searchText);
+
+    // 새로운 URL로 페이지 이동
+    window.location.href = url;
+});

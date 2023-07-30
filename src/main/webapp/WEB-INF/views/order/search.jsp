@@ -13,7 +13,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>도서 검색 페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -35,12 +35,21 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-md-6">
-                    <h3>도서 검색 결과</h3>
+                    <h1>도서 검색 결과</h1>
                 </div>
                 <div class="col-md-6 text-end">
                     <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
                     <a href="/order/process" class="btn btn-outline-secondary">돌아가기</a>
                 </div>
+            </div>
+            <%--네이버 오픈 API를 활용한 도서 검색--%>
+            <div class="container">
+                <form id="bookSearchForm" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" id="searchBook" class="form-control" placeholder="원하시는 도서명을 입력하세요" aria-describedby="bookSearchBtn">
+                        <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                    </div>
+                </form>
             </div>
             <table class="table table-bordered searchResults" style="text-align: center">
                 <thead>
@@ -61,7 +70,7 @@
                         <td class="bookId" id="bookIsbnText_${bookStatus.index}">${book.isbn}</td>
                         <td class="border-box"><img src="${book.image}" alt="${book.title}" /></td>
                         <td class="title">${book.title}</td>
-                        <td>${book.author}</td>
+                        <td class="writer">${book.author}</td>
                         <td class="publisher">${book.publisher}</td>
                         <td>${book.pubdate}</td>
                         <td class="inPrice">${book.discount }</td>

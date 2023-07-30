@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <title>발주품목 확인 페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
@@ -34,16 +34,6 @@
   <my:navBar current="cart"></my:navBar>
   <my:alert></my:alert>
 
-  <!-- toast -->
-  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
-      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="d-flex">
-              <div class="toast-body"></div>
-              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-      </div>
-  </div>
-
   <div class="ui center aligned container" id="container">
       <div class="row justify-content-center">
           <div class="col-12">
@@ -59,12 +49,12 @@
 
               <table class="table table-bordered info" style="text-align: center">
                   <thead>
-                  <tr>
-                      <th class="table-dark" style="width:150px;">발주일자</th>
-                      <th class="table-dark" style="width:150px;">납기일자</th>
-                      <th class="table-dark" style="width:150px;">매입처명</th>
-                      <th class="table-dark" style="width:150px;">발주담당자</th>
-                  </tr>
+                      <tr>
+                          <th class="table-dark" style="width:150px;">발주일자</th>
+                          <th class="table-dark" style="width:150px;">납기일자</th>
+                          <th class="table-dark" style="width:150px;">매입처명</th>
+                          <th class="table-dark" style="width:150px;">발주담당자</th>
+                      </tr>
                   </thead>
                   <tbody class="table-group-divider">
                       <tr>
@@ -80,21 +70,23 @@
               <c:set var="totalPrice" value="0" />
               <table class="table table-bordered" style="text-align: center">
                   <thead>
-                  <tr>
-                      <th style="width:50px;">ISBN</th>
-                      <th style="width:350px;">제목</th>
-                      <th style="width:120px;">출판사</th>
-                      <th style="width:100px;">단가</th>
-                      <th style="width:180px;">발주수량</th>
-                      <th style="width:100px;">합계</th>
-                      <th style="width:70px;">삭제</th>
-                  </tr>
+                      <tr>
+                          <th style="width:50px;">ISBN</th>
+                          <th style="width:300px;">제목</th>
+                          <th style="width:100px;">글쓴이</th>
+                          <th style="width:100px;">출판사</th>
+                          <th style="width:100px;">단가</th>
+                          <th style="width:180px;">발주수량</th>
+                          <th style="width:100px;">합계</th>
+                          <th style="width:70px;">삭제</th>
+                      </tr>
                   </thead>
                   <tbody class="table-group-divider">
                   <c:forEach items="${cartInfo}" var="cart" varStatus="cartStatus">
-                      <tr>
+                      <tr id="cartRow_${cartStatus.index}">
                           <td id="bookIdText_${cartStatus.index}">${cart.bookId }</td>
                           <td>${cart.title }</td>
+                          <td>${cart.writer}</td>
                           <td>${cart.publisher }</td>
                           <td><fmt:formatNumber value="${cart.inPrice}" type="currency" currencyCode="KRW" /></td>
                           <td>
@@ -111,12 +103,16 @@
                                           <button id="plus_btn_${cartStatus.index}" type="button"
                                                   class="btn btn-light plus_btn">+
                                           </button>
-                                      <button class="btn btn-light changeBtn" id="btn_cart_${cartStatus.index}" value="${cart.cartId}"><i class="fa-solid fa-circle-check"></i></button>
+                                          <button class="btn btn-light changeBtn" id="btn_cart_${cartStatus.index}" value="${cart.cartId}">
+                                                <i class="fa-solid fa-circle-check"></i>
+                                          </button>
                                       </div>
                                   </div>
                               </div>
                           </td>
-                          <td><fmt:formatNumber value="${cart.inPrice * cart.bookCount}" type="currency" currencyCode="KRW" /></td>
+                          <td class="inPriceSumEach" id="inPriceSum_${cartStatus.index}">
+                              <fmt:formatNumber value="${cart.inPrice * cart.bookCount}" type="currency" currencyCode="KRW" />
+                          </td>
                           <td>
                               <button id="btn_cart_${cartStatus.index}" type="button"
                                       class="btn btn-outline-danger btn_delete_cart"> 삭제
@@ -128,12 +124,12 @@
                       <c:set var="totalPrice" value="${totalPrice + (cart.inPrice * cart.bookCount)}" />
                   </c:forEach>
                   <tr>
-                      <td colspan="7">
+                      <td colspan="8">
                           <table class="table mb-0" style="text-align: right">
                               <tbody>
                                 <tr>
-                                    <td>
-                                        총 발주 품목 수량 : <fmt:formatNumber value="${totalQuantity}" />
+                                    <td id="totalQuantity">
+                                        총 발주 수량 : <fmt:formatNumber value="${totalQuantity}" />
                                     </td>
                                 </tr>
                               </tbody>
@@ -141,7 +137,7 @@
                           <table class="table mb-0" style="text-align: right">
                               <tbody>
                               <tr>
-                                  <td>
+                                  <td id="totalPrice">
                                       총 결제 예상 금액  : <fmt:formatNumber value="${totalPrice}" type="currency" currencyCode="KRW" />
                                   </td>
                               </tr>
@@ -153,9 +149,32 @@
               </table>
               <div class="row">
                   <div class="col-md-6 text-center bottomBtn">
-                      <%--취소하시겠습니까? 모달 띄우기--%>
-                      <button type="button" class="btn btn-secondary">취소하기</button>
-                      <button type="button" class="btn btn-danger">발주하기</button>
+                      <button type="button" class="btn btn-danger addOrderDetails">발주하기</button>
+                  </div>
+              </div>
+
+              <%--modal--%>
+              <div class="orderConfirmModal modal" tabindex="-1">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title">발주 확인</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <form id="orderProcessForm" action="/order/add" method="post" >
+                                  <input type="hidden" name="name" value="<sec:authentication property='principal.originName'/>">
+                                  <input type="hidden" name="inserted" value="${currentDate}">
+                                  <input type="hidden" name="totalQuantity" value="<fmt:formatNumber value='${totalQuantity}' />">
+                                  <input type="hidden" name="totalPrice" value="<fmt:formatNumber value='${totalPrice}' type='currency' currencyCode='KRW' />">
+                              </form>
+                              <p>발주 품목과 수량이 맞는지 다시 한 번 확인해주세요.</p>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">다시 확인할래요</button>
+                              <button type="submit" form="orderProcessForm" class="btn btn-outline-danger addOrderDetailsBtn">이대로 발주할게요</button>
+                          </div>
+                      </div>
                   </div>
               </div>
 
@@ -164,6 +183,13 @@
                   <input type="hidden" name="cartId" class="update_cartId">
                   <input type="hidden" name="bookCount" class="update_bookCount">
               </form>
+
+              <!-- 발주 품목 삭제 form -->
+              <form action="/cart/delete" method="post" class="quantity_delete_form">
+                  <input type="hidden" name="cartId" class="delete_cartId">
+                  <input type="hidden" name="memberId" value="${member.memberId}">
+              </form>
+
           </div>
       </div>
   </div>
