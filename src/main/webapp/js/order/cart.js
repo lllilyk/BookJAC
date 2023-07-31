@@ -210,6 +210,7 @@ $(document).ready(function() {
         // totalQuantity와 totalPrice를 초기화합니다.
         $("#totalQuantity").text("총 발주 수량 : 0");
         $("#totalPrice").text("총 결제 예상 금액  : 0");
+
     });
 });
 
