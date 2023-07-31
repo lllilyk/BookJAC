@@ -75,8 +75,8 @@ public class OrderService {
                       "orderDetailsList", list);
     }
 
-    public List<Cart> getOrderCartList(String inserted) {
-        List<Cart> cart = mapper.getOrderCart(inserted);
+    public List<Cart> getOrderCartList(String inserted, String memberId) {
+        List<Cart> cart = mapper.getOrderCart(inserted, memberId);
         return cart;
     }
 

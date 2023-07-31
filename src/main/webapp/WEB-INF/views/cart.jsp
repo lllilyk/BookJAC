@@ -162,6 +162,7 @@
                           </div>
                           <div class="modal-body">
                               <form id="orderProcessForm" action="/order/add" method="post" >
+                                  <input type="hidden" name="memberId" value="<sec:authentication property="name"/>">
                                   <input type="hidden" name="name" value="<sec:authentication property='principal.originName'/>">
                                   <input type="hidden" name="inserted" value="${currentDate}">
                                   <input type="hidden" name="totalQuantity" value="<fmt:formatNumber value='${totalQuantity}' />">
