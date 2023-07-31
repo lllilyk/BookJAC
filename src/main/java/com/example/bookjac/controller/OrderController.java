@@ -84,6 +84,7 @@ public class OrderController {
     }
 
     @GetMapping("/each")
+    @PreAuthorize("isAuthenticated()")
     public String eachOrderDetails(@RequestParam("inserted") String inserted,
                                    Model model){
 
