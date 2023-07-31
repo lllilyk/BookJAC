@@ -89,6 +89,7 @@ public class OrderController {
 
         List<Cart> orderCartList = service.getOrderCartList(inserted);
         model.addAttribute("orderCartList", orderCartList);
+        model.addAttribute("inserted", inserted);
         return "order/each";
     }
 }

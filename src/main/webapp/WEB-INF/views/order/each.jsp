@@ -12,7 +12,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>발주내역 확인 페이지</title>
+    <title id="title">${inserted} 발주 상세 내역</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
@@ -38,10 +38,10 @@
     <div class="col-12">
       <div class="row">
         <div class="col-md-6">
-            <h1>발주 상세 내역</h1>
+            <h1>${inserted} 발주 상세 내역</h1>
         </div>
         <div class="col-md-6 text-end">
-            <a href="/order/details" class="btn btn-outline-success">다운로드</a>
+            <button id="excelBtn" class="btn btn-outline-success">엑셀 다운</button>
             <a href="/order/details" class="btn btn-outline-dark">돌아가기</a>
         </div>
       </div>
@@ -50,7 +50,7 @@
           <c:set var="totalPrice" value="0" />
           <c:set var="inserted" value="${orderCartList[0].inserted}" />
           <c:set var="memberId" value="${orderCartList[0].memberId}" />
-          <table class="table table-bordered" style="text-align: center; border-collapse: collapse;">
+          <table class="table table-bordered excelTable" id="TableToExport" style="text-align: center; border-collapse: collapse;">
               <thead>
               <tr>
                   <td colspan="8">
@@ -128,9 +128,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    var date = '${orderCartJson}';
-</script>
-<script src="/js/order/each.js"></script>
+<script src="/js/revenue/excel.js"></script>
 </body>
 </html>
