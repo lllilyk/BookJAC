@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,11 +40,20 @@ public class InventoryController {
         model.addAllAttributes(result);
     }
 
-    @PostMapping("/inbound/{bookId}/{inboundedDate}")
-    public ResponseEntity<Map<String, Object>> inbound(@PathVariable("bookId") String bookId,
+    @PostMapping("/inbound/{cartId}/{inboundedDate}")
+    public ResponseEntity<Map<String, Object>> inbound(@PathVariable("cartId") String cartId,
                                                        @PathVariable("inboundedDate") String inboundedDate) {
-        return ResponseEntity.ok().body(service.inbound(bookId, inboundedDate));
+        return ResponseEntity.ok().body(service.inbound(cartId, inboundedDate));
     }
+
+
+//    //도서목록에 있는 도서를 삭제
+//    @DeleteMapping("/inbound/{cartId}")
+//    @ResponseBody
+//    public ResponseEntity<Map<String, Object>> deleteBook(@PathVariable("cartId") String cartId) {
+//        Map<String, Object> result = service.deleteInbounded(cartId);
+//        return ResponseEntity.ok().body(result);
+//    }
 
     @GetMapping("/inventoryList")
     public void inventoryList(Model model,
@@ -61,10 +71,5 @@ public class InventoryController {
         model.addAllAttributes(result);
     }
 
-    //입고된 도서 조회
-    @PostMapping("")
-    public void inboundedList(Model model) {
-        List<Book> inboundedList = service.inboundedList();
 
-    }
 }

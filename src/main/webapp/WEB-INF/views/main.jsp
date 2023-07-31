@@ -10,15 +10,34 @@
 
 <html>
 <head>
+    <style>
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        img {
+            width: 50vw;
+            height: 50vh;
+        }
+
+    </style>
 </head>
-<body style="background: #e2e2e2;">
-<div align="center">
-    <h1>메인 페이지</h1>
-</div>
+
+<body>
 
 <my:navBar></my:navBar>
 
 <my:alert></my:alert>
+
+<div id="container">
+    <img src="/images/BOOKJAC logo3.png">
+</div>
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"
         integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w=="

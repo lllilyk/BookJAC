@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("member")
@@ -21,15 +20,35 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
-    @GetMapping("signup")
-    @PreAuthorize("isAnonymous()")
-    public void signupForm() {
+    @GetMapping("checkId/{id}")
+    @ResponseBody
+    public Map<String, Object> checkId(@PathVariable("id") String id) {
 
+        return service.checkId(id);
+    }
+
+    @GetMapping("checkEmail/{email}")
+    @ResponseBody
+    public Map<String, Object> checkEmail(@PathVariable("email") String email) {
+
+        return service.checkEmail(email);
+    }
+
+    @GetMapping("checkPhoneNumber/{phoneNumber}")
+    @ResponseBody
+    public Map<String, Object> checkPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
+        return service.checkPhoneNumber(phoneNumber);
     }
 
     @GetMapping("login")
     @PreAuthorize("isAnonymous()")
     public void loginForm() {
+
+    }
+
+    @GetMapping("signup")
+    @PreAuthorize("isAnonymous()")
+    public void signupForm() {
 
     }
 

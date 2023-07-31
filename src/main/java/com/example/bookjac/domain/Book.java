@@ -25,7 +25,6 @@ public class Book {
     private String checkEvent;
 
 
-
     // 디스플레이 필요 여부
     private int safeDisplayCount;
 

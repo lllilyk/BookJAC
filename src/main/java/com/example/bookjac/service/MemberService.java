@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -70,6 +71,25 @@ public class MemberService {
             cnt = mapper.update(member);
         }
         return cnt == 1;
+    }
+
+    public Map<String, Object> checkId(String id) {
+        Member member = mapper.selectById(id);
+
+        // member가 null이면 available
+        return Map.of("available", member == null);
+    }
+
+    public Map<String, Object> checkEmail(String email) {
+        Member member = mapper.selectByEmail(email);
+
+        return Map.of("available", member == null);
+    }
+
+    public Map<String, Object> checkPhoneNumber(String phoneNumber) {
+        Member member = mapper.selectByPhoneNumber(phoneNumber);
+
+        return Map.of("available", member == null);
     }
 }
 

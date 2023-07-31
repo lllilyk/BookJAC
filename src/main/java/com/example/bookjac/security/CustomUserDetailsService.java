@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username + "회원이 존재하지 않습니다.");
         }
 
-        /* 39번째 코드를 풀어 쓴다면
+        /* 33번째 코드를 풀어 쓴다면
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
             for (String auth : member.getAuthority()) {
                 authorityList.add(new SimpleGrantedAuthority(auth));
