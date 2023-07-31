@@ -67,7 +67,7 @@
             </div>
             <div class="col">
                 <label>책 검색</label>
-                <%--                <input class="form-control" type="text" value="${param.title}" id="bookTitle">--%>
+                <input class="form-control" type="text" value="${param.title}" id="bookTitle">
             </div>
             <div class="col">
                 <input class="form-control d-none" type="text" id="settlementId" value="${param.settlementId}">
