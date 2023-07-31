@@ -95,7 +95,7 @@
                     </c:if>
                     <c:if test="${!order.inbounded}">
                         <button id="checkInbound_${order.cartId}_${loop.index}" type="button"
-                                class="btn btn-outline-danger btn-sm">
+                                class="btn btn-outline-danger btn-sm" onclick="handleInbound(${order.cartId})">
                             입고전
                         </button>
                     </c:if>

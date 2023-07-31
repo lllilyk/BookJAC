@@ -43,7 +43,6 @@ public class InventoryService {
     public Map<String, Object> inbound(String cartId, String inboundedDate) {
         Map<String, Object> result = new HashMap<>();
         Cart cartResult = mapper.selectOrderByBookId(cartId);
-        System.out.println(cartResult);
         LocalDate parsedDate = LocalDate.parse(inboundedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         if (cartResult != null) {
@@ -52,7 +51,11 @@ public class InventoryService {
                 result.put("inbounded", 1);
                 int total = cartResult.getTotalCount() == null ? 0 : cartResult.getTotalCount();
                 int bookIdWithTotalCount = cartResult.getBookCount() + total;
-                result.put("total", bookIdWithTotalCount);
+                int bookIdWithTotalCountMi = cartResult.getBookCount() - total;
+                System.out.println(bookIdWithTotalCount);
+                System.out.println("mi" + bookIdWithTotalCountMi);
+                result.put("totalC", bookIdWithTotalCount);
+                result.put("totalmi", bookIdWithTotalCountMi);
                 result.put("bookTotal", cartResult.getBookCount());
                 mapper.update(bookIdWithTotalCount, cartResult.getBookId());
                 Cart c = mapper.selectOld(cartResult.getBookId());

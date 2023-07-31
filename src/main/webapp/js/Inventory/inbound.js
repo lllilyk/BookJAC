@@ -20,55 +20,45 @@ $("button[id^='checkInbound']").click(function () {
         success: function (data) {
             console.log(data);
             if (data.inbounded) {
-                $("#" + buttonId).removeClass("btn-outline-danger").addClass("btn-outline-primary btn-sm").text("입고됌");
+                $("#" + buttonId).removeClass("btn-outline-danger").addClass("btn-outline-primary btn-sm").text("입고됨");
                 $("#inboundDate_" + cartId + "_" + index).text(clickedDate);
-                $("#totalCount_" + cartId + "_" + index).css("color", "blue").css("font-weight", "bold").text(data.total);
+                $("#totalCount_" + cartId + "_" + index).css("color", "blue").css("font-weight", "bold").text(data.totalC);
             } else {
                 $("#" + buttonId).removeClass("btn-outline-primary").addClass("btn-outline-danger btn-sm").text("입고전");
                 $("#inboundDate_" + cartId + "_" + index).empty();
-                $("#totalCount_" + cartId + "_" + index).css("color", "blue").css("font-weight", "bold").text(!data.totalmi ? 0 : data.total);
+                $("#totalCount_" + cartId + "_" + index).css("color", "blue").css("font-weight", "bold").text(data.totalmi);
 
             }
         }
     });
 });
 
+$("button[id^='checkInbounded']").click(function () {
+    const buttonId = this.id;
+    const cartId = buttonId.split("_")[1];
+    const index = buttonId.split("_")[2];
 
-// function handleInbound(bookId) {
-//     const book = {bookId: bookId};
-//     $.ajax("/inventory/inbound", {
-//         type: "POST",
-//         contentType: "application/json",
-//         data: JSON.stringify(book),
-//         success: function (data) {
-//             alert("도서목록으로 추가 되었습니다."); // 실패 메시지 표시
-//         },
-//         error: function () {
-//             alert("서버와 통신 중 오류가 발생했습니다.");
-//         }
-//     });
-// }
+    // ... AJAX 요청 등 필요한 처리 ...
 
-// $("button[id^='checkInbounded']").click(function () {
-//     const buttonId = this.id;
-//     const cartId = buttonId.split("_")[1];
-//
-//     $.ajax("/inventory/inbound/" + cartId, {
-//         method: "delete",
-//         success: function (data) {
-//             console.log(data);
-//             if (data.success) {
-//                 // 성공적으로 삭제되면 페이지를 새로고침하여 도서 목록을 갱신합니다.
-//                 location.reload();
-//             } else {
-//                 alert("삭제 실패: " + data.message); // 실패 시 알림을 표시합니다.
-//             }
-//         },
-//         error: function () {
-//             alert("서버와 통신 중 오류가 발생했습니다.");
-//         }
-//     });
-// });
+    // 입고됨 버튼을 클릭했을 때 totalCount를 data.totalmi로 업데이트
+    // 이후의 처리를 여기에 추가
+    $("#totalCount_" + cartId + "_" + index).css("color", "blue").css("font-weight", "bold").text(data.totalmi);
+});
+
+function handleInbound(cartId) {
+    const book = {cartId: cartId};
+    $.ajax("/inventory/inbound", cartId + "/" + clickedDate, {
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(book),
+        success: function (data) {
+            alert("도서목록으로 추가 되었습니다."); // 실패 메시지 표시
+        },
+        error: function () {
+            alert("서버와 통신 중 오류가 발생했습니다.");
+        }
+    });
+}
 
 $(document).ready(function () {
     // "입고전만" 버튼 클릭 시 입고된 도서 숨기고 입고전 도서 보이기
