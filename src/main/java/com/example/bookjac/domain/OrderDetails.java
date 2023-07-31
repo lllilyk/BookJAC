@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Data
 public class OrderDetails {
     private Integer id;
+    private String memberId;
     private String name;
     private String inserted;
     private String totalQuantity;

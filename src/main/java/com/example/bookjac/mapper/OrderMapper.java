@@ -39,8 +39,8 @@ public interface OrderMapper {
     List<Order> selectAllPage(Integer startIndex, Integer booksInPage, String search);
 
     @Insert("""
-            INSERT INTO OrderDetails (name, inserted, totalQuantity, totalPrice)
-            VALUES (#{name}, #{inserted}, #{totalQuantity}, #{totalPrice})
+            INSERT INTO OrderDetails (memberId, name, inserted, totalQuantity, totalPrice)
+            VALUES (#{memberId}, #{name}, #{inserted}, #{totalQuantity}, #{totalPrice})
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(OrderDetails od);
@@ -54,11 +54,12 @@ public interface OrderMapper {
     @Select("""
             <script>
 			<bind name="pattern" value="'%' + search + '%'" />
-			SELECT *
-			FROM OrderDetails
-			WHERE name LIKE #{pattern}
-				OR inserted LIKE #{pattern}
-			ORDER BY id DESC
+			SELECT od.name AS name, od.inserted AS inserted, od.totalQuantity AS totalQuantity, od.totalPrice AS totalPrice, m.id AS memberId
+			FROM OrderDetails od
+			LEFT JOIN Member m ON od.memberId = m.id
+			WHERE od.name LIKE #{pattern}
+				OR od.inserted LIKE #{pattern}
+			ORDER BY od.id DESC
 			LIMIT #{startIndex}, #{recordsInOrderDetails}
 			</script>
             """)
@@ -67,8 +68,8 @@ public interface OrderMapper {
     @Select("""
             SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice, inserted
             FROM OrderCart
-            WHERE inserted = #{inserted}
+            WHERE inserted = #{inserted} AND memberId = #{memberId}
             """)
-    List<Cart> getOrderCart(String inserted);
+    List<Cart> getOrderCart(String inserted, String memberId);
 
 }
