@@ -24,6 +24,8 @@ public class Cart {
     private boolean inbounded;
     private LocalDate inserted;
     private Integer totalCount;
+    private Integer inCount;
+    private Integer displayCount;
     private LocalDate inboundedDate;
     private boolean showInbound;
 
@@ -37,8 +39,8 @@ public class Cart {
         this.totalPrice = this.inPrice * this.bookCount;
     }
 
-    public Integer getInPrice(){
-        if(inPrice == null){
+    public Integer getInPrice() {
+        if (inPrice == null) {
             return 0;
         }
         return inPrice;

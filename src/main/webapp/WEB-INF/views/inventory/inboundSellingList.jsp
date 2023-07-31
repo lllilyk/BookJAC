@@ -85,16 +85,16 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${orderList}" var="order">
+        <c:forEach items="${orderList}" var="order" varStatus="loop">
             <tr class="bookRow ${order.inbounded ? 'inbounded' : 'inbound'}">
                 <td>
                     <c:if test="${order.inbounded}">
-                        <button id="checkInbounded_${order.bookId}" type="button"
+                        <button id="checkInbounded_${order.cartId}_${loop.index}" type="button"
                                 class="btn btn-outline-primary btn-sm">입고됌
                         </button>
                     </c:if>
                     <c:if test="${!order.inbounded}">
-                        <button id="checkInbound_${order.bookId}" type="button"
+                        <button id="checkInbound_${order.cartId}_${loop.index}" type="button"
                                 class="btn btn-outline-danger btn-sm">
                             입고전
                         </button>
@@ -106,15 +106,15 @@
                 <td>${order.publisher}</td>
                 <td>
                     <c:if test="${order.inbounded}">
-                        <span id="totalCount_${order.bookId}">${order.totalCount + order.bookCount}</span>
+                        <span id="totalCount_${order.cartId}_${loop.index}">${order.totalCount + order.bookCount}</span>
                     </c:if>
                     <c:if test="${!order.inbounded}">
-                        ${order.totalCount}
+                        ${order.totalCount eq null ? 0 : order.totalCount}
                     </c:if>
                 </td>
                 <td>${order.bookCount}</td>
                 <td>${order.inserted}</td>
-                <td id="inboundDate_${order.bookId}">
+                <td id="inboundDate_${order.cartId}_${loop.index}">
                     <c:if test="${order.inboundedDate != null}">
                         ${order.inboundedDate}
                     </c:if>

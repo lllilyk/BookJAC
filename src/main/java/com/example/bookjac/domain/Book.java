@@ -7,6 +7,7 @@ import java.util.Date;
 @Data
 public class Book {
     private String id;
+    private String isbn;
     private String title;
     private String writer;
     private String publisher;
@@ -22,7 +23,6 @@ public class Book {
     private int sellAmount;
     private int refundAmount;
     private String checkEvent;
-
 
 
     // 디스플레이 필요 여부
