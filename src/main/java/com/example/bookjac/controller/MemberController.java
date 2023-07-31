@@ -20,22 +20,24 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
-    @GetMapping("checkPhoneNumber/{phoneNumber}")
+    @GetMapping("checkId/{id}")
     @ResponseBody
-    public Map<String, Object> checkPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
-        return service.checkPhoneNumber(phoneNumber);
+    public Map<String, Object> checkId(@PathVariable("id") String id) {
+
+        return service.checkId(id);
     }
 
     @GetMapping("checkEmail/{email}")
     @ResponseBody
     public Map<String, Object> checkEmail(@PathVariable("email") String email) {
+
         return service.checkEmail(email);
     }
 
-    @GetMapping("checkId/{id}")
+    @GetMapping("checkPhoneNumber/{phoneNumber}")
     @ResponseBody
-    public Map<String, Object> checkId(@PathVariable("id") String id) {
-        return service.checkId(id);
+    public Map<String, Object> checkPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
+        return service.checkPhoneNumber(phoneNumber);
     }
 
     @GetMapping("login")

@@ -6,10 +6,12 @@ let checkPassword = false;
 
 // 중복확인 시 모두 사용 가능한 값이면 가입버튼 활성화, 그렇지 않으면 비활성화
 function enableSubmit() {
+    console.log(checkId, checkPassword, checkEmail, checkPhoneNumber);
+
     if (checkId && checkEmail && checkPhoneNumber && checkPassword ) {
-        $("#signupSubmit").removeAttr("disabled")
+        $("#signupSubmit").removeAttr("disabled");
     } else {
-        $("#signupSubmit").attr("disabled", "")
+        $("#signupSubmit").attr("disabled", "");
     }
 }
 
@@ -53,7 +55,7 @@ $("#inputEmail").keyup(function () {
    // email 중복 다시 확인
    checkEmail = false;
    $("#availableEmailMessage").addClass("d-none");
-   $("#notAvailableEmailMessage").removeClass("d-none");
+   $("#notAvailableEmailMessage").addClass("d-none");
 
    // submit 버튼 비활성화
     enableSubmit();
@@ -85,7 +87,7 @@ $("#inputPhoneNum").keyup(function () {
    // 전화번호 중복 다시 확인
    checkPhoneNumber = false;
    $("#availablePhoneNumberMessage").addClass("d-none");
-   $("#notAvailablePhoneNumberMessage").removeClass("d-none");
+   $("#notAvailablePhoneNumberMessage").addClass("d-none");
 
    // submit 버튼 비활성화
     enableSubmit();
@@ -109,11 +111,6 @@ $("#checkPhoneNumberBtn").click(function () {
            }
        },
        complete: function() {
-           console.log("complete start")
-           console.log("complete", checkId)
-           console.log("complete", checkEmail)
-           console.log("complete", checkPhoneNumber)
-           console.log("complete", checkPassword)
            enableSubmit();
        }
    })
@@ -140,7 +137,7 @@ $("#inputPW, #inputPWCheck").keyup(function () {
         // 패스워드가 다르다는 메세지 출력
         $("#passwordFailText").removeClass("d-none");
         $("#passwordSuccessText").addClass("d-none");
-        checkId = false;
+        checkPassword = false;
     }
     enableSubmit();
 });
