@@ -25,7 +25,21 @@
             border: solid;
             border-color: lightgray;
         }
-
+        td{
+            text-align: center;
+            vertical-align: middle;
+        }
+        .active > .page-link, .page-link.active {
+            z-index: 3;
+            background-color: black;
+            border-color: black;
+        }
+        .pagination {
+            --bs-pagination-color: black;
+            --bs-pagination-active-border-color: black;
+            --bs-pagination-focus-color: black;
+            --bs-pagination-hover-color: black;
+        }
     </style>
 </head>
 <body>
@@ -40,7 +54,7 @@
                     <h1>발주품목 등록</h1>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-success">발주품목</a>
+                    <a href="/cart/<sec:authentication property='name'/>" class="btn btn-outline-dark" style="font-size: 20px;">발주품목</a>
                 </div>
             </div>
 
@@ -53,8 +67,8 @@
                             </div>
                             <div class="input-group mb-3">
                                 <input type="search" name="search" class="form-control" id="inputTitle" placeholder="등록되어 있는 도서인지 확인해 보세요" aria-describedby="bookSearchINDBBtn"
-                                    style="height: 50px;">
-                                <button class="btn btn-outline-secondary" type="submit" id="bookSearchInDBBtn">검색</button>
+                                    style="height: 50px; text-align: center;">
+                                <button class="btn btn-dark" type="submit" id="bookSearchInDBBtn">검색</button>
                             </div>
                         </form>
                     </div>
@@ -65,8 +79,8 @@
                             </div>
                             <div class="input-group mb-3">
                                 <input type="text" id="searchBook" class="form-control" placeholder="원하는 도서명을 검색해 보세요" aria-describedby="bookSearchBtn"
-                                       style="height: 50px;">
-                                <button class="btn btn-outline-secondary" type="submit" id="bookSearchBtn">검색</button>
+                                       style="height: 50px; text-align: center;">
+                                <button class="btn btn-dark" type="submit" id="bookSearchBtn">검색</button>
                             </div>
                         </form>
                     </div>
@@ -89,7 +103,7 @@
                 <tbody class="table-group-divider">
                 <c:forEach items="${bookList}" var="book" varStatus="bookStatus">
                     <tr>
-                        <td class="bookId" id="bookIdText_${bookStatus.index}">${book.id }</td>
+                        <td class="bookId" id="bookIdText_${bookStatus.index}">${book.isbn }</td>
                         <td class="title">${book.title }</td>
                         <td class="writer">${book.writer }</td>
                         <td class="publisher">${book.publisher }</td>
@@ -114,7 +128,7 @@
                         </td>
                         <td>
                             <button id="btn_cart_${bookStatus.index}" type="button"
-                                    class="btn btn-outline-danger btn_cart"> 등록
+                                    class="btn btn-light btn_cart"> <i class="fa-solid fa-circle-check"></i>
                             </button>
                         </td>
                     </tr>

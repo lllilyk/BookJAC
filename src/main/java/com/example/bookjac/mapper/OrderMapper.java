@@ -21,7 +21,7 @@ public interface OrderMapper {
     @Select("""
             <script>
 			<bind name="pattern" value="'%' + search + '%'" />
-            SELECT id,
+            SELECT isbn,
                    title,
                    writer,
                    publisher,
@@ -31,7 +31,7 @@ public interface OrderMapper {
             WHERE title LIKE #{pattern}
 				OR writer LIKE #{pattern}
 				OR publisher LIKE #{pattern}
-				OR id LIKE #{pattern}
+				OR isbn LIKE #{pattern}
             ORDER BY totalCount
             LIMIT #{startIndex}, #{booksInPage}
             </script>
@@ -65,30 +65,10 @@ public interface OrderMapper {
     List<OrderDetails> selectAllPages(Integer startIndex, Integer recordsInOrderDetails, String search);
 
     @Select("""
-            SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
-            FROM OrderCart
-            WHERE memberId = #{name}
-            """)
-    List<Cart> getOrderCart(String inserted);
-
-    /*@Select("""
-            SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice
+            SELECT cartId, memberId, bookId, bookCount, title, writer, publisher, inPrice, inserted
             FROM OrderCart
             WHERE inserted = #{inserted}
             """)
-    List<Cart> selectByDate(String inserted);*/
+    List<Cart> getOrderCart(String inserted);
 
-   /* @Select("""
-            SELECT *
-            FROM OrderCart
-            WHERE memberId = #{name} AND inserted = #{inserted}
-            """)
-    List<Cart> getOrderCartByNameAndDate(String name, String inserted);*/
-
-    /*@Select("""
-            SELECT *
-            FROM OrderDetails
-            WHERE id = #{id}
-            """)
-    OrderDetails selectById(Integer id);*/
 }

@@ -16,6 +16,7 @@ public class Cart {
     private Integer totalPrice;
 
     //book
+    private String isbn;
     private String title;
     private String writer;
     private String publisher;
