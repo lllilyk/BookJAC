@@ -67,7 +67,7 @@
 <%-- 입고 리스트 --%>
 <div class="container-lg">
     <button id="showInboundBtn" type="button" class="btn btn-danger">입고전만</button>
-    <button id="showInboundedBtn" type="button" class="btn btn-success">입고됌만</button>
+    <button id="showInboundedBtn" type="button" class="btn btn-success">입고됨만</button>
     <button id="showAllBtn" type="button" class="btn btn-secondary">전체</button>
     <table class="table">
         <thead>
@@ -90,7 +90,7 @@
                 <td>
                     <c:if test="${order.inbounded}">
                         <button id="checkInbounded_${order.cartId}_${loop.index}" type="button"
-                                class="btn btn-outline-primary btn-sm">입고됌
+                                class="btn btn-outline-primary btn-sm">입고됨
                         </button>
                     </c:if>
                     <c:if test="${!order.inbounded}">

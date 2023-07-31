@@ -87,7 +87,7 @@
             <tbody>
             <c:forEach items="${inventoryList}" var="inven">
                 <tr>
-                    <td>${inven.id}</td>
+                    <td>${inven.isbn}</td>
                     <td>${inven.title}</td>
                     <td>${inven.writer}</td>
                     <td>${inven.publisher}</td>
@@ -95,13 +95,25 @@
                     <td>${inven.inCount}</td>
                     <td>${inven.totalCount}</td>
                     <td>
-                        <input name="safeDisplayCount" value="1" class="form-control" type="number" style="width: 50px">
+                        <input name="safeDisplayCount" value="1" class="form-control" type="number" style="width: 80px">
                     </td>
                     <td>
-                        <c:if test="${inven.safeDisplayCount < inven.safeDisplayCount}">
+                        <c:if test="${inven.displayCount <= 1}">
                             <p style="color: red">디스플레이 필요!</p>
                         </c:if>
-                        <c:if test="${inven.displayCount >= inven.safeDisplayCount}">
+                        <c:if test="${inven.displayCount > 1}">
+                            <p style="color: blue">여유</p>
+                        </c:if>
+                    </td>
+                    <td>
+                        <input name="safeInventoryCount" value="10" class="form-control" type="number"
+                               style="width: 80px">
+                    </td>
+                    <td>
+                        <c:if test="${inven.inCount le 10}">
+                            <p style="color: red; font-weight: bold">주문 필요!</p>
+                        </c:if>
+                        <c:if test="${inven.inCount > 10}">
                             <p style="color: blue">여유</p>
                         </c:if>
                     </td>
@@ -120,7 +132,7 @@
                 <%-- 이전 페이지 --%>
                 <li class="page-item">
                     <c:if test="${pageInfo.currentPageNum gt 1 }">
-                        <c:url value="/inventory/inboundSellingList" var="pageLink">
+                        <c:url value="/inventory/inventoryList" var="pageLink">
                             <c:param name="page" value="${pageInfo.currentPageNum - 1}"></c:param>
                         </c:url>
                         <a class="page-link" href="${pageLink}" aria-label="Previous">
@@ -132,7 +144,7 @@
                 <%-- 페이지 목록--%>
                 <c:forEach begin="${pageInfo.page + 1 }" end="${pageInfo.lastPageNum}" var="pageNum">
                     <li class="page-item">
-                        <c:url value="/inventory/inboundSellingList" var="pageLink">
+                        <c:url value="/inventory/inventoryList" var="pageLink">
                             <c:param name="page" value="${pageNum }"></c:param>
                         </c:url>
                         <a class="page-link ${pageNum eq (pageInfo.currentPageNum) ? 'active' : ''}"
@@ -143,7 +155,7 @@
                 <%-- 다음 페이지 --%>
                 <li class="page-item">
                     <c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
-                        <c:url value="/inventory/inboundSellingList" var="pageLink">
+                        <c:url value="/inventory/inventoryList" var="pageLink">
                             <c:param name="page" value="${pageInfo.currentPageNum + 1}"></c:param>
                         </c:url>
                         <a class="page-link" href="${pageLink}" aria-label="Next">
