@@ -68,6 +68,7 @@
                     <td>${book.eventStartDate}</td>
                     <td>${book.eventEndDate}</td>
 
+
                 </tr>
             </c:forEach>
             </tbody>
