@@ -11,10 +11,10 @@
 
     <my:alert></my:alert>
 
-    <div class="container-lg">
+    <div style="margin-top: 10vh;" class="container-lg">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
-                <h1>회원 정보 수정</h1>
+                <h1 align="center" style=" font-weight: bold; margin-bottom: 5vh;">회원 정보 수정</h1>
                 <form id="modifyForm" action="/member/modify" method="post">
                     <div class="mb-3">
                         <label class="form-label" for="inputId">
@@ -61,16 +61,34 @@
                         <label class="form-label" for="inputEmail">
                         email
                         </label>
-                        <input id="inputEmail" class="form-control" type="email" name="email" value="${member.email}" />
+                        <div class="input-group">
+                            <input id="inputEmail" class="form-control" type="email" name="email" value="${member.email}" />
+                            <button class="btn btn-outline-secondary" type="button" id="checkEmailBtn" style="font-weight: bold;">중복확인</button>
+                        </div>
+
+                        <div class="d-none form-text text-primary" id="availableEmailMessage">
+                            <i class="fa-solid fa-check"></i>
+                            사용 가능한 이메일입니다.
+                        </div>
+
+                        <div class="d-none form-text text-danger" id="notAvailableEmailMessage">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            사용 불가능한 이메일입니다.
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="inputPhoneNumber">
                         전화번호
                         </label>
-                        <input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber}" />
+                        <div class="input-group">
+                            <input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber}" />
+                            <button class="btn btn-outline-secondary" type="button" id="checkPhoneNumberBtn" style="font-weight: bold;">중복확인</button>
+                        </div>
                     </div>
 
+                    <div align="center" style="margin-top: 5vh;" class="mb-3">
                     <button id="modifyButton" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="disabled btn btn-secondary">수정</button>
+                    </div>
                 </form>
             </div>
         </div>
