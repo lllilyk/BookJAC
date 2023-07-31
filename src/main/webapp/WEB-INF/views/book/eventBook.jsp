@@ -68,13 +68,19 @@
                     <td>${book.eventStartDate}</td>
                     <td>${book.eventEndDate}</td>
 
+
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
+</div>
 
-  <div>${message}</div>
+
+
+<%--  <div class="alert alert-warning alert-dismissible fade show" role="alert">${message}--%>
+<%--      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
+<%--  </div>--%>
 
 
 
