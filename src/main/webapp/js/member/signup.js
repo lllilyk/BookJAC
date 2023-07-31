@@ -6,6 +6,8 @@ let checkPassword = false;
 
 // 중복확인 시 모두 사용 가능한 값이면 가입버튼 활성화, 그렇지 않으면 비활성화
 function enableSubmit() {
+    console.log(checkId, checkPassword, checkEmail, checkPhoneNumber);
+
     if (checkId && checkEmail && checkPhoneNumber && checkPassword ) {
         $("#signupSubmit").removeAttr("disabled");
     } else {
@@ -135,7 +137,7 @@ $("#inputPW, #inputPWCheck").keyup(function () {
         // 패스워드가 다르다는 메세지 출력
         $("#passwordFailText").removeClass("d-none");
         $("#passwordSuccessText").addClass("d-none");
-        checkId = false;
+        checkPassword = false;
     }
     enableSubmit();
 });
