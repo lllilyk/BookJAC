@@ -47,9 +47,9 @@ public interface InventoryMapper {
 
     @Insert("""
             INSERT INTO Book (isbn, title, writer, publisher, inPrice, totalCount, inCount, displayCount)
-            VALUES (#{bookId}, #{title}, #{writer}, #{publisher}, #{inPrice}, #{totalCount}, #{inCount}, #{displayCount})
+            VALUES (#{cart.bookId}, #{cart.title}, #{cart.writer}, #{cart.publisher}, #{cart.inPrice}, #{bookIdWithTotalCount}, #{cart.inCount}, #{cart.displayCount})
             """)
-    Integer insertInboundedList(Cart cart);
+    Integer insertInboundedList(Cart cart, int bookIdWithTotalCount);
 
 //    @Select("""
 //                SELECT * FROM OrderCart oc LEFT JOIN Book b ON oc.bookId = b.isbn
@@ -75,4 +75,9 @@ public interface InventoryMapper {
             WHERE isbn = #{bookId}
             """)
     void update(int bookIdWithTotalCount, String bookId);
+
+    @Select("""
+                SELECT Count(*) FROM Book
+            """)
+    Integer selectAllBook();
 }

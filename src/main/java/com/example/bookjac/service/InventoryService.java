@@ -57,16 +57,12 @@ public class InventoryService {
                 mapper.update(bookIdWithTotalCount, cartResult.getBookId());
                 Cart c = mapper.selectOld(cartResult.getBookId());
                 if (c == null) {
-                    mapper.insertInboundedList(cartResult);
+                    result.put("totalmi", 0);
+                    mapper.insertInboundedList(cartResult, bookIdWithTotalCount);
                 }
             } else {
                 Integer updateCnt = mapper.updateInbounded(cartId, !cartResult.isInbounded());
                 result.put("inbounded", 0);
-                Integer totalC = cartResult.getTotalCount();
-                Integer total = totalC == null ? 0 : totalC;
-                int bookIdWithTotalCountmi = total - totalC;
-                result.put("totalmi", bookIdWithTotalCountmi);
-                result.put("bookTotal", cartResult.getBookCount());
                 mapper.deleteBookByCartId(cartResult.getCartId());
             }
         }
@@ -83,7 +79,7 @@ public class InventoryService {
         Integer startIndex = (page - 1) * rowPerPage;
 
         // 전체레코드수 구하기
-        Integer numOfRecords = mapper.selectAllOrderCount();
+        Integer numOfRecords = mapper.selectAllBook();
 
         // 마지막페이지 번호 구하기
         Integer lastPageNumber = (numOfRecords - 1) / rowPerPage + 1;

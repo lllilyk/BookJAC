@@ -26,9 +26,7 @@ $("button[id^='checkInbound']").click(function () {
             } else {
                 $("#" + buttonId).removeClass("btn-outline-primary").addClass("btn-outline-danger btn-sm").text("입고전");
                 $("#inboundDate_" + cartId + "_" + index).empty();
-                const stock = parseInt(bookTotal) - parseInt(totalmi);
-                //const displayStock = isNaN(stock) ? 0 : stock;
-                $("#totalCount_" + cartId + "_" + index).css("color", "blue").css("font-weight", "bold").text(stock);
+                $("#totalCount_" + cartId + "_" + index).css("color", "blue").css("font-weight", "bold").text(!data.totalmi ? 0 : data.total);
 
             }
         }
