@@ -116,7 +116,7 @@
                     <c:forEach items="${orderDetailsList}" var="od" varStatus="orderDetails">
                         <tr>
                             <td>${od.name}</td>
-                            <td><a href="/order/each?inserted=${od.inserted}">${od.inserted}</a></td>
+                            <td><a href="/order/each?inserted=${od.inserted}&memberId=${od.memberId}">${od.inserted}</a></td>
                             <td>${od.totalQuantity}</td>
                             <td>${od.totalPrice}</td>
                         </tr>

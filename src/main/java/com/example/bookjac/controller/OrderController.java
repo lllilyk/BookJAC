@@ -86,11 +86,15 @@ public class OrderController {
     @GetMapping("/each")
     @PreAuthorize("isAuthenticated()")
     public String eachOrderDetails(@RequestParam("inserted") String inserted,
-                                   Model model){
+                                   @RequestParam("memberId") String memberId,
+                                   Model model,
+                                   Authentication auth){
 
-        List<Cart> orderCartList = service.getOrderCartList(inserted);
+        String name = auth.getName();
+        List<Cart> orderCartList = service.getOrderCartList(inserted, memberId);
         model.addAttribute("orderCartList", orderCartList);
         model.addAttribute("inserted", inserted);
+        model.addAttribute("memberId", memberId);
         return "order/each";
     }
 }
