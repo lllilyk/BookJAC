@@ -9,10 +9,10 @@
 </head>
 <body style="background: #e2e2e2;">
 
-<div class="container-lg">
+<div style="margin-top: 10vh;" class="container-lg">
     <div class="row justify-content-center">
       <div class="col-12">
-        <h1>회원 목록</h1>
+        <h1 align="center" style=" font-weight: bold; margin-bottom: 5vh;">회원 목록</h1>
         <table class="table">
           <thead>
             <tr>

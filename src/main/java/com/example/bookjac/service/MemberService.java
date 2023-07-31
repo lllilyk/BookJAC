@@ -3,6 +3,7 @@ package com.example.bookjac.service;
 import com.example.bookjac.domain.Member;
 import com.example.bookjac.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,10 +81,16 @@ public class MemberService {
         return Map.of("available", member == null);
     }
 
-    public Map<String, Object> checkEmail(String email) {
+    public Map<String, Object> checkEmail(String email, Authentication authentication) {
         Member member = mapper.selectByEmail(email);
 
-        return Map.of("available", member == null);
+        if (authentication != null) {
+            Member oldMember = mapper.selectById(authentication.getName());
+            return Map.of("available", member == null || oldMember.getEmail().equals(email));
+        } else {
+            return Map.of("available", member == null);
+
+        }
     }
 
     public Map<String, Object> checkPhoneNumber(String phoneNumber) {
