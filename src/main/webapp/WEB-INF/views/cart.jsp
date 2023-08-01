@@ -165,8 +165,8 @@
                                   <input type="hidden" name="memberId" value="<sec:authentication property="name"/>">
                                   <input type="hidden" name="name" value="<sec:authentication property='principal.originName'/>">
                                   <input type="hidden" name="inserted" value="${currentDate}">
-                                  <input type="hidden" name="totalQuantity" value="<fmt:formatNumber value='${totalQuantity}' />">
-                                  <input type="hidden" name="totalPrice" value="<fmt:formatNumber value='${totalPrice}' type='currency' currencyCode='KRW' />">
+                                  <input type="hidden" name="totalQuantity" value="<fmt:formatNumber value='${totalQuantity}'/>">
+                                  <input type="hidden" name="totalPrice" value="<fmt:formatNumber value='${totalPrice}' type='currency' currencyCode='KRW'/>">
                               </form>
                               <p>발주 품목과 수량이 맞는지 다시 한번 확인해 주세요.</p>
                           </div>
