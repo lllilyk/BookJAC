@@ -163,6 +163,9 @@ $(".btn_delete_cart").on("click", function(e) {
                 // 총 결제 예상 금액 업데이트
                 let totalPrice = document.getElementById("totalPrice");
                 totalPrice.innerText = "총 결제 예상 금액: " + formatCurrency(responseD.totalPrice);
+
+                $("input[name=totalPrice]").val(formatCurrency(responseD.totalPrice));
+                $("input[name=totalQuantity]").val(responseD.totalQuantity);
             }
         }
     })
@@ -204,12 +207,12 @@ $(document).ready(function() {
         // 해당하는 경로로 페이지 이동
         window.location.href = window.location.href.replace("/order/add", "/order/each?inserted=" + insertedInput.value);
 
-        // 테이블의 tbody 영역을 선택하여 해당 영역의 모든 자식 노드를 삭제합니다.
+        /*// 테이블의 tbody 영역을 선택하여 해당 영역의 모든 자식 노드를 삭제합니다.
         $(".table-group-divider tbody").empty();
 
         // totalQuantity와 totalPrice를 초기화합니다.
         $("#totalQuantity").text("총 발주 수량 : 0");
-        $("#totalPrice").text("총 결제 예상 금액  : 0");
+        $("#totalPrice").text("총 결제 예상 금액  : 0");*/
 
     });
 });
