@@ -112,7 +112,7 @@
         <tbody>
         <c:forEach items="${bookList}" var="book">
             <tr>
-                <td>${book.id}</td>
+                <td>${book.isbn}</td>
                 <td>
                         ${book.title}
                     <button type="button" id="sellBtn_${book.id}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal(event)">판매</button>

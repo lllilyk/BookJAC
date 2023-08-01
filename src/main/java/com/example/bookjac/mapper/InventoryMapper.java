@@ -11,7 +11,7 @@ import java.util.List;
 public interface InventoryMapper {
     @Select("""
                 SELECT * FROM OrderCart
-                ORDER BY inserted DESC
+                ORDER BY cartId DESC
             """)
     List<Cart> selectAllOrder();
 

@@ -46,7 +46,8 @@ public interface BookMapper {
 				writer,
 				publisher,
 				categoryId,
-				checkEvent
+				checkEvent,
+				isbn
 			     
 			FROM Book 
 			
@@ -76,7 +77,8 @@ public interface BookMapper {
 				publisher,
 				event,
 				eventStartDate,
-				eventEndDate
+				eventEndDate,
+				isbn
 			     
 			FROM Book 
 			
