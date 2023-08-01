@@ -1,6 +1,7 @@
 package com.example.bookjac.service;
 
 import com.example.bookjac.domain.Member;
+import com.example.bookjac.mapper.CartMapper;
 import com.example.bookjac.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,9 @@ public class MemberService {
 
     @Autowired
     private MemberMapper mapper;
+
+    @Autowired
+    private CartMapper cartMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
