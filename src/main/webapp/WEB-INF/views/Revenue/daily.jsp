@@ -213,7 +213,7 @@
             </div>
             <div class="modal-body">
                 정산 내역을 삭제하시겠습니까?
-                <input type="text" class="form-control" id="settlementIdInput">
+                <input type="hidden" class="form-control" id="settlementIdInput">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
