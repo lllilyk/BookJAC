@@ -88,7 +88,7 @@
         }
         .ui-datepicker th{
             /* 요일 영역 */
-            background : grey;
+            background : #6e6e6e;
         }
         .ui-datepicker th span{
             /* 요일 텍스트 */
@@ -111,7 +111,7 @@
         .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
             /* 오늘일자 */
             border:0px;
-            background:#ccc;
+            background: #000000;
             color: #fff;
         }
         .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
@@ -168,7 +168,7 @@
                 <div class="row g-3">
                 <%-- 발주 담당자별 발주내역 검색하기 --%>
                     <div class="col-md-6">
-                        <form id="bookSearchForm" action="/order/details">
+                        <form id="nameSearchForm" action="/order/details">
                             <div class="input-group mb-3">
                                 <label for="inputTitle" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">발주담당자로 검색</label>
                             </div>
@@ -179,13 +179,15 @@
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <label for="searchByDate" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">발주일자로 검색</label>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" id="searchByDate" class="checkDate" autocomplete="off" placeholder="발주일자확인 →" readonly>
-                            <button type="button" class="btn btn-dark dateBtn" >날짜 선택 후 클릭!</button>
-                        </div>
+                        <form id="dateSearchForm" action="/order/details">
+                            <div class="input-group mb-3">
+                                <label for="searchByDate" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">발주일자로 검색</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" id="searchByDate" class="checkDate form-control" autocomplete="off" placeholder="발주일자확인 →" readonly>
+                                <button type="submit" class="btn btn-dark dateBtn" >날짜 선택 후 클릭!</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -211,6 +213,9 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <c:if test="${empty orderDetailsList}">
+                <p class="text-center">검색 결과가 없습니다.</p>
+            </c:if>
         </div>
     </div>
 </div>

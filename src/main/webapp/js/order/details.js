@@ -9,26 +9,27 @@ $(document).ready(function() {
         closeText: "닫기",
         prevText: '이전 달',
         nextText: '다음 달',
-        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-        dayNames: ['일','월','화','수','목','금','토'],
-        dayNamesShort: ['일','월','화','수','목','금','토'],
-        dayNamesMin: ['일','월','화','수','목','금','토'],
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
         yearSuffix: '년',
         changeMonth: true,
         changeYear: true
     }
     $(".checkDate").datepicker(config);
+});
 
-    // 검색 버튼 클릭 이벤트 처리
-    $(".dateBtn").click(function() {
-        // 발주일자 입력값 가져오기
-        const selectedDate = $(".checkDate").val();
+// 검색 버튼 클릭 이벤트 처리
+$(".dateBtn").click(function(event) {
+    event.preventDefault();
+    const selectedDate = $("#searchByDate").val();
 
-        // 테이블의 모든 행 숨기기
-        $("table.table tbody tr").hide();
+    // 페이지 번호를 1로 초기화하여 첫 번째 페이지에서 검색 결과를 보여주기 위함
+    const page = 1;
 
-        // 입력된 발주일자와 동일한 inserted 값을 가진 행 표시
-        $("table.table tbody tr:contains('" + selectedDate + "')").show();
-    });
+    // 새로운 URL을 만들어서 페이지 이동
+    const newUrl = `/order/details?search=${selectedDate}&page=${page}`;
+    window.location.href = newUrl;
 });
