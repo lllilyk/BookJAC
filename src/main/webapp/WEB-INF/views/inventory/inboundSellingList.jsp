@@ -14,7 +14,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>입고 내역</title>
 </head>
 
 <style>

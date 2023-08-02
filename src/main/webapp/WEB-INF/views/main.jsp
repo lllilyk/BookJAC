@@ -10,6 +10,7 @@
 
 <html>
 <head>
+    <title>북작북작 동네책방</title>
     <style>
 
         #container {

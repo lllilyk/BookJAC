@@ -14,7 +14,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>재고 목록</title>
 </head>
 
 <style>

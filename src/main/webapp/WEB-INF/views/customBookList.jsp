@@ -20,7 +20,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>도서 검색</title>
 </head>
 
 <style>
