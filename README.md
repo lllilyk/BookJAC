@@ -1,15 +1,6 @@
 <div align=center>
 	<img src="https://capsule-render.vercel.app/api?type=waving&color=12354e&height=200&section=header&text=BookJAC&fontColor=fffefb&fontSize=90" />	
 </div>
-<div align=center>
-	<h3>↘️ 상세 설명은 여기에 ↙️</h3>
-</div>
-<div align=center>
-	<a href="https://fortune-panama-ec6.notion.site/Lily-ed6ac3c3ea7649d4948daadc77564511?pvs=4">
-		<img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />
-	</a>
-	<br>
-</div>
 
 ## 🏷️ Contents
 
@@ -37,7 +28,7 @@
 > 
 > **프로젝트 설명:** 매출 관리를 통해 재고와 주문을 최적화하여 사용자 편의성을 강화한 도서 물류 관리 시스템 <br>
 > 
-> **개발 기간:** 2023.06.28 ~ 2023.08.01 <br>
+> **개발 기간:** 2023.07.04 ~ 2023.08.01 <br>
 >
 > **개발 인원:** 5명 <br>
 > 
@@ -58,8 +49,9 @@
 	<br>
 	<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=Spring&logoColor=white" />
 	<img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=Bootstrap&logoColor=white" />
-	<img src="https://img.shields.io/badge/Mybatis-000000?style=flat&logo=Fluentd&logoColor=white" />
+	<img src="https://img.shields.io/badge/SemanticUI-35BDB2?style=flat&logo=semanticuireact&logoColor=white" />
 	<br>
+ 	<img src="https://img.shields.io/badge/Mybatis-000000?style=flat&logo=Fluentd&logoColor=white" />
 	<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" />
 	<img src="https://img.shields.io/badge/MariaDB-003545?style=flat&logo=MariaDB&logoColor=white" />
 </div>
