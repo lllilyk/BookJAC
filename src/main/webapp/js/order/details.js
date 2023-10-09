@@ -33,3 +33,4 @@ $(".dateBtn").click(function(event) {
     const newUrl = `/order/details?search=${selectedDate}&page=${page}`;
     window.location.href = newUrl;
 });
+

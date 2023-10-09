@@ -22,7 +22,7 @@ class CartServiceTest {
 
         Cart cart = new Cart();
         cart.setMemberId(memberId);
-        cart.setBookId(bookId);
+        /*cart.setBookId(bookId);*/
         cart.setBookCount(count);
 
         //when

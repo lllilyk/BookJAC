@@ -25,7 +25,7 @@ class CartMapperTest {
 
         Cart cart = new Cart();
         cart.setMemberId(memberId);
-        cart.setBookId(bookId);
+       /* cart.setBookId(bookId);*/
         cart.setBookCount(count);
 
         int result = 0;
@@ -81,7 +81,7 @@ class CartMapperTest {
 
         Cart cart = new Cart();
         cart.setMemberId(memberId);
-        cart.setBookId(bookId);
+        /*cart.setBookId(bookId);*/
 
         Cart resutlCart = mapper.checkCart(cart);
         System.out.println(resutlCart);

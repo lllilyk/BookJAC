@@ -178,6 +178,7 @@
                             </div>
                         </form>
                     </div>
+                    <%-- 발주 일자별 발주내역 검색하기 --%>
                     <div class="col-md-6">
                         <form id="dateSearchForm" action="/order/details">
                             <div class="input-group mb-3">

@@ -66,8 +66,8 @@
                                 <label for="inputTitle" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">보유 도서</label>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="search" name="search" class="form-control" id="inputTitle" placeholder="등록되어 있는 도서인지 확인해 보세요" aria-describedby="bookSearchINDBBtn"
-                                    style="height: 50px; text-align: center;">
+                                <input type="search" name="search" class="form-control" id="inputTitle" placeholder="등록되어 있는 도서인지 확인해 보세요"
+                                       aria-describedby="bookSearchINDBBtn" style="height: 50px; text-align: center;">
                                 <button class="btn btn-dark" type="submit" id="bookSearchInDBBtn">검색</button>
                             </div>
                         </form>
@@ -78,14 +78,15 @@
                                 <label for="searchBook" class="form-label" style="font-size: 20px; font-weight: bold; margin: auto;">신규 도서</label>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" id="searchBook" class="form-control" placeholder="원하는 도서명을 검색해 보세요" aria-describedby="bookSearchBtn"
-                                       style="height: 50px; text-align: center;">
+                                <input type="text" id="searchBook" class="form-control" placeholder="원하는 도서명을 검색해 보세요"
+                                       aria-describedby="bookSearchBtn" style="height: 50px; text-align: center;">
                                 <button class="btn btn-dark" type="submit" id="bookSearchBtn">검색</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
             <%--재고 목록--%>
             <table class="table table-bordered" style="text-align: center">
                 <thead>
